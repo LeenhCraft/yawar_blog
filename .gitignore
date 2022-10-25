@@ -1,0 +1,6 @@
+.vscode
+.tmp.drivedownload
+.tmp.driveupload
+*.log
+/Config
+/Medios
