@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: black !important;
+}
+
+.nav-link svg {
+    fill: #fafafa;
+}
+
+.dropdown-toggle::after {
+    border-top: 0 transparent;
+}
+
+.nav-link a:hover, .nav-link:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
+.bar {
+    height: 2px;
+    background-color: #fafafa;
+}
+
+.text-gray {
+    color: #1c1c1a;
+}
+
+.btn-web {
+    background-color: #F35E63;
+    border-color: #F35E63;
+}

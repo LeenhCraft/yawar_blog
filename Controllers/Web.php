@@ -8,6 +8,7 @@ class Web extends Controllers
 
     public function web()
     {
-        $this->views->getView('Web', 'web');
+        $data['titulo_web'] = "Blog";
+        $this->views->getView('Web', 'index2', $data);
     }
 }
