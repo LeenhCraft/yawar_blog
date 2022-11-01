@@ -103,6 +103,10 @@ body.is-scroll-banner .is-banner {
     text-align: center;
 }
 
-.d-none{
+.d-none {
     display: none;
+}
+
+.mr-2 {
+    margin-right: .5rem;
 }

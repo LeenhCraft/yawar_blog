@@ -162,7 +162,7 @@ class CompWebModel extends Mysql
             $sql = "SELECT * FROM blog_links WHERE idgroup = {$value['idgroup']} AND li_status = 1";
             $requestImg = $this->select_all($sql);
             $nData[$key] = $value;
-            $nData[$key]['ga_links'] = $requestImg;
+            $nData[$key]['gr_links'] = $requestImg;
         }
         return $nData;
     }

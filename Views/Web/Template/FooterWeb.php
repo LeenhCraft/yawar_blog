@@ -98,6 +98,7 @@
 </div>
 <!-- <script src="<?php echo media() . 'js/globala108.js' ?>"></script>
 <script src="<?php echo media() . 'js/indexa108.js' ?>"></script> -->
+<script src="https://kit.fontawesome.com/772425e4ae.js" crossorigin="anonymous"></script>
 <script src="<?php echo media() . 'js/blog.js' ?>"></script>
 </body>
 
