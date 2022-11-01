@@ -348,14 +348,14 @@ function getName2($id2)
     return $arrPermisos;
 }
 
-function can_carrito()
-{
-    require_once 'Models/WebModel.php';
-    $objWeb = new WebModel();
-    $b = (isset($_SESSION['vi'])) ? $_SESSION['vi'] : 0;
-    $a = $objWeb->car_art($b);
-    return $a;
-}
+// function can_carrito()
+// {
+//     require_once 'Models/WebModel.php';
+//     $objWeb = new WebModel();
+//     $b = (isset($_SESSION['vi'])) ? $_SESSION['vi'] : 0;
+//     $a = $objWeb->car_art($b);
+//     return $a;
+// }
 
 function codigo_visita()
 {

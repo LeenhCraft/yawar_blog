@@ -33,4 +33,4 @@
     <div class="global-wrap">
         <div class="global-cover" style="background-image: url(https://via.placeholder.com/1600x1031);"></div>
         <div class="global-content">
-            <?php require_once __DIR__ . '/navbar_web.php'; ?>
+            <?php require_once __DIR__ . '/Navbarweb.php'; ?>

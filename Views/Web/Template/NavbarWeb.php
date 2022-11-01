@@ -1,7 +1,7 @@
 <header class="header-section">
     <div class="header-wrap">
         <div class="header-logo global-logo is-header">
-            <a href="index.html" class="is-logo"><img src="https://via.placeholder.com/85x34" alt="Reiro home" /></a>
+            <a href="/" class="is-logo"><img src="https://via.placeholder.com/85x34" alt="Reiro home" /></a>
         </div>
         <div class="header-nav">
             <span class="header-search search-open is-mobile"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -18,25 +18,15 @@
             </label>
             <nav>
                 <ul>
-                    <li><a href="https://reiro.fueko.net/demos/">Demos</a></li>
-                    <li><a href="style-guide/index.html">Style Guide</a></li>
-                    <li><a href="membership/index.html">Membership</a></li>
-                    <li class="is-dropdown">
-                        <span><svg role="img" viewBox="0 0 20 4" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M2 4A2 2 0 102.001.001 2 2 0 002 4zm8 0a2 2 0 10.001-3.999A2 2 0 0010 4zm8 0a2 2 0 10.001-3.999A2 2 0 0018 4z" />
-                            </svg></span>
-                        <ul>
-                            <li><a href="featured/index.html">Editor’s Choice</a></li>
-                            <li><a href="features/index.html">Features</a></li>
-                            <li><a href="tags/index.html">Tags</a></li>
-                            <li><a href="authors/index.html">Authors</a></li>
-                            <li><a href="subscribe/index.html">Subscribe</a></li>
-                            <li><a href="contact/index.html">Contact</a></li>
-                            <li>
-                                <a href="https://themeforest.net/item/reiro-multipurpose-ghost-blog-theme/40287312">Get Theme</a>
-                            </li>
-                        </ul>
-                    </li>
+                    <?php
+                    // dep($data);
+                    foreach ($data['componentes']['menu']['content'] as $item) {
+
+                    ?>
+                        <li><a href="<?php echo $item['me_url'] ?>"><?php echo $item['me_name'] ?></a></li>
+                    <?php
+                    }
+                    ?>
                 </ul>
                 <ul>
                     <li class="header-search search-open is-desktop">
@@ -45,10 +35,10 @@
                         </svg>
                     </li>
                     <li class="signin">
-                        <a href="signin/index.html">Sign in</a>
+                        <a href="signin/index.html">Iniciar sesión</a>
                     </li>
                     <li class="signup">
-                        <a href="membership/index.html" class="global-button">Become a subscriber</a>
+                        <a href="membership/index.html" class="global-button">Suscribirme</a>
                     </li>
                 </ul>
             </nav>
