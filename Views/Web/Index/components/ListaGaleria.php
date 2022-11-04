@@ -6,7 +6,7 @@
         ?>
             <article class="item is-special">
                 <div class="item-image global-image global-image-orientation global-radius">
-                    <a href="<?php echo $value['ga_slug'] ?>" class="global-link" aria-label="You have to fight to reach your dream"></a>
+                    <a href="<?php echo path_gallery() . $value['ga_slug'] ?>" class="global-link" aria-label="You have to fight to reach your dream"></a>
                     <img srcset="
                       <?php echo $value['ga_img'] ?> 300w,
                       <?php echo $value['ga_img'] ?> 600w

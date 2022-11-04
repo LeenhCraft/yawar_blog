@@ -38,7 +38,7 @@ class CompWebModel extends Mysql
 
     public function listTags()
     {
-        $sql = "SELECT * FROM blog_tags WHERE tag_status = 1";
+        $sql = "SELECT * FROM blog_tags WHERE tag_status = 1 AND tag_publicar = 1";
         $request = $this->select_all($sql);
         $nData = [];
         foreach ($request as $key => $value) {
@@ -120,9 +120,9 @@ class CompWebModel extends Mysql
         return $request;
     }
 
-    public function randoPost()
+    public function randoPost($limit = 2)
     {
-        $sql = "SELECT * FROM blog_posts a INNER JOIN web_usuarios b ON a.idwebusuario = b.idwebusuario WHERE a.pos_publicar = 1 AND a.pos_status = 1 ORDER BY RAND() LIMIT 2";
+        $sql = "SELECT * FROM blog_posts a INNER JOIN web_usuarios b ON a.idwebusuario = b.idwebusuario WHERE a.pos_publicar = 1 AND a.pos_status = 1 ORDER BY RAND() LIMIT $limit";
         $request = $this->select_all($sql);
         foreach ($request as $key => $value) {
             $img = $this->getImg($value['idpost'], 'POST::PORT');
@@ -141,7 +141,7 @@ class CompWebModel extends Mysql
             // $sql = "SELECT * FROM blog_images WHERE idgalery = {$value['idgalery']} AND img_type = 'GALLERY::PORT'";
             $requestImg = $this->getImg($value['idgalery'], 'GALLERY::PORT');
             $nData[$key] = $value;
-            $nData[$key]['ga_img'] = isset($requestImg['img_url']) ? $requestImg['img_url'] : 'https://via.placeholder.com//600x900';
+            $nData[$key]['ga_img'] = isset($requestImg['img_url']) ? $requestImg['img_url'] : 'https://via.placeholder.com/700x900';
         }
         return $nData;
     }

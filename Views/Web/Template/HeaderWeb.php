@@ -22,7 +22,8 @@
     <meta property="og:site_name" content="leenhcraft.com">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://leenhcraft.com/Assets/images/portafolio/perfil.jpg">
-    <title>Document</title>
+    <title><?php echo isset($data['titulo_web']) ? $data['titulo_web'] : NOMBRE_EMPRESA; ?></title>
+    <link rel="icon" type="image/png" href="<?php echo media() . 'img/favicon.png'; ?>">
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&amp;display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&amp;display=swap" />
     <link rel="stylesheet" type="text/css" href="<?php echo media() . 'css/screena108.css'; ?>">

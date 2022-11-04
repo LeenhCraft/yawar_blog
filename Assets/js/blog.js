@@ -111,3 +111,26 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   })(window);
 });
+
+const readingProgress = (e, t) => {
+  const o = document.querySelector(e),
+    n = document.querySelector(t),
+    a = () => {
+      const e = o.getBoundingClientRect(),
+        t = window.innerHeight / 2;
+      Math.round(n.max - n.value);
+      e.top > t && (n.value = 0),
+        e.top < t && (n.value = n.max),
+        e.top <= t &&
+          e.bottom >= t &&
+          (n.value = (n.max * Math.abs(e.top - t)) / e.height),
+        window.addEventListener("scroll", a);
+    };
+  window.addEventListener("scroll", a);
+};
+
+/* Custom settings for progress bar */
+!(function () {
+  const a = document.querySelector(".post-progress");
+  a && readingProgress(".post-content", ".post-progress");
+})();

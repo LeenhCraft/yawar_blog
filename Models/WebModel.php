@@ -233,4 +233,16 @@ class WebModel extends Mysql
         }
         return $return;
     }
+
+    public function masVisitado($vis_cod, $idarticulo, $url)
+    {
+        $sql = "SELECT * FROM blog_masvisitados WHERE vis_cod = $vis_cod AND idpost = $idarticulo";
+        $response = $this->select_all($sql);
+        if (empty($response)) {
+            $sql = "INSERT INTO blog_masvisitados(vis_cod,idpost,mas_url) VALUES (?,?,?)";
+            $arrData = array($vis_cod, $idarticulo, $url);
+            $response = $this->insert($sql, $arrData);
+        }
+        return $response;
+    }
 }

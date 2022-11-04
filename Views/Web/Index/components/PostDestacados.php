@@ -12,7 +12,7 @@
         ?>
 
             <article class="item">
-                <a href="<?php echo $value['pos_slug'] ?>" class="global-link" aria-label="<?php echo $value['pos_name'] ?>"></a>
+                <a href="<?php echo path_post() . $value['pos_slug'] ?>" class="global-link" aria-label="<?php echo $value['pos_name'] ?>"></a>
                 <div class="item-image global-image global-image-orientation global-radius">
                     <img srcset="
                         <?php echo $value['pos_img'] ?> 300w,
@@ -21,12 +21,12 @@
                 </div>
                 <div class="item-content">
                     <h2 class="item-title">
-                        <a href="<?php echo $value['pos_slug'] ?>"><?php echo $value['pos_name'] ?></a>
+                        <a href="<?php echo path_post() . $value['pos_slug'] ?>"><?php echo $value['pos_name'] ?></a>
                     </h2>
                     <div class="global-meta">
                         <div class="global-meta-content">
                             by
-                            <a href="<?php echo urls_amigables($value['usu_nombre']) ?>"><?php echo $value['usu_nombre'] ?></a>
+                            <a href="<?php echo path_author().urls_amigables($value['usu_nombre']) ?>"><?php echo $value['usu_nombre'] ?></a>
                         </div>
                     </div>
                 </div>

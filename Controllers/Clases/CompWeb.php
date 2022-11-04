@@ -9,10 +9,6 @@ class CompWeb extends Controllers
     public function components()
     {
         $data = [ //traer de la db
-            'menu' => [
-                'status' => true,
-                'content' => $this->model->menus(),
-            ],
             'eslogan' => [
                 'status' => true,
                 'content' => $this->model->sloganPrincipal()
@@ -41,6 +37,17 @@ class CompWeb extends Controllers
             'listagaleria' => [
                 'status' => true,
                 'content' => $this->model->galleries()
+            ]
+        ];
+        return $data;
+    }
+
+    public function principal()
+    {
+        $data = [ //traer de la db
+            'menu' => [
+                'status' => true,
+                'content' => $this->model->menus(),
             ],
             'esloganfooter' => [
                 'status' => true,

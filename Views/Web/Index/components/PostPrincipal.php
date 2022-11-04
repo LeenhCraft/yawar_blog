@@ -5,7 +5,7 @@
 <div class="loop-wrap is-top">
     <article class="item is-top is-first">
         <div class="item-image global-image global-image-orientation global-radius">
-            <a href="the-trick-to-getting-more-done-is-to-have-the-freedom-to-roam-around/index.html" class="global-link" aria-label="The trick to getting more done is to have the freedom to roam around"></a>
+            <a href="<?php echo path_post() . $data['componentes']['postprincipal']['content']['pos_slug']; ?>" class="global-link" aria-label="The trick to getting more done is to have the freedom to roam around"></a>
             <img srcset="
                       <?php /*img del post */ echo $data['componentes']['postprincipal']['content']['pos_img'] ?> 300w,
                       <?php /*img del post */ echo $data['componentes']['postprincipal']['content']['pos_img'] ?> 600w,
@@ -24,7 +24,7 @@
                 ?>
             </div>
             <h2 class="item-title">
-                <a href="<?php /*url del post */ echo $data['componentes']['postprincipal']['content']['pos_slug'] ?> ">
+                <a href="<?php /*url del post */ echo path_post() . $data['componentes']['postprincipal']['content']['pos_slug'] ?> ">
                     <?php /*nombre del post */ echo $data['componentes']['postprincipal']['content']['pos_name'] ?>
                 </a>
             </h2>
@@ -43,7 +43,7 @@
                 <div class="global-meta-content">
                     <div>
                         by
-                        <a href="<?php echo urls_amigables($data['componentes']['postprincipal']['content']['usu_nombre']) ?>"><?php /*Nombre del autor del post*/ echo $data['componentes']['postprincipal']['content']['usu_nombre'] ?></a>
+                        <a href="<?php echo path_author() . urls_amigables($data['componentes']['postprincipal']['content']['usu_nombre']) ?>"><?php /*Nombre del autor del post*/ echo $data['componentes']['postprincipal']['content']['usu_nombre'] ?></a>
                     </div>
                     <time datetime="<?php /*Nombre del autor del post*/ echo date('Y-m-d', strtotime($data['componentes']['postprincipal']['content']['pos_date'])) ?>"><span><?php echo date('F j, Y', strtotime($data['componentes']['postprincipal']['content']['pos_date'])) ?> ∙ </span>3 min read</time>
                 </div>
@@ -76,7 +76,7 @@
     ?>
         <article class="item is-top">
             <div class="item-image global-image global-image-orientation global-radius">
-                <a href="there-are-still-many-questions-left-to-answer/index.html" class="global-link" aria-label="There are still many questions left to answer"></a>
+                <a href="<?php echo path_post() . $value['pos_slug'] ?>" class="global-link" aria-label="There are still many questions left to answer"></a>
                 <img srcset="
                       <?php echo $value['pos_img'] ?> 300w,
                       <?php echo $value['pos_img'] ?> 600w
@@ -87,18 +87,18 @@
                     <?php
                     foreach ($value['pos_tag'] as $item) {
                     ?>
-                        <a href="<?php echo $item['tag_slug'] ?>"><?php echo $item['tag_name'] ?></a>
+                        <a href="<?php echo path_tag() . $item['tag_slug'] ?>"><?php echo $item['tag_name'] ?></a>
                     <?php
                     }
                     ?>
                 </div>
                 <h2 class="item-title">
-                    <a href="<?php echo $value['pos_slug'] ?>"><?php echo $value['pos_name'] ?></a>
+                    <a href="<?php echo path_post() . $value['pos_slug'] ?>"><?php echo $value['pos_name'] ?></a>
                 </h2>
                 <div class="global-meta">
                     <div class="global-meta-content">
                         by
-                        <a href="<?php echo urls_amigables($value['usu_nombre']) ?>"><?php echo $value['usu_nombre'] ?></a>
+                        <a href="<?php echo path_author() . urls_amigables($value['usu_nombre']) ?>"><?php echo $value['usu_nombre'] ?></a>
                     </div>
                 </div>
             </div>

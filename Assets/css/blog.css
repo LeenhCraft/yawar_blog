@@ -110,3 +110,33 @@ body.is-scroll-banner .is-banner {
 .mr-2 {
     margin-right: .5rem;
 }
+
+.global-margin {
+    margin-bottom: 6rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.col-md {
+    grid-column: 1 / span 2;
+    width: 100% !important;
+}
+
+.post-sidebar-lnh {
+    position: inherit;
+    right: -4vw;
+}
+
+@media (max-width: 1024px) {
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .global-margin {
+        margin-bottom: 0rem;
+    }
+}

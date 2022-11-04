@@ -6,11 +6,32 @@ use UAParser\Parser;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-//Retorla la url del proyecto
+//Retorna la url del proyecto
 function base_url()
 {
     return BASE_URL;
 }
+
+function path_post()
+{
+    return base_url() . 'yawarpost/';
+}
+
+function path_tag()
+{
+    return base_url() . 'yawartag/';
+}
+
+function path_gallery()
+{
+    return base_url() . 'yawargallery/';
+}
+
+function path_author()
+{
+    return base_url() . 'yawarautor/';
+}
+
 function media()
 {
     return BASE_URL . "Assets/";
@@ -389,27 +410,29 @@ function codigo_visita()
             $objWeb->rg_visita($_SESSION['vi'], $ip, $agente, $url, $metod);
         }
     }
-    //Comprobamos si esta definida la sesión 'tiempo'.
-    if (isset($_SESSION['tiempo'])) {
+    if (isset($_SESSION['login'])) {
+        //Comprobamos si esta definida la sesión 'tiempo'.
+        if (isset($_SESSION['tiempo'])) {
 
-        //Tiempo en segundos para dar vida a la sesión.
-        $inactivo = 1200; //5 min en este caso.
+            //Tiempo en segundos para dar vida a la sesión.
+            $inactivo = 1200; //5 min en este caso.
 
-        //Calculamos tiempo de vida inactivo.
-        $vida_session = time() - $_SESSION['tiempo'];
+            //Calculamos tiempo de vida inactivo.
+            $vida_session = time() - $_SESSION['tiempo'];
 
-        //Compraración para redirigir página, si la vida de sesión sea mayor a el tiempo insertado en inactivo.
-        if ($vida_session > $inactivo) {
-            //Removemos sesión.
-            session_unset();
-            //Destruimos sesión.
-            session_destroy();
-            //Redirigimos pagina.
-            header('location: ' . base_url());
-            exit();
+            //Compraración para redirigir página, si la vida de sesión sea mayor a el tiempo insertado en inactivo.
+            if ($vida_session > $inactivo) {
+                //Removemos sesión.
+                session_unset();
+                //Destruimos sesión.
+                session_destroy();
+                //Redirigimos pagina.
+                header('location: ' . base_url());
+                exit();
+            }
         }
+        $_SESSION['tiempo'] = time();
     }
-    $_SESSION['tiempo'] = time();
     $objWeb->centinel($_SESSION['vi'], $ip, $agente, $url, $metod);
 }
 
