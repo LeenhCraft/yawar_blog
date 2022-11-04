@@ -1,4 +1,4 @@
-<?php headerWeb('HeaderWeb', $data);?>
+<?php headerWeb('HeaderWeb', $data); ?>
 <main class="global-main">
     <progress class="post-progress"></progress>
     <article class="post-section is-sidebar">
@@ -19,7 +19,7 @@
                             <div class="global-meta-wrap">
                                 <div>
                                     <div class="global-meta-avatar is-image global-image">
-                                        <a href="<?php echo path_author().urls_amigables($data['post']['usu_nombre']); ?>" class="global-link" title="Damian Erdman"></a>
+                                        <a href="<?php echo path_author() . urls_amigables($data['post']['usu_nombre']); ?>" class="global-link" title="Damian Erdman"></a>
                                         <img src="<?php echo $data['post']['aut_img']; ?>" alt="Damian Erdman" loading="lazy">
                                     </div>
                                 </div>
@@ -27,7 +27,7 @@
                             <div class="global-meta-content">
                                 <div>
                                     by
-                                    <a href="<?php echo path_author().urls_amigables($data['post']['usu_nombre']); ?>"><?php echo $data['post']['usu_nombre']; ?></a>
+                                    <a href="<?php echo path_author() . urls_amigables($data['post']['usu_nombre']); ?>"><?php echo $data['post']['usu_nombre']; ?></a>
                                 </div>
                                 <time datetime="<?php echo date('Y-m-d', strtotime($data['post']['pos_date'])) ?>">
                                     <span>
@@ -60,7 +60,7 @@
                         </div>
                         <figcaption>
                             Photo by
-                            <a href="<?php echo path_author().urls_amigables($data['post']['usu_nombre']); ?>">
+                            <a href="<?php echo path_author() . urls_amigables($data['post']['usu_nombre']); ?>">
                                 <?php echo $data['post']['usu_nombre']; ?>
                             </a>
                         </figcaption>
@@ -77,7 +77,7 @@
                 <div class="post-sidebar post-sidebar-lnh">
                     <div class="is-authors">
                         <small class="global-subtitle">Escrito por</small>
-                        <a href="<?php echo path_author().urls_amigables($data['post']['usu_nombre']); ?>">
+                        <a href="<?php echo path_author() . urls_amigables($data['post']['usu_nombre']); ?>">
                             <img src="<?php echo $data['post']['aut_img']; ?>" alt="<?php echo $data['post']['usu_nombre']; ?>" loading="lazy">
                             <div>
                                 <h3 class="post-sidebar-title"><?php echo $data['post']['usu_nombre']; ?></h3>
@@ -131,12 +131,12 @@
                 ?>
                     <article class="item is-special">
                         <div class="item-image global-image global-image-orientation global-radius">
-                            <a href="<?php echo $gallery['ga_slug'] ?>" class="global-link" aria-label="<?php echo $gallery['ga_name'] ?>"></a>
+                            <a href="<?php echo path_gallery() . $gallery['ga_slug'] ?>" class="global-link" aria-label="<?php echo $gallery['ga_name'] ?>"></a>
                             <img srcset="<?php echo $gallery['ga_img'] ?> 300w, 
                             <?php echo $gallery['ga_img'] ?> 600w" sizes="(max-width:480px) 300px, 600px" src="<?php echo $gallery['ga_img'] ?>" loading="lazy" alt="<?php echo $gallery['ga_name'] ?>">
                         </div>
                         <div class="item-content">
-                            <h2 class="item-title"><a href="<?php echo $gallery['ga_slug'] ?>"><?php echo $gallery['ga_name'] ?></a></h2>
+                            <h2 class="item-title"><a href="<?php echo  path_gallery() . $gallery['ga_slug'] ?>"><?php echo $gallery['ga_name'] ?></a></h2>
                         </div>
                     </article>
                 <?php }

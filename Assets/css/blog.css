@@ -120,6 +120,11 @@ body.is-scroll-banner .is-banner {
     grid-template-columns: repeat(3, 1fr);
 }
 
+.grid-1 {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+}
+
 .col-md {
     grid-column: 1 / span 2;
     width: 100% !important;
@@ -132,6 +137,11 @@ body.is-scroll-banner .is-banner {
 
 @media (max-width: 1024px) {
     .grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .grid-1 {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
     }

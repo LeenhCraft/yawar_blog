@@ -27,11 +27,12 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&amp;display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&amp;display=swap" />
     <link rel="stylesheet" type="text/css" href="<?php echo media() . 'css/screena108.css'; ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo media() . 'css/cards.mina.css'; ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo media() . 'css/blog.css'; ?>">
 </head>
 
 <body>
     <div class="global-wrap">
-        <div class="global-cover" style="background-image: url(https://via.placeholder.com/1600x1031);"></div>
+        <div class="global-cover" style="background-image: url(<?php echo isset($data['img_port']) ? $data['img_port'] : 'https://via.placeholder.com/1600x1031' ?>);"></div>
         <div class="global-content">
             <?php require_once __DIR__ . '/Navbarweb.php'; ?>

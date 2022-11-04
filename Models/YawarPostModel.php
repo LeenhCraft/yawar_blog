@@ -5,6 +5,7 @@ class YawarPostModel extends Mysql
     {
         parent::__construct();
     }
+    
     public function buscarPost($slug)
     {
         require_once __DIR__ . '/CompWebModel.php';
