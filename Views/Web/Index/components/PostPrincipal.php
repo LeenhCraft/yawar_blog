@@ -18,7 +18,7 @@
                 <?php
                 foreach ($data['componentes']['postprincipal']['content']['pos_tag'] as $value) {
                 ?>
-                    <a href="<?php echo $value['tag_slug'] ?>"><?php echo $value['tag_name'] ?></a>
+                    <a href="<?php echo path_tag() . $value['tag_slug'] ?>"><?php echo $value['tag_name'] ?></a>
                 <?php
                 }
                 ?>
@@ -35,17 +35,17 @@
                 <div class="global-meta-wrap">
                     <div>
                         <div class="global-meta-avatar is-image global-image">
-                            <a href="author/damian/index.html" class="global-link" title="<?php /*Nombre del autor del post*/ $data['componentes']['postprincipal']['content']['usu_nombre'] ?>"></a>
-                            <img src="<?php /*Nombre del autor del post*/ echo $data['componentes']['postprincipal']['content']['aut_img'] ?>" alt="<?php echo $data['componentes']['postprincipal']['content']['usu_nombre'] ?>" loading="lazy" />
+                            <a href="author/damian/index.html" class="global-link" title="<?php $data['componentes']['postprincipal']['content']['usu_nombre'] ?>"></a>
+                            <img src="<?php echo $data['componentes']['postprincipal']['content']['aut_img'] ?>" alt="<?php echo $data['componentes']['postprincipal']['content']['usu_nombre'] ?>" loading="lazy" />
                         </div>
                     </div>
                 </div>
                 <div class="global-meta-content">
                     <div>
                         by
-                        <a href="<?php echo path_author() . urls_amigables($data['componentes']['postprincipal']['content']['usu_nombre']) ?>"><?php /*Nombre del autor del post*/ echo $data['componentes']['postprincipal']['content']['usu_nombre'] ?></a>
+                        <a href="<?php echo path_author() . urls_amigables($data['componentes']['postprincipal']['content']['usu_nombre']) ?>"><?php echo $data['componentes']['postprincipal']['content']['usu_nombre'] ?></a>
                     </div>
-                    <time datetime="<?php /*Nombre del autor del post*/ echo date('Y-m-d', strtotime($data['componentes']['postprincipal']['content']['pos_date'])) ?>"><span><?php echo date('F j, Y', strtotime($data['componentes']['postprincipal']['content']['pos_date'])) ?> ∙ </span>3 min read</time>
+                    <time datetime="<?php echo date('Y-m-d', strtotime($data['componentes']['postprincipal']['content']['pos_date'])) ?>"><span><?php echo date('F j, Y', strtotime($data['componentes']['postprincipal']['content']['pos_date'])) ?> ∙ </span>3 min read</time>
                 </div>
             </div>
         </div>
