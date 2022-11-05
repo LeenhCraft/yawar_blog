@@ -6,7 +6,7 @@ class YawarTag extends Controllers
         parent::__construct();
         $url = urls();
         parent::otra_clase('Clases', 'CompWeb');
-        $data['titulo_web'] = "YawarTag";
+        $data['titulo_web'] = "Yawar.:Tag";
         $data['componentes'] = $this->oClass->principal();
         $data['tag'] = $this->model->buscarTag($url['method']);
         if (!empty($data['tag'])) {

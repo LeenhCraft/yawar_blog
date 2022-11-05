@@ -7,7 +7,7 @@ class YawarGallery extends Controllers
         $url = urls();
         parent::otra_clase('Clases', 'CompWeb');
 
-        $data['titulo_web'] = "Gallery";
+        $data['titulo_web'] = "Yawar.:Gallery";
         $data['componentes'] = $this->oClass->principal();
         $data['gallery'] = $this->model->buscarGallery($url['method']);
         if (!empty($data['gallery'])) {

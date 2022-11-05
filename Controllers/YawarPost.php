@@ -7,7 +7,7 @@ class YawarPost extends Controllers
         $url = urls();
         parent::otra_clase('Clases', 'CompWeb');
         parent::otro('CompWeb');
-        $data['titulo_web'] = "YawarPost";
+        $data['titulo_web'] = "Yawar.:Post";
         $data['componentes'] = $this->oClass->principal();
         $data['post'] = $this->model->buscarPost($url['method']);
         if (!empty($data['post'])) {
