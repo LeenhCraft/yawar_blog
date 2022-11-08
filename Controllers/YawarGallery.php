@@ -17,7 +17,7 @@ class YawarGallery extends Controllers
             // dep($data, 1);
             $this->views->getView('Web/Gallery', 'Index', $data);
         } else {
-            dep('404');
+            require_once __DIR__ . '/Error.php';
         }
         exit();
     }

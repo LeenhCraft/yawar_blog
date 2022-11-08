@@ -31,5 +31,6 @@
       require_once __DIR__ . '/components/ListaGaleria.php';
     }
     ?>
+  </div>
 </main>
 <?php footerWeb('FooterWeb', $data); ?>

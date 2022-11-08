@@ -14,7 +14,7 @@ class YawarTag extends Controllers
             $data['img_port'] = $data['tag']['tag_img'];
             $this->views->getView('Web/Tag', 'Index', $data);
         } else {
-            dep('404');
+            require_once __DIR__ .'/Error.php';
         }
         exit();
     }
