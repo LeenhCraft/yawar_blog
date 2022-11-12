@@ -2598,7 +2598,7 @@ body.is-white-text .featured-section.is-accent .item::before {
 
 .search-results:empty {
     padding-top: 0;
-    padding-bottom: 0
+    padding-bottom: 0;
 }
 
 .search-results a {

@@ -179,4 +179,18 @@ class CompWebModel extends Mysql
         }
         return $nData;
     }
+
+    public function buscarPost($parametro, $offset = 0, $limit = 10)
+    {
+        $like = $parametro != "" ? "AND a.pos_name LIKE '%$parametro%'" : '';
+        $limit = $parametro != "" ? "LIMIT $offset,$limit" : '';
+        $sql = "SELECT a.idpost as num, a.pos_name as title, a.pos_slug as slug, a.pos_date as 'date' FROM blog_posts a WHERE a.pos_publicar = 1 AND a.pos_status = 1 $like ORDER BY a.idpost DESC $limit";
+        $request = $this->select_all($sql);
+        foreach ($request as $key => $value) {
+            $img = $this->getImg($value['num'], 'POST::PORT');
+            $request[$key]['img'] = isset($img['img_url']) ? $img['img_url'] : 'https://via.placeholder.com/1600x2108';
+            // $request[$key]['pos_tag'] = $this->getTag($value['idpost']);
+        }
+        return $request;
+    }
 }
