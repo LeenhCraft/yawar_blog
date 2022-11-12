@@ -20,7 +20,9 @@ class YawarPost extends Controllers
             // dep($data, 1);
             $this->views->getView('Web/Post', 'Index', $data);
         } else {
-            require_once __DIR__ .'/Error.php';
+            require_once __DIR__ . '/Error.php';
+            $classError = new Errors();
+            $classError->notFound();
         }
         // if (method_exists($this, $url['method'])) {
         //     echo 'Method exists';

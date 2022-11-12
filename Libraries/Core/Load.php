@@ -1,9 +1,12 @@
 <?php
+require_once __DIR__ . '/../../Controllers/Error.php';
+$objError = new Errors();
 if (file_exists("Controllers/sys.php")) {
 	require_once("Controllers/sys.php");
 	$bp = new Sys();
 } else {
-	require_once("Controllers/Error.php");
+	// require_once("Controllers/Error.php");
+	$objError->notFound();
 }
 $controller = ucwords($controller);
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -23,8 +26,10 @@ if (file_exists($controllerFile)) {
 	if (method_exists($controller, $method)) {
 		$controller->{$method}($params);
 	} else {
-		require_once("Controllers/Error.php");
+		// require_once("Controllers/Error.php");
+		$objError->notFound();
 	}
 } else {
-	require_once("Controllers/Error.php");
+	// require_once("Controllers/Error.php");
+	$objError->notFound();
 }

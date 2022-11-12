@@ -5,7 +5,7 @@ class Account extends Controllers
     {
         parent::__construct();
         if (!isset($_SESSION['pe'])) {
-            header('Location: ' . base_url());
+            header('Location: ' . base_url().'Signin');
         }
     }
 

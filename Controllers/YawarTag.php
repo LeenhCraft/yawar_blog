@@ -15,6 +15,8 @@ class YawarTag extends Controllers
             $this->views->getView('Web/Tag', 'Index', $data);
         } else {
             require_once __DIR__ . '/Error.php';
+            $classError = new Errors();
+            $classError->notFound();
         }
         exit();
     }

@@ -5,9 +5,13 @@ class Publicar extends Controllers
     {
         parent::__construct();
         if (!isset($_SESSION['pe'])) {
-            header('Location: ' . base_url());
+            // header('Location: ' . base_url());
+            require_once __DIR__ . '/Error.php';
+            $classError = new Errors();
+            $classError->notAccess();
         }
     }
+
     public function publicar()
     {
         parent::otra_clase('Clases', 'CompWeb');

@@ -18,6 +18,8 @@ class YawarGallery extends Controllers
             $this->views->getView('Web/Gallery', 'Index', $data);
         } else {
             require_once __DIR__ . '/Error.php';
+            $classError = new Errors();
+            $classError->notFound();
         }
         exit();
     }
