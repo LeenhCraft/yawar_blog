@@ -141,3 +141,14 @@ const readingProgress = (e, t) => {
 //     a = e.attributes.width.value / e.attributes.height.value;
 //   t.style.flex = a + " 1 0%";
 // })
+/*seccion de publicar post */
+// $(document).ready(function () {
+//   $(".open-section-post").on("click", function () {
+//     $("body").addClass("public-is-active");
+//     $(".public-section").css("display", "block");
+//   });
+//   $(".public-overlay").on("click", function () {
+//     $("body").removeClass("public-is-active");
+//     $(".public-section").css("display", "none");
+//   });
+// });

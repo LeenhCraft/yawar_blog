@@ -6,6 +6,10 @@
   if ($data['componentes']['eslogan']['status']) {
     require_once __DIR__ . '/components/Eslogan.php';
   }
+  // // publicar post
+  // if ($data['componentes']['publicapost']['status']) {
+  //   require_once __DIR__ . '/components/PublicaPost.php';
+  // }
   // lista de etiquetas
   if ($data['componentes']['listaetiquetas']['status']) {
     require_once __DIR__ . '/components/ListaEtiquetas.php';

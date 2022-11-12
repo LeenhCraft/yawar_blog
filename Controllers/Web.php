@@ -10,8 +10,8 @@ class Web extends Controllers
     {
         parent::otra_clase('Clases', 'CompWeb');
         $data['titulo_web'] = "Blog";
-        $data['componentes'] = array_merge($this->oClass->principal(), $this->oClass->components());
-        // dep($_SESSION, 1);
+        $data['componentes'] = $this->oClass->compweb(["principal", "body"]);
+        // dep($data['componentes'], 1);
         $this->views->getView('Web/Index', 'Index', $data);
     }
 }

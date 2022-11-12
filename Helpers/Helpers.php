@@ -32,6 +32,11 @@ function path_author()
     return base_url() . 'yawarautor/';
 }
 
+function path_recursos()
+{
+    return base_url() . 'Medios/';
+}
+
 function media()
 {
     return BASE_URL . "Assets/";
@@ -194,7 +199,7 @@ function enviarEmail($data, $template)
         $asunto = $data['asunto'];
         $nombre = $data['nombre'];
         ob_start();
-        require_once("Views/App/Template/Email/" . $template . ".php");
+        require_once("Views/Email/" . $template . ".php");
         $mensaje = ob_get_clean();
         try {
             //Server settings
@@ -582,6 +587,43 @@ function urls()
     $arrUrl = explode("/", $url);
     $controller = $arrUrl[0];
     $method = isset($arrUrl[1]) ? $arrUrl[1] : $arrUrl[0];
-    $params = isset($arrUrl[2]) ? $arrUrl[2] : '';
+    $params = "";
+    if (!empty($arrUrl[2])) {
+        if ($arrUrl[2] != "") {
+            for ($i = 2; $i < count($arrUrl); $i++) {
+                $params .=  $arrUrl[$i] . ',';
+            }
+            $params = trim($params, ',');
+        }
+    }
+    // $params = isset($arrUrl[2]) ? $arrUrl[2] : '';
     return ['controllers' => $controller, 'method' => $method, 'params' => $params];
+}
+
+function getTokenCsrf()
+{
+    if (isset($_SESSION['csrf'])) {
+        unset($_SESSION['csrf']);
+    }
+    $token = token();
+    $_SESSION['csrf'] = ['token' => $token, 'time' => time()];
+    return $token;
+}
+
+function validarCrf($token = "")
+{
+    $return = ['status' => false, 'message' => 'Token invalido'];
+    if (isset($_SESSION['csrf']) && $_SESSION['csrf']['token'] == $token) {
+        $inactivo = 300; //5 min en este caso.
+        $vida_session = time() - $_SESSION['csrf']['time'];
+        if ($vida_session > $inactivo) {
+            unset($_SESSION['csrf']);
+            $return = ['status' => false, 'message' => 'Token invalido'];
+        } else {
+            $return = ['status' => true, 'message' => 'Token valido'];
+        }
+    } else {
+        $return = ['status' => false, 'message' => 'Token invalido'];
+    }
+    return $return;
 }

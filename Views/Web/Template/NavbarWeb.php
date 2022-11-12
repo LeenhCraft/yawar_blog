@@ -1,7 +1,7 @@
 <header class="header-section">
     <div class="header-wrap">
         <div class="header-logo global-logo is-header">
-            <a href="/" class="is-logo"><img src="https://via.placeholder.com/85x34" alt="Reiro home" /></a>
+            <a href="/" class="is-logo"><img src="https://via.placeholder.com/85x34" alt="<?php echo NOMBRE_EMPRESA ?>" /></a>
         </div>
         <div class="header-nav">
             <span class="header-search search-open is-mobile"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -23,7 +23,7 @@
                     foreach ($data['componentes']['menu']['content'] as $item) {
 
                     ?>
-                        <li><a href="<?php echo $item['me_url'] ?>"><?php echo $item['me_name'] ?></a></li>
+                        <li><a class="text-capitalize" href="<?php echo base_url() . $item['me_url'] ?>"><?php echo $item['me_name'] ?></a></li>
                     <?php
                     }
                     ?>
@@ -34,12 +34,25 @@
                             <path d="m16.822 18.813 4.798 4.799c.262.248.61.388.972.388.772-.001 1.407-.637 1.407-1.409 0-.361-.139-.709-.387-.971l-4.799-4.797c3.132-4.108 2.822-10.005-.928-13.756l-.007-.007-.278-.278a.6985.6985 0 0 0-.13-.107C13.36-1.017 7.021-.888 3.066 3.067c-4.088 4.089-4.088 10.729 0 14.816 3.752 3.752 9.65 4.063 13.756.93Zm-.965-13.719c2.95 2.953 2.95 7.81 0 10.763-2.953 2.949-7.809 2.949-10.762 0-2.951-2.953-2.951-7.81 0-10.763 2.953-2.95 7.809-2.95 10.762 0Z" />
                         </svg>
                     </li>
-                    <li class="signin">
-                        <a href="signin/index.html">Iniciar sesión</a>
-                    </li>
-                    <li class="signup">
-                        <a href="membership/index.html" class="global-button">Suscribirme</a>
-                    </li>
+                    <?php
+                    if (isset($_SESSION['pe'])) {
+                    ?>
+                        <li class="account">
+                            <a class="global-button no-color" href="<?php echo base_url() . 'account'; ?>">Mi cuenta</a>
+                        </li>
+                    <?php
+                    } else {
+
+
+                    ?>
+                        <li class="signin">
+                            <a href="<?php echo base_url() . 'Signin'; ?>">Iniciar sesión</a>
+                        </li>
+
+                        <li class="signup">
+                            <a href="membership/index.html" class="global-button">Suscribirme</a>
+                        </li>
+                    <?php } ?>
                 </ul>
             </nav>
         </div>

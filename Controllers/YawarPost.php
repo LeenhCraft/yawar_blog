@@ -8,7 +8,7 @@ class YawarPost extends Controllers
         parent::otra_clase('Clases', 'CompWeb');
         parent::otro('CompWeb');
         $data['titulo_web'] = "Yawar.:Post";
-        $data['componentes'] = $this->oClass->principal();
+        $data['componentes'] = $this->oClass->compweb(["principal"]);
         $data['post'] = $this->model->buscarPost($url['method']);
         if (!empty($data['post'])) {
             $data['postrandom'] = $this->other->randoPost(3);

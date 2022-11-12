@@ -110,7 +110,7 @@ class WebModel extends Mysql
         return $return;
     }
 
-    public function login($strEmail, $strPassword)
+    public function login($strEmail, $strPassword = "")
     {
         $sql = "SELECT * FROM web_usuarios WHERE usu_usuario like '$strEmail' AND usu_estado = 1";
         $request = $this->select($sql);
@@ -202,6 +202,13 @@ class WebModel extends Mysql
         return $request;
     }
 
+    public function getUser(int $idusuario)
+    {
+        $sql = "SELECT * FROM web_usuarios a WHERE a.idwebusuario like '$idusuario'";
+        $request = $this->select($sql);
+        return $request;
+    }
+
     public function upd_recuperar($idwebusuario, $pass)
     {
         $return = $request = [];
@@ -244,5 +251,21 @@ class WebModel extends Mysql
             $response = $this->insert($sql, $arrData);
         }
         return $response;
+    }
+
+    public function empresa()
+    {
+        $sql = "SELECT * FROM sis_empresas WHERE emp_estado = 1";
+        $request = $this->select($sql);
+        return $request;
+    }
+
+    public function upd_visita($idwebusuario)
+    {
+        $vis_cod = $_SESSION['vi'];
+        $sql = "UPDATE web_visitas SET idwebusuario = ? WHERE vis_cod = ?";
+        $arrData = array($idwebusuario, $vis_cod);
+        $request = $this->update($sql, $arrData);
+        return $request;
     }
 }

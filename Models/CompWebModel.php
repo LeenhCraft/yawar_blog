@@ -50,28 +50,31 @@ class CompWebModel extends Mysql
         return $nData;
     }
 
-    public function posts($tipo = 1)
+    public function posts($tipo = 1, $offset = 0, $limit = 6)
     {
         $inner = $order = $where = "";
         $table = "SELECT * FROM blog_posts a";
         switch ($tipo) {
             case $tipo == 1: //post destacado
-                $where = "WHERE a.pos_principal = 1 AND a.pos_publicar = 1 AND a.pos_status = 1";
                 $inner = "INNER JOIN web_usuarios b ON a.idwebusuario = b.idwebusuario";
+                $where = "WHERE a.pos_principal = 1 AND a.pos_publicar = 1 AND a.pos_status = 1";
                 break;
             case $tipo == 2: //lista de posts
-                $offset = 0;
-                $limit = 6;
-                $order = "ORDER BY a.pos_date DESC LIMIT $offset,$limit";
                 $inner = "INNER JOIN web_usuarios b ON a.idwebusuario = b.idwebusuario";
                 $where = "WHERE a.pos_publicar = 1 AND a.pos_status = 1";
+                $order = "ORDER BY a.pos_date DESC LIMIT $offset,$limit";
                 break;
-
+            case $tipo == '3': //post destacado
+                $inner = "INNER JOIN web_usuarios b ON a.idwebusuario = b.idwebusuario";
+                $where = "WHERE a.pos_publicar = 1 AND a.pos_status = 1 AND b.idwebusuario = " . $_SESSION['lnh'];
+                $order = "ORDER BY a.pos_date DESC LIMIT $offset,$limit";
+                break;
             default:
                 $inner = $order = $where = "";
                 break;
         }
         $sql = $table . ' ' . $inner . ' ' . $where . ' ' . $order;
+        // dep($sql,1);
         switch ($tipo) {
             case 1: //post destacado
                 $request = $this->select($sql);
@@ -87,6 +90,16 @@ class CompWebModel extends Mysql
                 $request['pos_tag'] = $this->getTag($request['idpost']);
                 break;
             case 2: //lista de posts
+                $request = $this->select_all($sql);
+                foreach ($request as $key => $value) {
+                    $img = $this->getImg($value['idpost'], 'POST::PORT');
+                    $imgAut = $this->getImg($value['idwebusuario'], 'USER::PORT');
+                    $request[$key]['pos_img'] = isset($img['img_url']) ? $img['img_url'] : 'https://via.placeholder.com/1600x2108';
+                    $request[$key]['aut_img'] = isset($imgAut['img_url']) ? $imgAut['img_url'] : 'https://via.placeholder.com/300x49';
+                    $request[$key]['pos_tag'] = $this->getTag($value['idpost']);
+                }
+                break;
+            case 3: //post del usuario
                 $request = $this->select_all($sql);
                 foreach ($request as $key => $value) {
                     $img = $this->getImg($value['idpost'], 'POST::PORT');

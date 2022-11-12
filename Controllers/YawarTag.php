@@ -7,14 +7,14 @@ class YawarTag extends Controllers
         $url = urls();
         parent::otra_clase('Clases', 'CompWeb');
         $data['titulo_web'] = "Yawar.:Tag";
-        $data['componentes'] = $this->oClass->principal();
+        $data['componentes'] = $this->oClass->compweb(["principal"]);
         $data['tag'] = $this->model->buscarTag($url['method']);
         if (!empty($data['tag'])) {
             $data['posts'] = $this->model->post($data['tag']['idtag']);
             $data['img_port'] = $data['tag']['tag_img'];
             $this->views->getView('Web/Tag', 'Index', $data);
         } else {
-            require_once __DIR__ .'/Error.php';
+            require_once __DIR__ . '/Error.php';
         }
         exit();
     }

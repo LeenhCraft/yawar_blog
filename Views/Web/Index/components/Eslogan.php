@@ -1,3 +1,30 @@
+<style>
+    .hero-public {
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 10px 6px;
+        cursor: pointer;
+        border-radius: 100px;
+        background-color: var(--color-one);
+        transition: background-color .16s ease;
+    }
+
+    .hero-public span:first-of-type {
+        font-size: 1.8rem;
+        line-height: 1;
+        overflow: hidden;
+        flex: 1 0 50%;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        opacity: var(--opacity-two);
+    }
+
+    .hero-public:hover {
+        background-color: var(--color-two);
+    }
+</style>
 <div class="hero-section">
     <div class="hero-wrap global-padding">
         <h1 class="hero-title global-title text-capitalized text-center">
@@ -17,5 +44,47 @@
                 </svg>
             </span>
         </div>
+        <?php
+        if (false) {
+        ?>
+            <div style="display: flex; justify-content: center; margin-top: 20px;">
+                <div style="background-color: var(--color-five);border-radius: var(--border-radius);max-width: 500px;min-width: 500px; padding: 2vh; margin: 0;">
+                    <div class="open-section-post">
+                        <span style="font-size: 1.8rem;opacity: var(--opacity-two);margin: 0 0 0px 10px;">Publicar nuevo post</span>
+
+                        <div style="display: flex; align-items: center; margin-top: 10px;">
+                            <div class="global-meta-avatar is-image global-image" style="min-width: 45px; margin-right: 10px; margin-left: 10px;">
+                                <a href="author/damian/index.html" class="global-link" title=""></a>
+                                <img src="https://via.placeholder.com/300x49" alt="BUSTAMANTE FERNANDEZ LEENH ALEXANDER" loading="lazy">
+                            </div>
+                            <div class="hero-public" style="max-width: 400px; overflow: hidden;">
+                                <a href="<?php echo base_url() . 'publicar' ?>" style="text-overflow: ellipsis;opacity: var(--opacity-two);white-space: nowrap;font-size: 1.8rem;">¿Qué estas pensando?</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="public-section">
+                <div class="public-wrap" style="z-index: 999;">
+                    <div class="public-content global-radius">
+                        <form class="public-form" onsubmit="return false">
+                            <!-- <input class="search-input" type="text" placeholder="Search"> -->
+
+                            <div>
+                                <p>Crear Publicacion</p>
+                                <span class="public-close"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M11.997 10.846L1.369.219 1.363.214A.814.814 0 00.818.005.821.821 0 000 .822c0 .201.074.395.208.545l.006.006L10.842 12 .214 22.626l-.006.006a.822.822 0 00-.208.546c0 .447.37.817.818.817a.814.814 0 00.551-.215l10.628-10.627 10.628 10.628.005.005a.816.816 0 001.368-.603.816.816 0 00-.213-.552l-.006-.005L13.151 12l10.63-10.627c.003 0 .004-.003.006-.005A.82.82 0 0024 .817a.817.817 0 00-1.37-.602l-.004.004-10.63 10.627z"></path>
+                                    </svg></span>
+                            </div>
+                            <input type="text">
+                        </form>
+                    </div>
+                </div>
+                <div class="public-overlay"></div>
+            </div>
+        <?php
+        }
+        ?>
+
     </div>
 </div>
