@@ -1,7 +1,9 @@
 <header class="header-section">
     <div class="header-wrap">
         <div class="header-logo global-logo is-header">
-            <a href="/" class="is-logo"><img src="https://via.placeholder.com/85x34" alt="<?php echo NOMBRE_EMPRESA ?>" /></a>
+            <a href="/" class="is-logo">
+                <img src="<?php echo isset($logo['img_url']) ? path_recursos() . 'Webp/' . $logo['img_url'] : 'https://via.placeholder.com/85x35' ?>" alt="<?php echo NOMBRE_EMPRESA ?>">
+            </a>
         </div>
         <div class="header-nav">
             <span class="header-search search-open is-mobile"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -36,14 +38,19 @@
                     </li>
                     <?php
                     if (isset($_SESSION['pe'])) {
+                        if (isset($_SESSION['_cf'])) {
                     ?>
+                            <li class="signin">
+                                <a href="<?php echo base_url() . 'Leenh'; ?>">Configurar Web</a>
+                            </li>
+                        <?php
+                        }
+                        ?>
                         <li class="account">
                             <a class="global-button no-color" href="<?php echo base_url() . 'account'; ?>">Mi cuenta</a>
                         </li>
                     <?php
                     } else {
-
-
                     ?>
                         <li class="signin">
                             <a href="<?php echo base_url() . 'Signin'; ?>">Iniciar sesión</a>

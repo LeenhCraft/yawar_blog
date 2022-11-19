@@ -33,6 +33,14 @@
 
 <body>
     <div class="global-wrap">
-        <div class="global-cover" style="background-image: url(<?php echo isset($data['img_port']) ? $data['img_port'] : 'https://via.placeholder.com/1600x1031' ?>);"></div>
+        <div class="global-cover" style="background-image: url(
+            <?php
+            if (isset($data['img_port'])) {
+                echo isset($data['img_port']) ? path_recursos() . 'Webp/' . $data['img_port'] : '#';
+            } else {
+                echo isset($backImg['img_url']) ? path_recursos() . 'Webp/' . $backImg['img_url'] : 'https://via.placeholder.com/1600x1031';
+            }
+            ?>);">
+        </div>
         <div class="global-content">
             <?php require_once __DIR__ . '/Navbarweb.php'; ?>

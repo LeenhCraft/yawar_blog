@@ -10,8 +10,11 @@ class Web extends Controllers
     {
         parent::otra_clase('Clases', 'CompWeb');
         $data['titulo_web'] = "Blog";
+        $this->oClass->linksfooter = false;
         $data['componentes'] = $this->oClass->compweb(["principal", "body"]);
         // dep($data['componentes'], 1);
+        parent::otro('leenh');
+        $data['imgBackDes'] = $this->other->verLogo('BACK::DES');
         $this->views->getView('Web/Index', 'Index', $data);
     }
 

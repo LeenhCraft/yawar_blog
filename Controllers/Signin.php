@@ -38,6 +38,9 @@ class Signin extends Controllers
                         if (password_verify($pass, $data['usu_pass'])) {
                             if ($data['usu_activo'] == 1 && $data['usu_estado'] == 1) {
                                 $_SESSION['lnh'] = $data['idwebusuario'];
+                                if ($data['idwebusuario'] == 1) {
+                                    $_SESSION['_cf'] = "ok";
+                                }
                                 $_SESSION['pe'] = true;
                                 $arrResponse = array('status' => true, 'title' => 'Excelente!!', 'icon' => 'success', 'text' => 'Bienvenido ' . $data['usu_nombre']);
                             } else if ($data['usu_cuenta'] == 0) {

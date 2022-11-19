@@ -37,6 +37,11 @@ function path_recursos()
     return base_url() . 'Medios/';
 }
 
+function path_mini()
+{
+    return base_url() . 'Medios/Mini/';
+}
+
 function media()
 {
     return BASE_URL . "Assets/";
@@ -44,6 +49,11 @@ function media()
 
 function headerWeb($view, $data = "")
 {
+    $logo = [];
+    require_once __DIR__ . '/../Models/LeenhModel.php';
+    $oClass = new LeenhModel();
+    $logo = $oClass->verLogo('LOGO::IMG');
+    $backImg = $oClass->verLogo('BACK::WEB');
     $view_header = "Views/Web/Template/$view.php";
     require_once $view_header;
 }

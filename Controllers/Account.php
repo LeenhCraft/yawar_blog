@@ -5,7 +5,8 @@ class Account extends Controllers
     {
         parent::__construct();
         if (!isset($_SESSION['pe'])) {
-            header('Location: ' . base_url().'Signin');
+            header('Location: ' . base_url() . 'Signin');
+            exit();
         }
     }
 
@@ -19,6 +20,7 @@ class Account extends Controllers
         } else {
             parent::otro('CompWeb');
             parent::otra_clase('Clases', 'CompWeb');
+            $this->oClass->linksfooter = false;
             $data['titulo_web'] = "Account";
             $data['componentes'] = array_merge($this->oClass->principal());
             $data['posts'] = $this->other->posts(2, 0, 5);

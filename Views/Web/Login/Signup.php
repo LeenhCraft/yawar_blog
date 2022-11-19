@@ -11,9 +11,9 @@
                 <input type="hidden" name="_token" value="<?php echo $data['csrf']; ?>">
                 <div class="form">
                     <h1 class="custom-title">Crear Cuenta</h1>
-                    <input type="text" name="txtnombre" id="txtnombre" placeholder="Nombre">
+                    <input type="text" name="txtnombre" id="txtnombre" placeholder="Nombre" autocomplete="off">
                     <input type="password" name="txtpass" id="txtpass" placeholder="Contraseña" autocomplete="off">
-                    <input type="email" name="txtemail" id="txtemail" placeholder="Email">
+                    <input type="email" name="txtemail" id="txtemail" placeholder="Email" autocomplete="off">
                     <button class="global-button" type="submit">Continue</button>
                     <div>
                         <small class="alert-loading global-alert">Processing your application</small>

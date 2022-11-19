@@ -121,6 +121,13 @@
 
   }
 </script>
+<?php
+if (isset($data['js']) && !empty($data['js'])) {
+  for ($i = 0; $i < count($data['js']); $i++) {
+    echo '<script src="' . media() . $data['js'][$i] . '"></script>';
+  }
+}
+?>
 </body>
 
 </html>

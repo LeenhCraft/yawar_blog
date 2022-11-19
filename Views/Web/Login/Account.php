@@ -46,7 +46,7 @@
                             </div>
                         <?php } ?>
                         <div class="account-signout-wrap">
-                            <a class="global-button" href="<?php echo base_url() . 'logout' ?>">Cerrar Sesión</a>
+                            <a class="global-button" href="<?php echo base_url() . 'Logout' ?>">Cerrar Sesión</a>
                         </div>
                     </div>
                 </div>

@@ -15,51 +15,6 @@
                 </div>
 
                 <div class="post-header-image">
-                    <style>
-                        .upload-button {
-                            /* Used to position the input */
-                            position: relative;
-
-                            /* Center the content */
-                            align-items: center;
-                            display: flex;
-                            /* flex-direction: column; */
-                            justify-content: space-between;
-
-                            /* Border */
-                            border: 1px solid rgb(124 139 154/25%);
-                            transition: border-color .15s ease;
-                            max-width: 860px;
-
-                        }
-
-                        .upload-button__input {
-                            /* Take the full size */
-                            height: 100%;
-                            left: 0;
-                            position: absolute;
-                            top: 0;
-                            width: 100%;
-
-                            /* Make it transparent */
-                            opacity: 0;
-                            cursor: pointer;
-                        }
-
-                        .upload-button__icon {
-                            width: 100%;
-                            margin-right: 0.5rem;
-                            padding: 2.25rem 0 2.25rem 2.25rem;
-                        }
-
-                        .upload-button:hover {
-                            border-color: var(--color-border-two);
-                        }
-
-                        .upload-button:hover .kg-file-card-icon::before {
-                            opacity: .08;
-                        }
-                    </style>
                     <div class="upload-button kg-file-card-container global-radius">
                         <input type="file" class="upload-button__input" />
                         <div class="upload-button__icon">

@@ -14,6 +14,7 @@ class Errors extends Controllers
 		$data['componentes'] = $this->oClass->principal();
 		$data['postrandom'] = $this->other->randoPost(3);
 		// dep($data,1);
+		http_response_code(404);
 		$this->views->getView($this, "Index", $data);
 	}
 

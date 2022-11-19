@@ -111,6 +111,14 @@ body.is-scroll-banner .is-banner {
     margin-right: .5rem;
 }
 
+.mb-2 {
+    margin-bottom: .5rem;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem;
+}
+
 .global-margin {
     margin-bottom: 6rem;
 }
@@ -272,4 +280,71 @@ body.is-scroll-banner .is-banner {
     background-color: var(--color-six);
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, .1), 0 8px 10px -6px rgba(0, 0, 0, .1);
     will-change: transform;
+}
+
+/* estilos de input:file */
+.upload-button {
+    /* Used to position the input */
+    position: relative;
+
+    /* Center the content */
+    align-items: center;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-between;
+
+    /* Border */
+    border: 1px solid rgb(124 139 154/25%);
+    transition: border-color .15s ease;
+    max-width: 860px;
+
+}
+
+.upload-button__input {
+    /* Take the full size */
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    /* Make it transparent */
+    opacity: 0;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.upload-button__icon {
+    width: 100%;
+    margin-right: 0.5rem;
+    padding: 2.25rem 0 2.25rem 2.25rem;
+}
+
+.upload-button:hover {
+    border-color: var(--color-border-two);
+}
+
+.upload-button:hover .kg-file-card-icon::before {
+    opacity: .08;
+}
+
+/* end */
+
+.f-s {
+    font-size: .7em;
+}
+
+.custom-content-leenh form.success .alert-success, .custom-content-leenh form.loading .alert-loading, .custom-content-leenh form.success+.alert-success, .custom-content-leenh form.error .alert-error {
+    display: inline-block
+}
+
+.border {
+    border: 1px solid rgb(124 139 154/25%);
+}
+
+.global-img {
+    font-size: 1.3rem;
+    line-height: 1.4;
+    display: none;
+    opacity: var(--opacity-one)
 }

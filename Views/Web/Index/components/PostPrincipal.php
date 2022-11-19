@@ -50,7 +50,9 @@
             </div>
         </div>
     </article>
-    <div class="subscribe-form global-radius">
+    <?php
+    /*
+     <div class="subscribe-form global-radius">
         <div class="global-dynamic-color">
             <small class="global-subtitle">estar enterado</small>
             <h3 class="subscribe-title">
@@ -68,6 +70,32 @@
                 <span class="alert-loading global-alert">Procesando su solicitud</span>
                 <span class="alert-success global-alert">Por favor revise su bandeja de entrada y haga clic en el enlace para confirmar su suscripción.</span>
                 <span class="alert-error global-alert">Hubo un error al enviar el correo electrónico. Por favor intentelo más tarde.</span>
+            </div>
+        </div>
+    </div>
+     */
+    ?>
+    <div class="subscribe-form global-radius">
+        <div class="global-dynamic-color">
+            <small class="global-subtitle">redes sociales</small>
+            <h3 class="subscribe-title">
+                Visita nuestra pagina de Facebook y canal de YouTube para mantenerte al tanto de todas las novedades.
+            </h3>
+        </div>
+        <div class="subscribe-wrap">
+            <div>
+                <a href="https://www.facebook.com/YawarMuxus/" target="_blank">
+                    <button class="global-button no-color mb-2">
+                        <i class="fab fa-facebook"></i>
+                        Facebook
+                    </button>
+                </a>
+                <a href="https://www.youtube.com/channel/UCnRk_SJpDNTV6ORyUzmmMZg" target="_blank">
+                    <button class="global-button no-color">
+                        <i class="fab fa-youtube"></i>
+                        YouTube
+                    </button>
+                </a>
             </div>
         </div>
     </div>

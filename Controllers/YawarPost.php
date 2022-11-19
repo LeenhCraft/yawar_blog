@@ -6,6 +6,7 @@ class YawarPost extends Controllers
         parent::__construct();
         $url = urls();
         parent::otra_clase('Clases', 'CompWeb');
+        $this->oClass->linksfooter = false;
         parent::otro('CompWeb');
         $data['titulo_web'] = "Yawar.:Post";
         $data['componentes'] = $this->oClass->compweb(["principal"]);
@@ -15,6 +16,8 @@ class YawarPost extends Controllers
             $data['older'] = $this->model->postOlder($data['post']['pos_date'], 1);
             $data['next'] = $this->model->postNext($data['post']['pos_date'], 1);
             $data['gallery'] = $this->model->postGalleries($data['post']['idpost'], 2);
+            // parent::otro('Leenh');
+            // $data['img_port'] = $data['post']['pos_img'];
             parent::otro('Web');
             $this->other->masVisitado($_SESSION['vi'], $data['post']['idpost'], $url['method']);
             // dep($data, 1);
