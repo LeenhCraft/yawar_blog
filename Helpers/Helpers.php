@@ -60,6 +60,9 @@ function headerWeb($view, $data = "")
 
 function footerWeb($view, $data = "")
 {
+    require_once __DIR__ . '/../Models/LeenhModel.php';
+    $oClass = new LeenhModel();
+    $logo = $oClass->verLogo('LOGO::IMG');
     $view_footer = "Views/Web/Template/$view.php";
     require_once $view_footer;
 }

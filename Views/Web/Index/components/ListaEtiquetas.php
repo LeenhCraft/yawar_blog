@@ -7,7 +7,7 @@
             <a href="<?= path_tag() . $tag['tag_slug'] ?>" class="item global-image-orientation global-radius">
                 <h2 class="item-title"><?= $tag['tag_name'] ?></h2>
                 <div class="widget-image global-image">
-                    <img src="<?= $tag['tag_img'] ?>" alt="<?= $tag['tag_name'] ?>" />
+                    <img src="<?= path_recursos() . 'Webp/' . $tag['tag_img'] ?>" alt="<?= $tag['tag_name'] ?>" />
                 </div>
             </a>
         <?php

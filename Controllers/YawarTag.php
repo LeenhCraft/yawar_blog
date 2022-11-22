@@ -13,6 +13,10 @@ class YawarTag extends Controllers
         if (!empty($data['tag'])) {
             $data['posts'] = $this->model->post($data['tag']['idtag']);
             $data['img_port'] = $data['tag']['tag_img'];
+            if (isset($_SESSION['pe'])) {
+                $data['js'] = ['js/tags.js'];
+                $data['csrf'] = getTokenCsrf();
+            }
             $this->views->getView('Web/Tag', 'Index', $data);
         } else {
             require_once __DIR__ . '/Error.php';

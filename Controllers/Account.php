@@ -28,6 +28,12 @@ class Account extends Controllers
             // dep($data['postsusuario'],1);
             parent::otro('web');
             $data['user'] = $this->other->getUser($_SESSION['lnh']);
+            $data['csrf'] = getTokenCsrf();
+            $data['js'] = ['js/publish.js'];
+            parent::otro("leenh");
+            $data['logo'] = $this->other->verLogo('LOGO::IMG');
+            $data['backImg'] = $this->other->verLogo('BACK::WEB');
+            $data['backDes'] = $this->other->verLogo('BACK::DES');
             $this->views->getView('Web/Login', 'Account', $data);
         }
     }

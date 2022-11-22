@@ -1,6 +1,6 @@
 :root {
-    --height-logo-header: 34px;
-    --height-logo-footer: 34px;
+    --height-logo-header: 60px;
+    --height-logo-footer: 120px;
     --height-logo-mobile-header: 34px;
     --height-logo-mobile-footer: 34px;
     --max-width-global-wrap: 1360px;

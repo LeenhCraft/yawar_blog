@@ -38,7 +38,8 @@
                     </li>
                     <?php
                     if (isset($_SESSION['pe'])) {
-                        if (isset($_SESSION['_cf'])) {
+                        // if (isset($_SESSION['_cf'])) {
+                            if(false){
                     ?>
                             <li class="signin">
                                 <a href="<?php echo base_url() . 'Leenh'; ?>">Configurar Web</a>

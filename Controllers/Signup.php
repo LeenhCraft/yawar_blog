@@ -9,6 +9,8 @@ class Signup extends Controllers
                 $this->register();
             } else {
                 $data['csrf'] = getTokenCsrf();
+                parent::otro("Leenh");
+                $data['logo'] = $this->other->verLogo('LOGO::IMG');
                 $this->views->getView('Web/Login', 'Signup', $data);
             }
         } else {

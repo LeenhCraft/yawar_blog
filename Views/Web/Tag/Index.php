@@ -2,13 +2,45 @@
 <main class="global-main">
     <div class="post-header">
         <div class="post-header-wrap global-padding is-center is-archive-image">
-            <div class="post-header-content">
-                <div class="archive-image global-image">
-                    <img src="<?php echo $data['tag']['tag_img'] ?>" alt="<?php echo $data['tag']['tag_name'] ?>">
-                </div>
-                <h1 class="post-title global-title"><?php echo $data['tag']['tag_name'] ?></h1>
-                <p class="post-excerpt global-excerpt d-none">descrip</p>
-
+            <div class="post-header-content custom-content-leenh">
+                <?php
+                if (isset($_SESSION['pe']) && isset($_SESSION['_cf'])) {
+                ?>
+                    <form id="img" class="formtag success" onsubmit="updTag(this,event)">
+                        <div class="message text-center border global-radius mb-4 global-padding" style="padding: 1.5rem; display: none;">
+                            <small class="alert-success global-im">Procesando su petición</small>
+                            <small class="alert-error global-im"></small>
+                        </div>
+                    <?php
+                }
+                    ?>
+                    <div class="archive-image global-image" style="position: relative;">
+                        <?php
+                        if (isset($_SESSION['pe']) && isset($_SESSION['_cf'])) {
+                        ?>
+                            <input type="hidden" name="_token" value="<?php echo $data['csrf'] ?>">
+                            <input type="hidden" name="_tag" value="<?php echo $data['tag']['idtag'] ?>">
+                            <input accept="image/*" name="img" type="file" class="upload-button__input" onchange="updImgTag(this,event)">
+                        <?php
+                        }
+                        ?>
+                        <img src="<?php echo path_recursos() . 'Webp/' . $data['tag']['tag_img'] ?>" alt="<?php echo $data['tag']['tag_name'] ?>">
+                    </div>
+                    <?php
+                    if (isset($_SESSION['pe']) && isset($_SESSION['_cf'])) {
+                    ?>
+                        <h1 class="post-title global-title">
+                            <input class="text-center" style="max-width: 100%;" type="text" name="tagname" value="<?php echo $data['tag']['tag_name'] ?>">
+                        </h1>
+                    <?php
+                    } else {
+                    ?>
+                        <h1 class="post-title global-title"><?php echo $data['tag']['tag_name'] ?></h1>
+                    <?php
+                    }
+                    ?>
+                    <p class="post-excerpt global-excerpt d-none">descrip</p>
+                    <?php if (isset($_SESSION['pe']) && isset($_SESSION['_cf'])) { ?></form><?php } ?>
             </div>
         </div>
     </div>
@@ -40,7 +72,7 @@
                         <div class="global-meta">
                             <div class="global-meta-content">
                                 by
-                                <a href="<?php echo path_author().urls_amigables($post['usu_nombre']) ?>"><?php echo $post['usu_nombre'] ?></a>
+                                <a href="<?php echo path_author() . urls_amigables($post['usu_nombre']) ?>"><?php echo $post['usu_nombre'] ?></a>
                             </div>
                         </div>
                     </div>

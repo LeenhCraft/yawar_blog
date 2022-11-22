@@ -1,7 +1,9 @@
 <div class="footer-content">
     <div class="footer-logo-wrap">
         <div class="global-logo is-footer">
-            <a href="/" class="is-logo"><img src="https://via.placeholder.com/85x34" alt="Reiro home" /></a>
+            <a href="<?php echo base_url(); ?>" class="is-logo">
+                <img src="<?php echo isset($logo['img_url']) ? path_recursos() . 'Webp/' . $logo['img_url'] : 'https://via.placeholder.com/85x35' ?>" alt="<?php echo NOMBRE_EMPRESA ?>">
+            </a>
         </div>
         <p class="footer-description">
             <?php echo $data['componentes']['esloganfooter']['content']['sl_name'] ?>

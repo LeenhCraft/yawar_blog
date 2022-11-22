@@ -3,7 +3,9 @@
     <div class="custom-container">
         <div class="custom-logo-wrap">
             <div class="custom-logo global-logo is-header">
-                <a href="<?php echo base_url(); ?>" class="is-logo"><img src="https://via.placeholder.com/85x34" alt="<?php echo NOMBRE_EMPRESA ?>" /></a>
+                <a href="<?php echo base_url(); ?>" class="is-logo">
+                    <img src="<?php echo isset($data['logo']['img_url']) ? path_recursos() . 'Webp/' . $data['logo']['img_url'] : 'https://via.placeholder.com/85x35' ?>" alt="<?php echo NOMBRE_EMPRESA ?>">
+                </a>
             </div>
         </div>
         <div class="custom-content">

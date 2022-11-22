@@ -348,3 +348,10 @@ body.is-scroll-banner .is-banner {
     display: none;
     opacity: var(--opacity-one)
 }
+
+.global-button-sm {
+    padding: .5rem;
+    font-size: 1.3rem;
+    margin-left: 1rem;
+    text-transform: capitalize;
+}

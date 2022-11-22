@@ -9,6 +9,8 @@ class Signin extends Controllers
                 $this->session();
             } else {
                 $data['csrf'] = getTokenCsrf();
+                parent::otro("Leenh");
+                $data['logo'] = $this->other->verLogo('LOGO::IMG');
                 $this->views->getView('Web/Login', 'Signin', $data);
             }
         } else {

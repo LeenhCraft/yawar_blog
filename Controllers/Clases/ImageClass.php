@@ -51,7 +51,7 @@ class ImageClass extends Controllers
         return $return;
     }
 
-    public function convertirWebp($extension, $ruta, $destination, $quality = 10)
+    public function convertirWebp($extension, $ruta, $destination, $quality = 50)
     {
 
         // $extension = pathinfo($ruta, PATHINFO_EXTENSION);
