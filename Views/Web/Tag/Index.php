@@ -6,7 +6,7 @@
                 <?php
                 if (isset($_SESSION['pe']) && isset($_SESSION['_cf'])) {
                 ?>
-                    <form id="img" class="formtag success" onsubmit="updTag(this,event)">
+                    <form id="img" class="formtag" onsubmit="updTag(this,event)">
                         <div class="message text-center border global-radius mb-4 global-padding" style="padding: 1.5rem; display: none;">
                             <small class="alert-success global-im">Procesando su petición</small>
                             <small class="alert-error global-im"></small>

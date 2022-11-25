@@ -22,6 +22,25 @@ class YawarGalleryModel extends Mysql
         return $request;
     }
 
+    public function listarGalleries()
+    {
+        require_once __DIR__ . '/CompWebModel.php';
+        $compWebModel = new CompWebModel();
+        $table = "SELECT * FROM blog_galleries a";
+        $inner = $order = $where = "";
+        $where = "WHERE a.ga_publicar = 1 AND a.ga_status = 1";
+        $order = "ORDER BY a.idgalery DESC";
+        $sql = $table . ' ' . $inner . ' ' . $where . ' ' . $order;
+        $request = $this->select_all($sql);
+        if (!empty($request)) {
+            foreach ($request as $key => $value) {
+                $img = $compWebModel->getImg($request[$key]['idgalery'], 'GALLERY::PORT');
+                $request[$key]['ga_img_port'] = isset($img['img_url']) ? $img['img_url'] : 'https://via.placeholder.com/1600x2108';
+            }
+        }
+        return $request;
+    }
+
     public function images($idgallery)
     {
         $table = "SELECT * FROM blog_images a";
@@ -53,6 +72,63 @@ class YawarGalleryModel extends Mysql
             $request['aut_img'] = isset($imgAut['img_url']) ? $imgAut['img_url'] : 'https://via.placeholder.com/300x49';
             $request['aut_meta'] = $yawarPostModel->metaAuthor($request['idwebusuario']);
         }
+        return $request;
+    }
+
+    public function insertGal($name, $slug)
+    {
+        $sql = "SELECT * FROM blog_galleries WHERE ga_name = '$name' OR ga_slug = '$slug'";
+        $request = $this->select_all($sql);
+        if (empty($request)) {
+            $query_insert = "INSERT INTO blog_galleries(ga_name,ga_slug) VALUES(?,?)";
+            $arrData = array($name, $slug);
+            $request_insert = $this->insert($query_insert, $arrData);
+            $return['status'] = true;
+            $return['text'] = $request_insert;
+        } else {
+            $return['status'] = false;
+            $return['text'] = "exist";
+        }
+        return $return;
+    }
+
+    public function updateGal($gallery, $slug, $idgallery)
+    {
+        $sql = "UPDATE blog_galleries SET ga_name = ?, ga_slug = ? WHERE idgalery = ?";
+        $arrData = array($gallery, $slug, $idgallery);
+        $request = $this->update($sql, $arrData);
+        return $request;
+    }
+
+    public function updPostAso($post, $idgalery)
+    {
+        $sql = "UPDATE blog_galleries SET idpost = ? WHERE idgalery = ?";
+        $arrData = array($post, $idgalery);
+        $request = $this->update($sql, $arrData);
+        return $request;
+    }
+
+    public function insImgGal($type, $lnh_name, $img_propietario, $idgalery)
+    {
+        $sql = "INSERT INTO blog_images (img_type, img_url, img_propietario, idgalery) VALUES (?,?,?,?)";
+        $arrData = array($type, $lnh_name, $img_propietario, $idgalery);
+        $request = $this->insert($sql, $arrData);
+        return $request;
+    }
+
+    public function delImgGal($idimage, $idgalery)
+    {
+        $sql = "DELETE FROM blog_images WHERE idimage = $idimage AND idgalery = $idgalery";
+        $arrData = array($idimage, $idgalery);
+        $request = $this->delete($sql, $arrData);
+        return $request;
+    }
+
+    public function delPostAso($idgalery, $idpost)
+    {
+        $sql = "UPDATE blog_galleries SET idpost = '0' WHERE idgalery = ? AND idpost = ?";
+        $arrData = array($idgalery, $idpost);
+        $request = $this->update($sql, $arrData);
         return $request;
     }
 }

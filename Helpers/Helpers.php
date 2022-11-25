@@ -618,25 +618,25 @@ function getTokenCsrf()
     if (isset($_SESSION['csrf'])) {
         unset($_SESSION['csrf']);
     }
-    $token = token();
+    $token = token(5);
     $_SESSION['csrf'] = ['token' => $token, 'time' => time()];
     return $token;
 }
 
 function validarCrf($token = "")
 {
-    $return = ['status' => false, 'message' => 'Token invalido'];
-    if (isset($_SESSION['csrf']) && $_SESSION['csrf']['token'] == $token) {
+    $return = ['status' => false, 'message' => 'Error de token'];
+    if (isset($_SESSION['csrf']) && $_SESSION['csrf']['token'] === $token) {
         $inactivo = 300; //5 min en este caso.
         $vida_session = time() - $_SESSION['csrf']['time'];
         if ($vida_session > $inactivo) {
             unset($_SESSION['csrf']);
-            $return = ['status' => false, 'message' => 'Token invalido'];
+            $return = ['status' => false, 'message' => 'Token expirado'];
         } else {
             $return = ['status' => true, 'message' => 'Token valido'];
         }
     } else {
-        $return = ['status' => false, 'message' => 'Token invalido'];
+        $return = ['status' => false, 'message' => 'Token desconocido'];
     }
     return $return;
 }

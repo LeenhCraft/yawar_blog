@@ -11,6 +11,7 @@ class Signup extends Controllers
                 $data['csrf'] = getTokenCsrf();
                 parent::otro("Leenh");
                 $data['logo'] = $this->other->verLogo('LOGO::IMG');
+                $data['imgSignup'] = $this->other->verLogo('SIGNUP::PORT');
                 $this->views->getView('Web/Login', 'Signup', $data);
             }
         } else {

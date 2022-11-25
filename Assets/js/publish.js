@@ -54,3 +54,44 @@ function save(ths, e) {
     },
   });
 }
+
+function saveSign(ths, e) {
+  e.preventDefault();
+  let form = $(ths);
+  let dat = new FormData(form[0]);
+
+  let ajaxUrl = base_url + "Leenh/imgSign";
+  $.ajax({
+    type: "POST",
+    url: ajaxUrl,
+    data: dat,
+    processData: false,
+    contentType: false,
+    success: function (data) {
+      let objData = JSON.parse(data);
+      if (objData.status) {
+        $("#imgg")
+          .removeClass("error")
+          .addClass("success")
+          .find(".message")
+          //   .removeClass("d-none")
+          .addClass("kg-callout-card-blue");
+        $("#imgg").find(".alert-success").html(objData.text);
+        $("#imgg").find(".message").show("slow");
+      } else {
+        // Swal.fire("Error", objData.text, "warning");
+        $("#imgg")
+          .removeClass("success")
+          .addClass("error")
+          .find(".message")
+          //   .removeClass("d-none")
+          .addClass("kg-callout-card-yellow");
+        $("#imgg").fin(".alert-error").html(objData.text);
+        $("#imgg").find(".message").show("slow");
+      }
+    },
+    error: function (error) {
+      alert(error);
+    },
+  });
+}

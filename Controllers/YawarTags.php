@@ -65,7 +65,7 @@ class YawarTags extends Controllers
                                 $arrResponse = array("status" => false, 'icon' => 'error', 'title' => 'Error!!', "text" => 'No se pudo guardar el tag.' . $request['text']);
                             }
                         } else {
-                            $arrResponse = array("status" => false, 'icon' => 'info', 'title' => 'Atención!!', "text" => $validacion['text']);
+                            $arrResponse = array("status" => false, 'icon' => 'info', 'title' => 'Atención!!', "text" => $validacion['message']);
                         }
                     } else {
                         $arrResponse = array("status" => false, 'icon' => 'info', 'title' => 'Atención!!', "text" => $csrf['text']);
@@ -123,7 +123,7 @@ class YawarTags extends Controllers
                             }
                         }
                     } else {
-                        $arrResponse = array("status" => false, 'icon' => 'info', 'title' => 'Atención!!', "text" => $csrf['text']);
+                        $arrResponse = array("status" => false, 'icon' => 'info', 'title' => 'Atención!!', "text" => $csrf['message']);
                     }
                 } else {
                     $arrResponse = array('status' => false, 'title' => 'Atención!!', 'icon' => 'warning', 'text' => 'Ingrese el nombre del tag');

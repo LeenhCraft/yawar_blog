@@ -36,6 +36,6 @@
             </form>
         </div>
     </div>
-    <div class="custom-image global-bg-image" style="background-image: url(https://via.placeholder.com/2000x2500);"></div>
+    <div class="custom-image global-bg-image" style="background-image: url(<?php echo isset($data['imgSignin']['img_url']) ?  path_recursos() . 'Webp/' . $data['imgSignin']['img_url'] : media() . 'svg/upload.svg' ?>);"></div>
 </div>
 <?php footerWeb('FooterLogin', $data); ?>

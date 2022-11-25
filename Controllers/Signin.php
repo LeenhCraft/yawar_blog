@@ -11,6 +11,7 @@ class Signin extends Controllers
                 $data['csrf'] = getTokenCsrf();
                 parent::otro("Leenh");
                 $data['logo'] = $this->other->verLogo('LOGO::IMG');
+                $data['imgSignin'] = $this->other->verLogo('SIGNIN::PORT');
                 $this->views->getView('Web/Login', 'Signin', $data);
             }
         } else {

@@ -131,9 +131,8 @@
                 ?>
                     <article class="item is-special">
                         <div class="item-image global-image global-image-orientation global-radius">
+                            <img src="<?php echo path_recursos().'Webp/'. $gallery['ga_img'] ?>" alt="<?php echo $gallery['ga_name'] ?>">
                             <a href="<?php echo path_gallery() . $gallery['ga_slug'] ?>" class="global-link" aria-label="<?php echo $gallery['ga_name'] ?>"></a>
-                            <img srcset="<?php echo $gallery['ga_img'] ?> 300w, 
-                            <?php echo $gallery['ga_img'] ?> 600w" sizes="(max-width:480px) 300px, 600px" src="<?php echo $gallery['ga_img'] ?>" loading="lazy" alt="<?php echo $gallery['ga_name'] ?>">
                         </div>
                         <div class="item-content">
                             <h2 class="item-title"><a href="<?php echo  path_gallery() . $gallery['ga_slug'] ?>"><?php echo $gallery['ga_name'] ?></a></h2>
@@ -141,7 +140,6 @@
                     </article>
                 <?php }
                 ?>
-
             </div>
         </div>
     <?php

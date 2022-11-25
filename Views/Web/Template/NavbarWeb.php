@@ -39,7 +39,7 @@
                     <?php
                     if (isset($_SESSION['pe'])) {
                         // if (isset($_SESSION['_cf'])) {
-                            if(false){
+                        if (false) {
                     ?>
                             <li class="signin">
                                 <a href="<?php echo base_url() . 'Leenh'; ?>">Configurar Web</a>
@@ -56,11 +56,18 @@
                         <li class="signin">
                             <a href="<?php echo base_url() . 'Signin'; ?>">Iniciar sesión</a>
                         </li>
+                        <li class="signin">
+                            <a class="global-button" style="text-decoration: none;" href="<?php echo base_url() . 'Signup'; ?>">Crear cuenta</a>
+                        </li>
 
-                        <li class="signup">
+
+                    <?php
+                        /*
+                    <li class="signup">
                             <a href="membership/index.html" class="global-button">Suscribirme</a>
                         </li>
-                    <?php } ?>
+                     */
+                    } ?>
                 </ul>
             </nav>
         </div>

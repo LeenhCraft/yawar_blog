@@ -128,17 +128,104 @@ class Leenh extends Controllers
             echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
             exit();
         } else {
-            parent::otro('CompWeb');
-            parent::otra_clase('Clases', 'CompWeb');
-            $this->oClass->linksfooter = false;
-            $data['titulo_web'] = "Account";
-            $data['componentes'] = array_merge($this->oClass->principal());
-            $data['csrf'] = getTokenCsrf();
-            $data['js'] = ['js/publish.js'];
-            $data['logo'] = $this->model->verLogo('LOGO::IMG');
-            $data['backImg'] = $this->model->verLogo('BACK::WEB');
-            $data['backDes'] = $this->model->verLogo('BACK::DES');
-            $this->views->getView('Config', 'Index', $data);
+            require_once __DIR__ . '/Error.php';
+            $classError = new Errors();
+            $classError->notFound();
+            // parent::otro('CompWeb');
+            // parent::otra_clase('Clases', 'CompWeb');
+            // $this->oClass->linksfooter = false;
+            // $data['titulo_web'] = "Account";
+            // $data['componentes'] = array_merge($this->oClass->principal());
+            // $data['csrf'] = getTokenCsrf();
+            // $data['js'] = ['js/publish.js'];
+            // $data['logo'] = $this->model->verLogo('LOGO::IMG');
+            // $data['backImg'] = $this->model->verLogo('BACK::WEB');
+            // $data['backDes'] = $this->model->verLogo('BACK::DES');
+            // $this->views->getView('Config', 'Index', $data);
+        }
+    }
+
+    public function imgSign()
+    {
+        if (strtoupper($_SERVER['REQUEST_METHOD']) === "POST" && isset($_SESSION['pe'])) {
+            // dep([$_FILES, $_POST], 1);
+            $arrResponse = array("status" => false, 'icon' => 'info', 'title' => 'Atención!!', "text" => 'No cuenta con los permisos necesarios.');
+            // $logo = $_FILES['imgLogo'];
+            $tk = isset($_POST['_token']) ? strClean($_POST['_token']) : '';
+            $imgSignin = $_FILES['imgSignin'];
+            $imgSignup = $_FILES['imgSignup'];
+
+            $csrf = validarCrf($tk);
+            if ($csrf['status']) {
+                parent::otra_clase('Clases', 'ImageClass');
+                $validacion = $this->oClass->validarImagen($imgSignin);
+                if ($validacion['status']) {
+                    $nombre = $this->oClass->nombre($imgSignin);
+                    $extension = $this->oClass->extension($imgSignin);
+                    $lnh_name = strlen($nombre) > 10 ? 'signin' . substr($nombre, 0, 5) . '-' . generar_letras(4) : 'signin-' . $nombre . '-' . generar_letras(4);
+                    $nomtemp = $lnh_name . '.webp';
+                    $ruta_usuario = $imgSignin['tmp_name'];
+                    $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $nomtemp);
+                    if ($conversion) {
+                        // $mini = $this->oClass->minificar($lnh_name . '.webp');
+                        //guardar en la base de datos
+                        $type = "SIGNIN::PORT";
+                        $idgalery = 0;
+                        $img_propietario = 0;
+                        $data = $this->model->verLogo($type);
+                        if (empty($data)) {
+                            $request = $this->model->insertImg($type, $nomtemp, $img_propietario, $idgalery);
+                        } else {
+                            $request = $this->model->updateImg($data['idimage'], $type, $nomtemp);
+                        }
+                        if ($request > 0) {
+                            $arrResponse = array("status" => true, 'icon' => 'success', 'title' => 'Excelente!!', "text" => 'Imagen actualizado correctamente.');
+                        } else {
+                            $arrResponse = array("status" => false, 'icon' => 'error', 'title' => 'Error!!', "text" => 'No se pudo guardar la imagen.');
+                        }
+                    } else {
+                        $arrResponse = array("status" => false, 'icon' => 'error', 'title' => 'Error!!', "text" => 'No se pudo convertir la imagen.');
+                    }
+                }
+
+                $validacion = $this->oClass->validarImagen($imgSignup);
+                if ($validacion['status']) {
+                    $nombre = $this->oClass->nombre($imgSignup);
+                    $extension = $this->oClass->extension($imgSignup);
+                    $lnh_name = strlen($nombre) > 10 ? 'signup' . substr($nombre, 0, 5) . '-' . generar_letras(4) : 'signup-' . $nombre . '-' . generar_letras(4);
+                    $nomtemp = $lnh_name . '.webp';
+                    $ruta_usuario = $imgSignup['tmp_name'];
+                    $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $nomtemp);
+                    if ($conversion) {
+                        // $mini = $this->oClass->minificar($lnh_name . '.webp');
+                        //guardar en la base de datos
+                        $type = "SIGNUP::PORT";
+                        $idgalery = 0;
+                        $img_propietario = 0;
+                        $data = $this->model->verLogo($type);
+                        if (empty($data)) {
+                            $request = $this->model->insertImg($type, $nomtemp, $img_propietario, $idgalery);
+                        } else {
+                            $request = $this->model->updateImg($data['idimage'], $type, $nomtemp);
+                        }
+                        if ($request > 0) {
+                            $arrResponse = array("status" => true, 'icon' => 'success', 'title' => 'Excelente!!', "text" => 'Imagen actualizado correctamente.');
+                        } else {
+                            $arrResponse = array("status" => false, 'icon' => 'error', 'title' => 'Error!!', "text" => 'No se pudo guardar la imagen.');
+                        }
+                    } else {
+                        $arrResponse = array("status" => false, 'icon' => 'error', 'title' => 'Error!!', "text" => 'No se pudo convertir la imagen.');
+                    }
+                }
+            } else {
+                $arrResponse = array('status' => false, 'title' => '', 'icon' => 'warning', 'text' => 'Token invalido');
+            }
+            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+            exit();
+        } else {
+            require_once __DIR__ . '/Error.php';
+            $classError = new Errors();
+            $classError->notFound();
         }
     }
 }

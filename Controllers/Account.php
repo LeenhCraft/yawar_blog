@@ -34,6 +34,8 @@ class Account extends Controllers
             $data['logo'] = $this->other->verLogo('LOGO::IMG');
             $data['backImg'] = $this->other->verLogo('BACK::WEB');
             $data['backDes'] = $this->other->verLogo('BACK::DES');
+            $data['imgSignin'] = $this->other->verLogo('SIGNIN::PORT');
+            $data['imgSignup'] = $this->other->verLogo('SIGNUP::PORT');
             $this->views->getView('Web/Login', 'Account', $data);
         }
     }
