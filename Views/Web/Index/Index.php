@@ -3,7 +3,7 @@
 
   <?php
   // slogan + buscador
-  if ($data['componentes']['eslogan']['status']) {
+  if (isset($data['componentes']['eslogan']['status'])) {
     require_once __DIR__ . '/components/Eslogan.php';
   }
   // // publicar post
@@ -11,11 +11,11 @@
   //   require_once __DIR__ . '/components/PublicaPost.php';
   // }
   // lista de etiquetas
-  if ($data['componentes']['listaetiquetas']['status']) {
+  if (isset($data['componentes']['listaetiquetas']['status'])) {
     require_once __DIR__ . '/components/ListaEtiquetas.php';
   }
   // registrarse
-  if ($data['componentes']['register']['status']) {
+  if (isset($data['componentes']['register']['status'])) {
     require_once __DIR__ . '/components/Registrarse.php';
   }
   ?>
@@ -23,19 +23,19 @@
   <div class="loop-section global-padding">
     <?php
     // post principal
-    if ($data['componentes']['postprincipal']['status']) {
+    if (isset($data['componentes']['postprincipal']['status'])) {
       require_once __DIR__ . '/components/PostPrincipal.php';
     }
     // posts destacados
-    if ($data['componentes']['postdestacados']['status']) {
+    if (isset($data['componentes']['postdestacados']['status'])) {
       require_once __DIR__ . '/components/PostDestacados.php';
     }
     // listado de miniposts
-    if ($data['componentes']['listaminipost']['status']) {
+    if (isset($data['componentes']['listaminipost']['status'])) {
       require_once __DIR__ . '/components/ListaMiniPost.php';
     }
     // lista de galerias
-    if ($data['componentes']['listagaleria']['status']) {
+    if (isset($data['componentes']['listagaleria']['status'])) {
       require_once __DIR__ . '/components/ListaGaleria.php';
     }
     ?>

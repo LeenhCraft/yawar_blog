@@ -96,132 +96,180 @@ class CompWeb extends Controllers
     public $eslogan = true;
     public function eslogan()
     {
-        return [
-            'eslogan' => [
-                'status' => $this->eslogan,
-                'content' => $this->model->sloganPrincipal()
-            ],
-        ];
+        if ($this->eslogan) {
+            return [
+                'eslogan' => [
+                    'status' => $this->eslogan,
+                    'content' => $this->model->sloganPrincipal()
+                ],
+            ];
+        } else {
+            return [];
+        }
     }
 
     public $publicapost = true;
     public function publicapost()
     {
-        return [
-            'publicapost' => [
-                'status' => $this->publicapost,
-                // 'content' => $this->other->getUser($_SESSION['lnh'])
-            ],
-        ];
+        if ($this->publicapost) {
+            return [
+                'publicapost' => [
+                    'status' => $this->publicapost,
+                    // 'content' => $this->other->getUser($_SESSION['lnh'])
+                ],
+            ];
+        } else {
+            return [];
+        }
     }
 
     public $listaetiquetas = true;
     public function listaetiquetas()
     {
-        return [
-            'listaetiquetas' => [
-                'status' => $this->listaetiquetas,
-                'content' => $this->model->listTags()
-            ],
-        ];
+        if ($this->listaetiquetas) {
+            return [
+                'listaetiquetas' => [
+                    'status' => $this->listaetiquetas,
+                    'content' => $this->model->listTags()
+                ],
+            ];
+        } else {
+            return [];
+        }
     }
 
     public $register = true;
     public function register()
     {
-        return [
-            'register' => [
-                'status' => $this->register,
-                'content' => $this->model->register()
-            ]
-        ];
+        if ($this->register) {
+            return [
+                'register' => [
+                    'status' => $this->register,
+                    'content' => $this->model->register()
+                ]
+            ];
+        } else {
+            return [];
+        }
     }
 
     public $postprincipal = true;
     public function postprincipal()
     {
-        return [
-            'postprincipal' => [
-                'status' => $this->postprincipal,
-                'content' => $this->model->posts(1)
-            ],
-        ];
+        if ($this->postprincipal) {
+            return [
+                'postprincipal' => [
+                    'status' => $this->postprincipal,
+                    'content' => $this->model->posts(1)
+                ],
+            ];
+        } else {
+            return [];
+        }
     }
 
     public $postrandom = true;
     public function postrandom()
     {
-        return [
-            'postrandom' => [
-                'status' => true,
-                'content' => $this->model->randoPost()
-            ],
-        ];
+        if ($this->postrandom) {
+            return [
+                'postrandom' => [
+                    'status' => true,
+                    'content' => $this->model->randoPost()
+                ],
+            ];
+        } else {
+            return [];
+        }
     }
 
     public $postdestacados = true;
     public function postdestacados()
     {
-        return [
-            'postdestacados' => [
-                'status' => $this->postdestacados,
-                'content' => $this->model->postDesta()
-            ],
-        ];
+        if ($this->postdestacados) {
+            return [
+                'postdestacados' => [
+                    'status' => $this->postdestacados,
+                    'content' => $this->model->postDesta()
+                ],
+            ];
+        } else {
+            return [];
+        }
     }
 
     public $listaminipost = true;
     public function listaminipost()
     {
-        return [
-            'listaminipost' => [
-                'status' => $this->listaminipost,
-                'content' => $this->model->posts(2)
-            ],
-        ];
+        if ($this->listaminipost) {
+            return [
+                'listaminipost' => [
+                    'status' => $this->listaminipost,
+                    'content' => $this->model->posts(2)
+                ],
+            ];
+        } else {
+            return [];
+        }
     }
 
     public $listagaleria = true;
     public function listagaleria()
     {
-        return [
-            'listagaleria' => [
-                'status' => $this->listagaleria,
-                'content' => $this->model->galleries()
-            ]
-        ];
+        if ($this->listagaleria) {
+            return [
+                'listagaleria' => [
+                    'status' => $this->listagaleria,
+                    'content' => $this->model->galleries()
+                ]
+            ];
+        } else {
+            return [];
+        }
     }
 
     public $menu = true;
     public function menu()
     {
-        return [
-            'menu' => [
-                'status' => $this->menu,
-                'content' => $this->model->menus(),
-            ],
-        ];
+        if ($this->menu) {
+            return [
+                'menu' => [
+                    'status' => $this->menu,
+                    'content' => $this->model->menus(),
+                ],
+            ];
+        } else {
+            return [];
+        }
     }
 
     public $esloganfooter = true;
     public function esloganfooter()
     {
-        return [
-            'esloganfooter' => [
-                'status' => $this->esloganfooter,
-                'content' => $this->model->sloganFooter(),
-            ]
-        ];
+        if ($this->esloganfooter) {
+            return [
+                'esloganfooter' => [
+                    'status' => $this->esloganfooter,
+                    'content' => $this->model->sloganFooter(),
+                ]
+            ];
+        } else {
+            return [];
+        }
     }
 
     public $linksfooter = true;
     public function linksfooter()
     {
-        return [
-            'linksfooter' => [
-                'status' => $this->linksfooter,
-                'content' => $this->model->linksFooter()
-            ]
-        ];
+        if ($this->linksfooter) {
+            return [
+                'linksfooter' => [
+                    'status' => $this->linksfooter,
+                    'content' => $this->model->linksFooter()
+                ]
+            ];
+        } else {
+            return [];
+        }
     }
 }

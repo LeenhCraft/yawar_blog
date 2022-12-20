@@ -2,11 +2,11 @@
   <div class="footer-wrap global-padding">
     <?php
     // eslogan de footer
-    if ($data['componentes']['esloganfooter']['status']) {
+    if (isset($data['componentes']['esloganfooter']['status'])) {
       require_once __DIR__ . '/../Index/components/EsloganFooter.php';
     }
     // links footer
-    if ($data['componentes']['linksfooter']['status']) {
+    if (isset($data['componentes']['linksfooter']['status'])) {
       require_once __DIR__ . '/../Index/components/LinksFooter.php';
     }
     ?>
