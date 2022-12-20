@@ -14,6 +14,10 @@
   if ($data['componentes']['listaetiquetas']['status']) {
     require_once __DIR__ . '/components/ListaEtiquetas.php';
   }
+  // registrarse
+  if ($data['componentes']['register']['status']) {
+    require_once __DIR__ . '/components/Registrarse.php';
+  }
   ?>
 
   <div class="loop-section global-padding">

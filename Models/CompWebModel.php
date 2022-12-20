@@ -193,4 +193,11 @@ class CompWebModel extends Mysql
         }
         return $request;
     }
+
+    public function register()
+    {
+        $img = $this->getImg(0, 'INDEX::CONT');
+        $request['img'] = isset($img['img_url']) ? $img['img_url'] : 'https://via.placeholder.com/300x200';
+        return $request;
+    }
 }

@@ -21,11 +21,12 @@ class Errors extends Controllers
 	public function notAccess()
 	{
 		parent::otra_clase('Clases', 'CompWeb');
-		$data['titulo_web'] = "Yawar.:404";
+		$data['titulo_web'] = "Yawar.:403";
 		parent::otro('CompWeb');
 		$data['componentes'] = $this->oClass->principal();
 		$data['postrandom'] = $this->other->randoPost(3);
 		// dep($data,1);
+		http_response_code(403);
 		$this->views->getView($this, "403", $data);
 	}
 }

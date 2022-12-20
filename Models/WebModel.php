@@ -268,4 +268,14 @@ class WebModel extends Mysql
         $request = $this->update($sql, $arrData);
         return $request;
     }
+
+    public function listCombo()
+    {
+        $sql = "SELECT idfilial as nmr, fi_nombre as nombre FROM ym_filiales WHERE fi_status = 1";
+        $request = $this->select_all($sql);
+        if (count($request) == 0) {
+            $request = array(array('nmr' => '', 'nombre' => 'Sin datos, registre algunos'));
+        }
+        return $request;
+    }
 }

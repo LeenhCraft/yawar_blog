@@ -11,10 +11,14 @@ class Web extends Controllers
         parent::otra_clase('Clases', 'CompWeb');
         $data['titulo_web'] = "Blog";
         $this->oClass->linksfooter = false;
-        $data['componentes'] = $this->oClass->compweb(["principal", "body"]);
+        $data['componentes'] = $this->oClass->compweb(["principal", "body", "register"]);
         // dep($data['componentes'], 1);
         parent::otro('leenh');
         $data['imgBackDes'] = $this->other->verLogo('BACK::DES');
+        if ($data['componentes']['register']['status']) {
+
+            $data['js'] = ['js/fn_rg_mn.js'];
+        }
         $this->views->getView('Web/Index', 'Index', $data);
     }
 
@@ -35,5 +39,103 @@ class Web extends Controllers
             $classError = new Errors();
             $classError->notFound();
         }
+    }
+
+    public function dni($parametro)
+    {
+        // $tiempo_inicial = microtime(true);
+        // try {
+        if (strtoupper($_SERVER['REQUEST_METHOD']) === "GET") {
+            $dni = intval(strClean($parametro));
+            // set_time_limit(1);
+            $response = consultaDNI($dni);
+            echo $response;
+        }
+        // } catch (Exception $th) {
+        //     echo "Error: " . $th->getMessage();
+        // } finally {
+        //     echo "Finalizado";
+        // }
+        // $tiempo_final = microtime(true);
+        // $tiempo = $tiempo_final - $tiempo_inicial;
+        // dep($tiempo);
+        die();
+    }
+
+    public function filiales()
+    {
+        if (strtoupper($_SERVER['REQUEST_METHOD']) === "POST") {
+            $arrData = $this->model->listCombo();
+            echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
+        }
+        die();
+    }
+
+    public function registrar()
+    {
+        if (strtoupper($_SERVER['REQUEST_METHOD']) === "POST") {
+            $mensaje = $dniApoderado = $nombreApoderado = $phoneApoderado = '';
+            $status = true;
+            $arrResponse = array("status" => false, "text" => $mensaje);
+            $dni = isset($_POST['txtdni']) ? intval(strClean($_POST['txtdni'])) : 0;
+            $nombre = isset($_POST['txtnom']) ? strClean($_POST['txtnom']) : '';
+            $phone = isset($_POST['txtcel']) ? intval(strClean($_POST['txtcel'])) : 0;
+            $check = isset($_POST['apoderado']) && strClean($_POST['apoderado']) === 'on' ? true : false;
+            $cede = isset($_POST['txtcede']) ? intval(strClean($_POST['txtcede'])) : 0;
+            $idapoderado = 0;
+
+            if ($check) {
+                $dniApoderado = isset($_POST['txtdniapo']) ? intval(strClean($_POST['txtdniapo'])) : 0;
+                $nombreApoderado = isset($_POST['txtnomapo']) ? strClean($_POST['txtnomapo']) : '';
+                $phoneApoderado = isset($_POST['txtcelapo']) ? intval(strClean($_POST['txtcelapo'])) : 0;
+                if (empty($dniApoderado) || empty($nombreApoderado) || empty($phoneApoderado)) {
+                    $mensaje .= "<br>Datos del apoderado incorrectos.";
+                    $status = false;
+                } else {
+                    parent::otro('YawarMuxus');
+                    $idapoderado = $this->other->insertarApoderado($dniApoderado, $nombreApoderado, $phoneApoderado);
+                }
+            }
+            if (empty($dni) || empty($nombre) || empty($phone) || empty($cede)) {
+                $mensaje .= "<br>Datos del alumno incorrectos.";
+                $status = false;
+            }
+            // dep([
+            //     $mensaje,
+            //     $status,
+            //     $dni,
+            //     $nombre,
+            //     $phone,
+            //     $check,
+            //     $cede,
+            //     $dniApoderado,
+            //     $nombreApoderado,
+            //     $phoneApoderado,
+            //     $idapoderado
+            // ], 1);
+            if (!$status) {
+                die(json_encode(array("status" => false, "text" => $mensaje)));
+            }
+            parent::otro('YawarMuxus');
+            $existe = $this->other->buscar($dni);
+            if ($existe['status'] == false) {
+                $respuesta = $this->other->insertar(
+                    $nombre,
+                    $dni,
+                    $phone,
+                    $cede,
+                    $idapoderado
+                );
+                if ($respuesta) {
+                    $arrResponse = array("status" => true, "text" => 'Se Registro correctamente' . $mensaje);
+                } else {
+                    $arrResponse = array("status" => false, "text" => "Ocurrio un error al registrarlo." . $mensaje);
+                }
+            } else {
+                $arrResponse = array("status" => false, "text" => 'El DNI ingresado ya esta registrado');
+            }
+            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+        }
+        die();
     }
 }

@@ -126,6 +126,17 @@ class CompWeb extends Controllers
         ];
     }
 
+    public $register = true;
+    public function register()
+    {
+        return [
+            'register' => [
+                'status' => $this->register,
+                'content' => $this->model->register()
+            ]
+        ];
+    }
+
     public $postprincipal = true;
     public function postprincipal()
     {
