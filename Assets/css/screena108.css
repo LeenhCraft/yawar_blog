@@ -2879,9 +2879,9 @@ body.search-no-active .search-section {
         padding: 8px 14px
     }
 
-    .post-header-image:not(.is-wide) {
+    /* .post-header-image:not(.is-wide) {
         max-width: var(--max-width-post-wrap-one)
-    }
+    } */
 
     .post-section.is-sidebar .post-header-content, .post-section.is-sidebar .post-header-image:not(.is-wide) {
         max-width: var(--max-width-content-wrap)

@@ -39,7 +39,7 @@
                                     <span style="margin-left: 1.5rem;" class="kg-bookmark-author">by <?php echo $data['post']['usu_nombre'] ?></span>
                                 </div>
                             </div>
-                            <div class="kg-bookmark-thumbnail"><img src="<?php echo $data['post']['pos_img'] ?>" alt="cargando..."></div>
+                            <div class="kg-bookmark-thumbnail"><img src="<?php echo path_recursos() . 'Webp/' . $data['post']['pos_img'] ?>" alt="<?php echo $data['post']['pos_name'] ?>"></div>
                         </a>
                         <?php if (isset($_SESSION['pe']) && isset($_SESSION['_cf'])) { ?>
                             <div class="account-buttons" style="margin: 2rem 0;">

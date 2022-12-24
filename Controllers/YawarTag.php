@@ -10,6 +10,7 @@ class YawarTag extends Controllers
         $data['titulo_web'] = "Yawar.:Tag";
         $data['componentes'] = $this->oClass->compweb(["principal"]);
         $data['tag'] = $this->model->buscarTag($url['method']);
+        $data['css'] = ['css/lnh.grid.css'];
         if (!empty($data['tag'])) {
             $data['posts'] = $this->model->post($data['tag']['idtag']);
             $data['img_port'] = $data['tag']['tag_img'];

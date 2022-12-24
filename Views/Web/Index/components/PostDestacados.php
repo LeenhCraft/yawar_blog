@@ -17,10 +17,7 @@
             <article class="item">
                 <a href="<?php echo path_post() . $value['pos_slug'] ?>" class="global-link" aria-label="<?php echo $value['pos_name'] ?>"></a>
                 <div class="item-image global-image global-image-orientation global-radius">
-                    <img srcset="
-                        <?php echo $value['pos_img'] ?> 300w,
-                        <?php echo $value['pos_img'] ?> 600w
-                      " sizes="(max-width:480px) 300px, 600px" src="<?php echo $value['pos_img'] ?>" loading="lazy" alt="<?php echo $value['pos_name'] ?>" />
+                    <img src="<?php echo path_recursos() . 'Webp/' . $value['pos_img']; ?>" loading="lazy" alt="<?php echo $value['pos_name'] ?>">
                 </div>
                 <div class="item-content">
                     <h2 class="item-title">

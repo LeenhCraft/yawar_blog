@@ -52,8 +52,9 @@ class CompWebModel extends Mysql
 
     public function posts($tipo = 1, $offset = 0, $limit = 6)
     {
-        $inner = $order = $where = "";
+        $inner = $order = $where = $and = "";
         $table = "SELECT * FROM blog_posts a";
+        // $and = isset($_SESSION['_cf']) && $_SESSION['_cf'] === 'ok' ? "a.pos_publicar = 0" : "a.pos_publicar = 1";
         switch ($tipo) {
             case $tipo == 1: //post destacado
                 $inner = "INNER JOIN web_usuarios b ON a.idwebusuario = b.idwebusuario";
@@ -61,7 +62,8 @@ class CompWebModel extends Mysql
                 break;
             case $tipo == 2: //lista de posts
                 $inner = "INNER JOIN web_usuarios b ON a.idwebusuario = b.idwebusuario";
-                $where = "WHERE a.pos_publicar = 1 AND a.pos_status = 1";
+                // $where = "WHERE a.pos_status = 1 $and";
+                $where = isset($_SESSION['_cf']) && $_SESSION['_cf'] === 'ok' ? "" : "WHERE a.pos_status = 1 AND a.pos_publicar = 1";
                 $order = "ORDER BY a.pos_date DESC LIMIT $offset,$limit";
                 break;
             case $tipo == '3': //post destacado
@@ -74,7 +76,7 @@ class CompWebModel extends Mysql
                 break;
         }
         $sql = $table . ' ' . $inner . ' ' . $where . ' ' . $order;
-        // dep($sql,1);
+        // dep($sql);
         switch ($tipo) {
             case 1: //post destacado
                 $request = $this->select($sql);

@@ -6,11 +6,7 @@
     <article class="item is-top is-first">
         <div class="item-image global-image global-image-orientation global-radius">
             <a href="<?php echo path_post() . $data['componentes']['postprincipal']['content']['pos_slug']; ?>" class="global-link" aria-label="The trick to getting more done is to have the freedom to roam around"></a>
-            <img srcset="
-                      <?php /*img del post */ echo $data['componentes']['postprincipal']['content']['pos_img'] ?> 300w,
-                      <?php /*img del post */ echo $data['componentes']['postprincipal']['content']['pos_img'] ?> 600w,
-                      <?php /*img del post */ echo $data['componentes']['postprincipal']['content']['pos_img'] ?> 1600w
-                    " sizes="(max-width:480px) 300px, (max-width:768px) 600px, 1600px" src="<?php /*img del post */ echo $data['componentes']['postprincipal']['content']['pos_img'] ?>" loading="lazy" alt="<?php echo $data['componentes']['postprincipal']['content']['pos_name'] ?>" />
+            <img src="<?php echo path_recursos() . 'Webp/' . $data['componentes']['postprincipal']['content']['pos_img'] ?>" loading="lazy" alt="<?php echo $data['componentes']['postprincipal']['content']['pos_name'] ?>">
         </div>
         <div class="item-content">
             <div class="item-tags global-tags">
@@ -104,12 +100,9 @@
     ?>
         <article class="item is-top">
             <div class="item-image global-image global-image-orientation global-radius">
-                <a href="<?php echo path_post() . $value['pos_slug'] ?>" class="global-link" aria-label="There are still many questions left to answer"></a>
-                <img srcset="
-                      <?php echo $value['pos_img'] ?> 300w,
-                      <?php echo $value['pos_img'] ?> 600w
-                    " sizes="(max-width:480px) 300px, 600px" src="<?php echo $value['pos_img'] ?>" loading="lazy" alt="<?php echo $value['pos_name'] ?>" />
-            </div>
+                <a href="<?php echo path_post() . $value['pos_slug'] ?>" class="global-link"></a>
+                <img src="<?php echo path_recursos() . 'Webp/' . $value['pos_img']; ?>" loading="lazy" alt="<?php echo $value['pos_name'] ?>">
+                </div>
             <div class="item-content">
                 <div class="item-tags global-tags">
                     <?php

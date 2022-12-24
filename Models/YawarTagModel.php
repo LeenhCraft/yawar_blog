@@ -49,7 +49,8 @@ class YawarTagModel extends Mysql
 
     public function cantPost($id)
     {
-        $sql = "SELECT COUNT(a.idpost) as tag_cantpost FROM blog_post_tag a WHERE a.idtag = '$id'";
+        // $sql = "SELECT COUNT(a.idpost) as tag_cantpost FROM blog_post_tag a WHERE a.idtag = '$id'";
+        $sql = "SELECT COUNT(a.idpost) as tag_cantpost FROM blog_post_tag a INNER JOIN blog_posts b ON b.idpost = a.idpost WHERE a.idtag = '$id' AND b.pos_publicar = 1 AND b.pos_status = 1";
         $request = $this->select($sql);
         return $request;
     }
@@ -87,8 +88,10 @@ class YawarTagModel extends Mysql
         $inner = $order = $where = "";
         $inner = "INNER JOIN blog_post_tag b ON a.idpost = b.idpost";
         $inner .= " INNER JOIN web_usuarios c ON a.idwebusuario = c.idwebusuario";
-        $where = "WHERE b.idtag = '$idtag' AND a.pos_publicar = 1 AND a.pos_status = 1";
+        $where = "WHERE b.idtag = '$idtag' ";
+        $where .= isset($_SESSION['_cf']) && $_SESSION['_cf'] == 'ok' ? " " : " AND a.pos_publicar = 1 AND a.pos_status = 1";
         $sql = $table . ' ' . $inner . ' ' . $where . ' ' . $order;
+        // dep($sql);
         $request = $this->select_all($sql);
         if (!empty($request)) {
             foreach ($request as $key => $value) {

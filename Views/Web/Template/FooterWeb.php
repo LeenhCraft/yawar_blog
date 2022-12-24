@@ -19,17 +19,6 @@
 </div>
 </div>
 
-<div id="notifications" class="global-notification">
-  <div class="subscribe">You’ve successfully subscribed to Reiro</div>
-  <div class="signin">Welcome back! You’ve successfully signed in.</div>
-  <div class="signup">Great! You’ve successfully signed up.</div>
-  <div class="update-email">Success! Your email is updated.</div>
-  <div class="expired">Your link has expired</div>
-  <div class="checkout-success">
-    Success! Check your email for magic link to sign-in.
-  </div>
-</div>
-
 <div class="search-section">
   <div class="search-wrap">
     <div class="search-content global-radius">
@@ -54,6 +43,7 @@
 <script src="<?php echo media() . 'js/indexa108.js' ?>"></script> -->
 <script>
   const base_url = "<?php echo base_url(); ?>";
+  const base_recursos = "<?php echo path_recursos() . 'Webp/'; ?>";
 </script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.js"></script>
 <script src="<?php echo media() . 'js/jquery.min.js'; ?>"></script>
@@ -101,11 +91,11 @@
           day: 'numeric'
         };
         resultSearch.forEach(function(item, index) {
-          console.log(item.item.title);
+          // console.log(item.item.title);
           let fecha = new Date(item.item.date);
           let html = `
             <a href="<?php echo path_post() ?>${item.item.slug}">
-            <img src="${item.item.img}">
+            <img src="${base_recursos+item.item.img}">
             <h5><span>${item.item.title}</h5>
             <time>${fecha.toLocaleDateString('es-pe',opciones)}</time>
             </a>

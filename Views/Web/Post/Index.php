@@ -5,6 +5,13 @@
         <div class="post-header">
             <div class="post-header-wrap global-padding">
                 <div class="post-header-content">
+                    <?php
+                    if (isset($data['editar']) && $data['editar'] == true) {
+                    ?>
+                        <a class="global-button py-2 px-4" href="<?php echo path_post() . $data['post']['pos_slug'] . '/editar' ?>">Editar Post</a>
+                    <?php
+                    }
+                    ?>
                     <h1 class="post-title global-title"><?php echo $data['post']['pos_name']; ?></h1>
                     <p class="post-excerpt global-excerpt"><?php echo $data['post']['pos_extract']; ?></p>
                     <div class="post-tags global-tags">
@@ -19,8 +26,8 @@
                             <div class="global-meta-wrap">
                                 <div>
                                     <div class="global-meta-avatar is-image global-image">
-                                        <a href="<?php echo path_author() . urls_amigables($data['post']['usu_nombre']); ?>" class="global-link" title="Damian Erdman"></a>
-                                        <img src="<?php echo $data['post']['aut_img']; ?>" alt="Damian Erdman" loading="lazy">
+                                        <a href="<?php echo path_author() . urls_amigables($data['post']['usu_nombre']); ?>" class="global-link" title="<?php echo $data['post']['usu_nombre']; ?>"></a>
+                                        <img src="<?php echo $data['post']['aut_img']; ?>" alt="cargando..." loading="lazy">
                                     </div>
                                 </div>
                             </div>
@@ -53,10 +60,7 @@
                 <div class="post-header-image">
                     <figure>
                         <div class="global-image global-image-orientation global-radius">
-                            <img srcset="<?php echo $data['post']['pos_img']; ?> 300w, 
-                            <?php echo $data['post']['pos_img']; ?> 600w,
-                            <?php echo $data['post']['pos_img']; ?> 1200w,
-                            <?php echo $data['post']['pos_img']; ?> 2000w" sizes="(max-width:480px) 300px, (max-width:768px) 600px, (max-width:1024px) 1200px, 2000px" src="<?php echo $data['post']['pos_img']; ?>" alt="<?php echo $data['post']['pos_name']; ?>">
+                            <img src="<?php echo path_recursos() . 'Webp/' . $data['post']['pos_img']; ?>" alt="<?php echo $data['post']['pos_name']; ?>">
                         </div>
                         <figcaption>
                             Photo by
@@ -70,7 +74,6 @@
         </div>
         <div class="global-margin">
             <div class="post-wrap global-padding grid">
-
                 <div class="post-content col-md">
                     <?php echo $data['post']['pos_body'] ?>
                 </div>
@@ -91,7 +94,7 @@
                         foreach ($data['postrandom'] as $post) {
                         ?>
                             <a href="<?php echo path_post() . $post['pos_slug'] ?>">
-                                <img src="<?php echo $post['pos_img'] ?>" alt="<?php echo $post['pos_name'] ?>" loading="lazy">
+                                <img src="<?php echo path_recursos() . 'Webp/' . $post['pos_img']; ?>" loading="lazy" alt="<?php echo $post['pos_name'] ?>">
                                 <div>
                                     <h3 class="post-sidebar-title"><?php echo $post['pos_name'] ?></h3>
                                 </div>
@@ -131,7 +134,7 @@
                 ?>
                     <article class="item is-special">
                         <div class="item-image global-image global-image-orientation global-radius">
-                            <img src="<?php echo path_recursos().'Webp/'. $gallery['ga_img'] ?>" alt="<?php echo $gallery['ga_name'] ?>">
+                            <img src="<?php echo path_recursos() . 'Webp/' . $gallery['ga_img'] ?>" alt="<?php echo $gallery['ga_name'] ?>">
                             <a href="<?php echo path_gallery() . $gallery['ga_slug'] ?>" class="global-link" aria-label="<?php echo $gallery['ga_name'] ?>"></a>
                         </div>
                         <div class="item-content">
@@ -154,7 +157,7 @@
                     <small class="global-subtitle">yawar post siguiente</small>
                     <div>
                         <div class="navigation-image global-image-orientation global-image global-radius is-square">
-                            <img src="<?php echo $data['next']['pos_img'] ?>" alt="<?php echo $data['next']['pos_name'] ?>" loading="lazy">
+                            <img src="<?php echo path_recursos() . 'Webp/' . $data['next']['pos_img'] ?>" alt="<?php echo $data['next']['pos_name'] ?>" loading="lazy">
                         </div>
                         <div class="navigation-title">
                             <div>
@@ -176,7 +179,7 @@
                             </div>
                         </div>
                         <div class="navigation-image global-image-orientation global-image global-radius is-square">
-                            <img src="<?php echo $data['older']['pos_img'] ?>" alt="<?php echo $data['older']['pos_name'] ?>" loading="lazy">
+                            <img src="<?php echo path_recursos() . 'Webp/' . $data['older']['pos_img'] ?>" alt="<?php echo $data['older']['pos_name'] ?>" loading="lazy">
                         </div>
                     </div>
                 </a>

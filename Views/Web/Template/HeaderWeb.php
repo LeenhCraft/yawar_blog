@@ -29,6 +29,13 @@
     <link rel="stylesheet" type="text/css" href="<?php echo media() . 'css/screena108.css'; ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo media() . 'css/cards.mina.css'; ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo media() . 'css/blog.css'; ?>">
+    <?php
+    if (isset($data['css']) && !empty($data['css'])) {
+        for ($i = 0; $i < count($data['css']); $i++) {
+            echo '<link rel="stylesheet" type="text/css" href="' . media() . $data['css'][$i] . '">';
+        }
+    }
+    ?>
 </head>
 
 <body>

@@ -5,18 +5,20 @@ class YawarPostModel extends Mysql
     {
         parent::__construct();
     }
-    
+
     public function buscarPost($slug)
     {
         require_once __DIR__ . '/CompWebModel.php';
         $compWebModel = new CompWebModel();
         $table = "SELECT * FROM blog_posts a";
         $inner = $order = $where = "";
-        $where = "WHERE a.pos_slug like '$slug' AND a.pos_publicar = 1 AND a.pos_status = 1";
+        // $where = "WHERE a.pos_slug like '$slug' AND a.pos_publicar = 1 AND a.pos_status = 1";
+        $where = isset($_SESSION['_cf']) && $_SESSION['_cf'] === 'ok' ? "WHERE a.pos_slug like '$slug'" : "WHERE a.pos_slug like '$slug' AND a.pos_publicar = 1 AND a.pos_status = 1";
         $inner = "INNER JOIN web_usuarios b ON a.idwebusuario = b.idwebusuario";
         $sql = $table . ' ' . $inner . ' ' . $where . ' ' . $order;
         // $sql = "SELECT * FROM blog_posts WHERE pos_slug like '$slug'";
         $request = $this->select($sql);
+        // dep($sql, 1);
         if (!empty($request)) {
             $img = $compWebModel->getImg($request['idpost'], 'POST::PORT');
             $imgAut = $compWebModel->getImg($request['idwebusuario'], 'USER::PORT');
@@ -24,6 +26,7 @@ class YawarPostModel extends Mysql
             $request['pos_img'] = isset($img['img_url']) ? $img['img_url'] : 'https://via.placeholder.com/1600x2108';
             $request['aut_img'] = isset($imgAut['img_url']) ? $imgAut['img_url'] : 'https://via.placeholder.com/300x49';
             $request['aut_meta'] = $this->metaAuthor($request['idwebusuario']);
+            $request['pos_gallery'] = !empty($this->postGalleries($request['idpost'])) ? $this->postGalleries($request['idpost'])[0] : [];
         }
         return $request;
     }

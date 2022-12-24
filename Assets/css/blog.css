@@ -296,7 +296,8 @@ body.is-scroll-banner .is-banner {
     /* Border */
     border: 1px solid rgb(124 139 154/25%);
     transition: border-color .15s ease;
-    max-width: 860px;
+    /* max-width: 860px; */
+    width: 100%;
 
 }
 
@@ -467,7 +468,7 @@ option {
     position: absolute;
     font-size: 10px;
     color: rgba(255, 255, 255, 0.6);
-    top: 8px;
+    top: 5px;
     left: 4px;
     opacity: 0;
     transition: all 0.25s ease 0.25s;
@@ -583,4 +584,43 @@ option {
 
 .m-0 {
     margin: 0 !important;
+}
+
+.bg-dark {
+    background-color: var(--color-body) !important;
+    border: 1px solid var(--color-body) !important;
+    box-shadow: 0 0 2px 1px var(--color-body) !important;
+}
+
+.bg-theme {
+    background-color: var(--ghost-accent-color) !important;
+}
+
+.font-weight-light {
+    font-weight: 300 !important;
+}
+
+.font-weight-lighter {
+    font-weight: lighter !important;
+}
+
+.font-weight-normal {
+    font-weight: 400 !important;
+}
+
+.font-weight-bold {
+    font-weight: 700 !important;
+}
+
+.font-weight-bolder {
+    font-weight: bolder !important;
+}
+
+.global-button-nocolor::before {
+    background-color: var(--color-three);
+    color: var(--color-font-two);
+}
+
+.global-border {
+    border-radius: var(--border-radius);
 }

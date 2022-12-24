@@ -23,10 +23,17 @@
                     <?php
                     // dep($data);
                     foreach ($data['componentes']['menu']['content'] as $item) {
-
+                        if (isset($_SESSION['_cf'])) {
                     ?>
-                        <li><a class="text-capitalize" href="<?php echo base_url() . $item['me_url'] ?>"><?php echo $item['me_name'] ?></a></li>
+                            <li><a class="text-capitalize" href="<?php echo base_url() . $item['me_url'] ?>"><?php echo $item['me_name'] ?></a></li>
+                            <?php
+                        } else {
+                            if ($item['me_privado'] != 1) {
+                            ?>
+                                <li><a class="text-capitalize" href="<?php echo base_url() . $item['me_url'] ?>"><?php echo $item['me_name'] ?></a></li>
                     <?php
+                            }
+                        }
                     }
                     ?>
                 </ul>

@@ -23,8 +23,8 @@ class YawarGalleries extends Controllers
 
     public function save()
     {
-        dep($_POST);
-        dep($_SESSION['csrf'], 1);
+        // dep($_POST);
+        // dep($_SESSION['csrf'], 1);
         if (isset($_SESSION['pe']) && isset($_SESSION['_cf'])) {
             $arrResponse = array('status' => false, 'title' => '', 'icon' => 'warning', 'text' => 'Ingrese los datos correctamente');
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {

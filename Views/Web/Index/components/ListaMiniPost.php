@@ -5,17 +5,14 @@
         <article class="item">
             <div class="item-image global-image global-image-orientation global-radius">
                 <a href="<?php echo path_post() . $value['pos_slug'] ?>" class="global-link" aria-label="We are stronger as a group than an individual"></a>
-                <img srcset="
-                      <?php echo $value['pos_img'] ?> 300w,
-                      <?php echo $value['pos_img'] ?> 600w
-                    " sizes="(max-width:480px) 300px, 600px" src="<?php echo $value['pos_img'] ?>" loading="lazy" alt="<?php echo $value['pos_name'] ?>" />
+                <img src="<?php echo path_recursos() . 'Webp/' . $value['pos_img']; ?>" loading="lazy" alt="<?php echo $value['pos_name'] ?>">
             </div>
             <div class="item-content">
                 <div class="item-tags global-tags">
                     <?php
                     foreach ($value['pos_tag'] as $item) {
                     ?>
-                        <a href="<?php echo path_tag(). $item['tag_slug'] ?>"><?php echo $item['tag_name'] ?></a>
+                        <a href="<?php echo path_tag() . $item['tag_slug'] ?>"><?php echo $item['tag_name'] ?></a>
                     <?php
                     }
                     ?>
@@ -29,7 +26,7 @@
                 <div class="global-meta">
                     <div class="global-meta-content">
                         by
-                        <a href="<?php echo path_author().urls_amigables($value['usu_nombre']) ?>"><?php echo $value['usu_nombre'] ?></a>
+                        <a href="<?php echo path_author() . urls_amigables($value['usu_nombre']) ?>"><?php echo $value['usu_nombre'] ?></a>
                     </div>
                 </div>
             </div>

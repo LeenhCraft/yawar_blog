@@ -14,6 +14,7 @@
             <h1 class="item-title">Solo para mienbros</h1>
             <p class="featured-subtitle" style="text-align: left;opacity: var(--opacity-one);">Si es integrante o baila con nosotros.Le pedimos se registre ingresando unos cuantos datos.</p>
             <form id="frmregister" onsubmit="saveRegister(this,event)">
+                <input type="hidden" name="_token" value="<?php echo $data['csrf'] ?>">
                 <div style="width: 100%;">
                     <div class="mb-4">
                         <input class="form-control form-livedoc-control" id="txtdni" name="txtdni" type="text" placeholder="DNI" autocomplete="off" maxlength="8" onkeydown="return limitar(event,this.value,8)" onkeyup="buscarDni(this)">

@@ -1,0 +1,55 @@
+.element-textarea {
+    background-color: var(--color-border-one);
+    width: calc(100% - var(--margin-wrap-left-right));
+    border-radius: var(--border-radius);
+    padding: 2rem 3.25rem;
+    height: 130px;
+}
+
+.post-footer {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 3.25rem;
+}
+
+/* .create-post .title {
+            font-size: 3.6rem;
+        } */
+.title {
+    font-size: 3.6rem;
+}
+
+@media (min-width: 576px) {
+
+    .title {
+        font-size: 3.6rem;
+    }
+
+    .element-textarea {
+        height: 140px;
+    }
+}
+
+@media (min-width: 768px) {
+    .title {
+        font-size: 4.4rem;
+    }
+
+    .element-textarea {
+        height: 190px;
+    }
+
+    .form-control-select {
+        width: 60%;
+    }
+}
+
+@media (min-width: 992px) {
+    .title {
+        font-size: 6.4rem;
+    }
+
+    .form-control-select {
+        width: 50%;
+    }
+}

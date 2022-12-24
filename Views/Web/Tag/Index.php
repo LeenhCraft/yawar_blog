@@ -40,7 +40,8 @@
                     }
                     ?>
                     <p class="post-excerpt global-excerpt d-none">descrip</p>
-                    <?php if (isset($_SESSION['pe']) && isset($_SESSION['_cf'])) { ?></form><?php } ?>
+                    <?php if (isset($_SESSION['pe']) && isset($_SESSION['_cf'])) { ?>
+                    </form><?php } ?>
             </div>
         </div>
     </div>
@@ -53,10 +54,33 @@
                 <article class="item">
                     <div class="item-image global-image global-image-orientation global-radius">
                         <a href="<?php echo path_post() . $post['pos_slug'] ?>" class="global-link" aria-label="<?php echo $post['pos_name'] ?>"></a>
-                        <img srcset="<?php echo $post['pos_img'] ?> 300w, 
-			 <?php echo $post['pos_img'] ?> 600w" sizes="(max-width:480px) 300px, 600px" src="<?php echo $post['pos_img'] ?>" loading="lazy" alt="<?php echo $post['pos_name'] ?>">
+                        <img src="<?php echo path_recursos() . 'Webp/' . $post['pos_img']; ?>" loading="lazy" alt="<?php echo $post['pos_name'] ?>">
                     </div>
                     <div class="item-content">
+                        <?php
+                        if (isset($_SESSION['_cf'])) {
+                        ?>
+                            <div class="global-tags mb-4">
+                                <?php
+                                if ($post['pos_publicar'] == 0) {
+                                    $text =  $post['pos_publicar'] == 1 ? 'Publicado' : 'No publicado';
+                                ?>
+                                    <span class="py-3 px-4 bg-theme global-border" style="font-size: 1.2rem;"><?php echo $text ?></span>
+                                <?php
+                                }
+                                ?>
+                                <?php
+                                if ($post['pos_status'] == 0) {
+                                    $text =  $post['pos_status'] == 1 ? 'Activo' : 'Inactivo';
+                                ?>
+                                    <span class="py-3 px-4 bg-theme global-border" style="font-size: 1.2rem;"><?php echo $text ?></span>
+                                <?php
+                                }
+                                ?>
+                            </div>
+                        <?php
+                        }
+                        ?>
                         <div class="item-tags global-tags">
                             <?php foreach ($post['pos_tag'] as $tag) {
                             ?>

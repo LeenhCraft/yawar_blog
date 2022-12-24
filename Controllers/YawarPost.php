@@ -21,7 +21,45 @@ class YawarPost extends Controllers
             parent::otro('Web');
             $this->other->masVisitado($_SESSION['vi'], $data['post']['idpost'], $url['method']);
             // dep($data, 1);
-            $this->views->getView('Web/Post', 'Index', $data);
+            if (isset($_SESSION['_cf'])) {
+                $data['editar'] = true;
+            }
+            if (isset($url['params']) && strtolower($url['params']) === "editar") {
+                $data['editar'] = true;
+                // dep('aqui',1);
+                parent::otra_clase('Clases', 'CompWeb');
+                $this->oClass->linksfooter = false;
+                $data['titulo_web'] = "Publicar";
+                $this->oClass->esloganfooter = false;
+                $data['componentes'] = $this->oClass->compweb(["principal"]);
+                parent::otro("YawarTag");
+                $data['tags'] = $this->other->listarTags();
+                parent::otro("Publicar");
+                $data['gallery'] = $this->other->listarGalleries(true);
+                $data['csrf'] = getTokenCsrf();
+                //documentacion de la libreria
+                /*https://www.jqueryscript.net/form/tags-selector-tagselect.html#google_vignette*/
+                $data['js'] = ['js/jquery.tagselect.js', 'js/update.post.js'];
+                $data['css'] = ['css/jquery.tagselect.css', 'css/lnh.grid.css', 'css/create.post.css'];
+                $data['titulo_view'] = "Editar Post";
+                $arraTag = [];
+                $arrPosTag = [];
+                foreach ($data['tags'] as $tag) {
+                    array_push($arraTag, $tag['tag_slug']);
+                }
+
+                foreach ($data['post']['pos_tag'] as $tag) {
+                    array_push($arrPosTag, $tag['tag_slug']);
+                }
+                $data['arrTag'] = $arraTag;
+                $data['arrPosTag'] = $arrPosTag;
+                $data['create-post'] = 'onsubmit="updatePost(this,event)"';
+                // dep($data, 1);
+                $this->views->getView('Web/Publicar', 'Index', $data);
+            } else {
+                $data['css'] = ['css/create.post.css'];
+                $this->views->getView('Web/Post', 'Index', $data);
+            }
         } else {
             require_once __DIR__ . '/Error.php';
             $classError = new Errors();
