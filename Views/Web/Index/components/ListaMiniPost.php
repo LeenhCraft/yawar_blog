@@ -5,7 +5,7 @@
         <article class="item">
             <div class="item-image global-image global-image-orientation global-radius">
                 <a href="<?php echo path_post() . $value['pos_slug'] ?>" class="global-link" aria-label="We are stronger as a group than an individual"></a>
-                <img src="<?php echo path_recursos() . 'Webp/' . $value['pos_img']; ?>" loading="lazy" alt="<?php echo $value['pos_name'] ?>">
+                <img src="<?php echo path_recursos() . $value['pos_img']; ?>" loading="lazy" alt="<?php echo $value['pos_name'] ?>">
             </div>
             <div class="item-content">
                 <div class="item-tags global-tags">

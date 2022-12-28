@@ -1,7 +1,7 @@
 <div class="widget-section global-padding">
     <div class="featured-section global-radius" style="display: flex; flex-wrap: wrap;">
         <div class="left" style="min-width: 200px;">
-            <img class="global-radius" src="<?php echo path_recursos() . 'Webp/' . $data['componentes']['register']['content']['img'] ?>" alt="cargando..." style="width: 200px;">
+            <img class="global-radius" src="<?php echo path_recursos() . $data['componentes']['register']['content']['img'] ?>" alt="cargando..." style="width: 200px;">
         </div>
         <div class="messageFormRegisterNewMember right ml-4" style="min-width: 400px; display: none;">
             <h2 class="w-100 m-0 mb-2">Felicidades!</h2>

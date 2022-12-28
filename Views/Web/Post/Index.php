@@ -21,13 +21,20 @@
                         <?php
                         } ?>
                     </div>
+                    <?php if (!empty($data['post']['pos_destacado'])) {
+                    ?>
+                        <div class="post-meta-wrap">
+                            <span class="global-border bg-theme px-4 py-1 f-s font-weight-bold">Post Destacado</span>
+                        </div>
+                    <?php
+                    } ?>
                     <div class="post-meta-wrap">
                         <div class="global-meta is-full-meta is-post">
                             <div class="global-meta-wrap">
                                 <div>
                                     <div class="global-meta-avatar is-image global-image">
                                         <a href="<?php echo path_author() . urls_amigables($data['post']['usu_nombre']); ?>" class="global-link" title="<?php echo $data['post']['usu_nombre']; ?>"></a>
-                                        <img src="<?php echo $data['post']['aut_img']; ?>" alt="cargando..." loading="lazy">
+                                        <img src="<?php echo path_recursos() . $data['post']['aut_img']; ?>" alt="<?php echo $data['post']['usu_nombre']; ?>" loading="lazy">
                                     </div>
                                 </div>
                             </div>
@@ -60,7 +67,7 @@
                 <div class="post-header-image">
                     <figure>
                         <div class="global-image global-image-orientation global-radius">
-                            <img src="<?php echo path_recursos() . 'Webp/' . $data['post']['pos_img']; ?>" alt="<?php echo $data['post']['pos_name']; ?>">
+                            <img src="<?php echo path_recursos() . $data['post']['pos_img']; ?>" alt="<?php echo $data['post']['pos_name']; ?>">
                         </div>
                         <figcaption>
                             Photo by
@@ -81,10 +88,10 @@
                     <div class="is-authors">
                         <small class="global-subtitle">Escrito por</small>
                         <a href="<?php echo path_author() . urls_amigables($data['post']['usu_nombre']); ?>">
-                            <img src="<?php echo $data['post']['aut_img']; ?>" alt="<?php echo $data['post']['usu_nombre']; ?>" loading="lazy">
+                            <img src="<?php echo path_recursos() . $data['post']['aut_img']; ?>" alt="<?php echo $data['post']['usu_nombre']; ?>" loading="lazy">
                             <div>
                                 <h3 class="post-sidebar-title"><?php echo $data['post']['usu_nombre']; ?></h3>
-                                <p><?php echo $data['post']['aut_meta']['me_descrip']; ?></p>
+                                <p class="asas"><?php echo !empty($data['post']['aut_meta']) ? $data['post']['aut_meta']['me_descrip'] : 'UNDEFINED'; ?></p>
                             </div>
                         </a>
                     </div>
@@ -94,7 +101,7 @@
                         foreach ($data['postrandom'] as $post) {
                         ?>
                             <a href="<?php echo path_post() . $post['pos_slug'] ?>">
-                                <img src="<?php echo path_recursos() . 'Webp/' . $post['pos_img']; ?>" loading="lazy" alt="<?php echo $post['pos_name'] ?>">
+                                <img src="<?php echo path_recursos() . $post['pos_img']; ?>" loading="lazy" alt="<?php echo $post['pos_name'] ?>">
                                 <div>
                                     <h3 class="post-sidebar-title"><?php echo $post['pos_name'] ?></h3>
                                 </div>
@@ -103,12 +110,14 @@
                         }
                         ?>
                     </div>
-                    <div class="subscribe-form global-radius is-sticky">
+                    <div class="subscribe-form global-radius">
                         <div class="global-dynamic-color">
-                            <small class="global-subtitle">estar enterado</small>
-                            <h3 class="subscribe-title">Recibe todas las publicaciones más recientes directamente en tu bandeja de entrada.</h3>
+                            <small class="global-subtitle">redes sociales</small>
+                            <h3 class="subscribe-title">
+                                Visita nuestra pagina de Facebook y canal de YouTube para mantenerte al tanto de todas las novedades.
+                            </h3>
                         </div>
-                        <div class="subscribe-wrap">
+                        <div class="subscribe-wrap d-none">
                             <form data-members-form="subscribe" data-members-autoredirect="false">
                                 <input data-members-email type="email" placeholder="Ingresa tu correo" aria-label="Your email address" required>
                                 <button class="global-button no-color" type="submit"> Subscribirse</button>
@@ -117,6 +126,22 @@
                                 <span class="alert-loading global-alert">Procesando su solicitud</span>
                                 <span class="alert-success global-alert">Por favor revise su bandeja de entrada y haga clic en el enlace para confirmar su suscripción.</span>
                                 <span class="alert-error global-alert">Hubo un error al enviar el correo electrónico. Por favor intentelo más tarde.</span>
+                            </div>
+                        </div>
+                        <div class="subscribe-wrap">
+                            <div>
+                                <button class="global-button no-color mb-2">
+                                    <a href="https://www.facebook.com/YawarMuxus/" target="_blank">
+                                        <i class="fab fa-facebook"></i>
+                                        Facebook
+                                    </a>
+                                </button>
+                                <button class="global-button no-color">
+                                    <a href="https://www.youtube.com/channel/UCnRk_SJpDNTV6ORyUzmmMZg" target="_blank">
+                                        <i class="fab fa-youtube"></i>
+                                        YouTube
+                                    </a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -134,7 +159,7 @@
                 ?>
                     <article class="item is-special">
                         <div class="item-image global-image global-image-orientation global-radius">
-                            <img src="<?php echo path_recursos() . 'Webp/' . $gallery['ga_img'] ?>" alt="<?php echo $gallery['ga_name'] ?>">
+                            <img src="<?php echo path_recursos() . $gallery['ga_img'] ?>" alt="<?php echo $gallery['ga_name'] ?>">
                             <a href="<?php echo path_gallery() . $gallery['ga_slug'] ?>" class="global-link" aria-label="<?php echo $gallery['ga_name'] ?>"></a>
                         </div>
                         <div class="item-content">
@@ -157,7 +182,7 @@
                     <small class="global-subtitle">yawar post siguiente</small>
                     <div>
                         <div class="navigation-image global-image-orientation global-image global-radius is-square">
-                            <img src="<?php echo path_recursos() . 'Webp/' . $data['next']['pos_img'] ?>" alt="<?php echo $data['next']['pos_name'] ?>" loading="lazy">
+                            <img src="<?php echo path_recursos() . $data['next']['pos_img'] ?>" alt="<?php echo $data['next']['pos_name'] ?>" loading="lazy">
                         </div>
                         <div class="navigation-title">
                             <div>
@@ -179,7 +204,7 @@
                             </div>
                         </div>
                         <div class="navigation-image global-image-orientation global-image global-radius is-square">
-                            <img src="<?php echo path_recursos() . 'Webp/' . $data['older']['pos_img'] ?>" alt="<?php echo $data['older']['pos_name'] ?>" loading="lazy">
+                            <img src="<?php echo path_recursos() . $data['older']['pos_img'] ?>" alt="<?php echo $data['older']['pos_name'] ?>" loading="lazy">
                         </div>
                     </div>
                 </a>

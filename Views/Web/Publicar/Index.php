@@ -46,6 +46,14 @@
                                 <span style="opacity: var(--opacity-one);">Post Principal</span>
                             </label>
                         </div>
+                        <div class="ml-4 mb-4">
+                            <label class="content-input m-0">
+                                <?php $checked = isset($data['post']['pos_destacado']) && !empty($data['post']['pos_destacado']) ? 'checked' : ''; ?>
+                                <input type="checkbox" name="destacado" <?php echo $checked; ?>>
+                                <i></i>
+                                <span style="opacity: var(--opacity-one);">Post Destacado</span>
+                            </label>
+                        </div>
                         <?php
                         if (isset($data['post']['pos_status'])) {
                         ?>

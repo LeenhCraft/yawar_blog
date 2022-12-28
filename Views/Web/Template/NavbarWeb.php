@@ -2,7 +2,7 @@
     <div class="header-wrap">
         <div class="header-logo global-logo is-header">
             <a href="/" class="is-logo">
-                <img src="<?php echo isset($logo['img_url']) ? path_recursos() . 'Webp/' . $logo['img_url'] : 'https://via.placeholder.com/85x35' ?>" alt="<?php echo NOMBRE_EMPRESA ?>">
+                <img src="<?php echo isset($logo['img_url']) ? path_recursos() . $logo['img_url'] : path_img_404() ?>" alt="<?php echo NOMBRE_EMPRESA ?>">
             </a>
         </div>
         <div class="header-nav">

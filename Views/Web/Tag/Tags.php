@@ -20,7 +20,7 @@
                         <input type="hidden" name="_token" value="<?php echo $data['csrf'] ?>">
                         <div class="item-image global-image global-image-orientation global-radius">
                             <input accept="image/*" name="img" type="file" class="upload-button__input" onchange="mostrarImg(this,event)">
-                            <img class="new-tag-img" src="https://via.placeholder.com/200x140" alt="Nueva imagen">
+                            <img class="new-tag-img" src="<?php echo path_img_404() ?>" alt="Nueva imagen">
                         </div>
                         <div class="item-content">
                             <h2 class="item-title"><a href="#"><input name="newtag" type="text" placeholder="Nuevo etiqueta"></a></h2>
@@ -33,7 +33,7 @@
                 <div class="custom-archive-item item">
                     <div class="item-image global-image global-image-orientation global-radius">
                         <a href="<?php echo path_tag() . $tag['tag_slug']; ?>" class="global-link" aria-label="<?php echo  $tag['tag_name']; ?>"></a>
-                        <img src="<?php echo path_recursos() . 'Webp/' . $tag['tag_img'] ?>" alt="<?php echo  $tag['tag_name']; ?>">
+                        <img src="<?php echo path_recursos() . $tag['tag_img'] ?>" alt="<?php echo  $tag['tag_name']; ?>">
                     </div>
                     <div class="item-content">
                         <h2 class="item-title"><a href="<?php echo path_tag() . $tag['tag_slug']; ?>"><?php echo  $tag['tag_name']; ?></a></h2>

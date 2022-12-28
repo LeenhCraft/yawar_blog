@@ -20,7 +20,7 @@ class YawarTagModel extends Mysql
             foreach ($request as $key => $value) {
                 $img = $compWebModel->getImg($request[$key]['idtag'], 'TAG::PORT');
                 $cant = $this->cantPost($request[$key]['idtag']);
-                $request[$key]['tag_img'] = isset($img['img_url']) ? $img['img_url'] : '#';
+                $request[$key]['tag_img'] = isset($img['img_url']) ? $img['img_url'] : img_404();
                 $request[$key]['tag_cantpost'] = isset($cant['tag_cantpost']) ? $cant['tag_cantpost'] : '0';
             }
         }
@@ -41,7 +41,7 @@ class YawarTagModel extends Mysql
         if (!empty($request)) {
             $img = $compWebModel->getImg($request['idtag'], 'TAG::PORT');
             $cant = $this->cantPost($request['idtag']);
-            $request['tag_img'] = isset($img['img_url']) ? $img['img_url'] : 'https://via.placeholder.com/1600x2108';
+            $request['tag_img'] = isset($img['img_url']) ? $img['img_url'] : img_404();
             $request['tag_cantpost'] = isset($cant['tag_cantpost']) ? $cant['tag_cantpost'] : '0';
         }
         return $request;
@@ -74,7 +74,7 @@ class YawarTagModel extends Mysql
         if (!empty($request)) {
             foreach ($request as $key => $value) {
                 $img = $compWebModel->getImg($request[$key]['idgalery'], 'GALLERY::PORT');
-                $request[$key]['ga_img'] = isset($img['img_url']) ? $img['img_url'] : 'https://via.placeholder.com/1600x2108';
+                $request[$key]['ga_img'] = isset($img['img_url']) ? $img['img_url'] : img_404();
             }
         }
         return $request;
@@ -97,7 +97,7 @@ class YawarTagModel extends Mysql
             foreach ($request as $key => $value) {
                 $img = $compWebModel->getImg($request[$key]['idpost'], 'POST::PORT');
                 $request[$key]['pos_tag'] = $compWebModel->getTag($request[$key]['idpost']);
-                $request[$key]['pos_img'] = isset($img['img_url']) ? $img['img_url'] : 'https://via.placeholder.com/1600x2108';
+                $request[$key]['pos_img'] = isset($img['img_url']) ? $img['img_url'] : img_404();
                 $request[$key]['aut_meta'] = $this->metaAuthor($request[$key]['idwebusuario']);
             }
         }

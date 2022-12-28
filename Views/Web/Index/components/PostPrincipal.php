@@ -6,7 +6,7 @@
     <article class="item is-top is-first">
         <div class="item-image global-image global-image-orientation global-radius">
             <a href="<?php echo path_post() . $data['componentes']['postprincipal']['content']['pos_slug']; ?>" class="global-link" aria-label="The trick to getting more done is to have the freedom to roam around"></a>
-            <img src="<?php echo path_recursos() . 'Webp/' . $data['componentes']['postprincipal']['content']['pos_img'] ?>" loading="lazy" alt="<?php echo $data['componentes']['postprincipal']['content']['pos_name'] ?>">
+            <img src="<?php echo path_recursos() . $data['componentes']['postprincipal']['content']['pos_img'] ?>" loading="lazy" alt="<?php echo $data['componentes']['postprincipal']['content']['pos_name'] ?>">
         </div>
         <div class="item-content">
             <div class="item-tags global-tags">
@@ -31,8 +31,8 @@
                 <div class="global-meta-wrap">
                     <div>
                         <div class="global-meta-avatar is-image global-image">
-                            <a href="author/damian/index.html" class="global-link" title="<?php $data['componentes']['postprincipal']['content']['usu_nombre'] ?>"></a>
-                            <img src="<?php echo $data['componentes']['postprincipal']['content']['aut_img'] ?>" alt="<?php echo $data['componentes']['postprincipal']['content']['usu_nombre'] ?>" loading="lazy" />
+                            <a href="<?php echo path_author() . urls_amigables($data['componentes']['postprincipal']['content']['usu_nombre']) ?>" class="global-link" title="<?php $data['componentes']['postprincipal']['content']['usu_nombre'] ?>"></a>
+                            <img src="<?php echo empty($data['componentes']['postprincipal']['content']['usu_foto']) ? path_img_404() : path_recursos() . img_user() . $data['componentes']['postprincipal']['content']['usu_foto']; ?>" alt="<?php echo $data['componentes']['postprincipal']['content']['usu_nombre'] ?>" loading="lazy" />
                         </div>
                     </div>
                 </div>
@@ -101,8 +101,8 @@
         <article class="item is-top">
             <div class="item-image global-image global-image-orientation global-radius">
                 <a href="<?php echo path_post() . $value['pos_slug'] ?>" class="global-link"></a>
-                <img src="<?php echo path_recursos() . 'Webp/' . $value['pos_img']; ?>" loading="lazy" alt="<?php echo $value['pos_name'] ?>">
-                </div>
+                <img src="<?php echo path_recursos() . $value['pos_img']; ?>" loading="lazy" alt="<?php echo $value['pos_name'] ?>">
+            </div>
             <div class="item-content">
                 <div class="item-tags global-tags">
                     <?php

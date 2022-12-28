@@ -43,9 +43,9 @@
         <div class="global-cover" style="background-image: url(
             <?php
             if (isset($data['img_port'])) {
-                echo isset($data['img_port']) ? path_recursos() . 'Webp/' . $data['img_port'] : '#';
+                echo isset($data['img_port']) ? path_recursos() . $data['img_port'] : path_img_404();
             } else {
-                echo isset($backImg['img_url']) ? path_recursos() . 'Webp/' . $backImg['img_url'] : 'https://via.placeholder.com/1600x1031';
+                echo isset($backImg['img_url']) ? path_recursos() . $backImg['img_url'] : path_img_404();
             }
             ?>);">
         </div>

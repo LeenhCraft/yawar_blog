@@ -2,7 +2,7 @@
     <div class="footer-logo-wrap">
         <div class="global-logo is-footer">
             <a href="<?php echo base_url(); ?>" class="is-logo">
-                <img src="<?php echo isset($logo['img_url']) ? path_recursos() . 'Webp/' . $logo['img_url'] : 'https://via.placeholder.com/85x35' ?>" alt="<?php echo NOMBRE_EMPRESA ?>">
+                <img src="<?php echo isset($logo['img_url']) ? path_recursos() . 'Webp/' . $logo['img_url'] : path_img_404() ?>" alt="<?php echo NOMBRE_EMPRESA ?>">
             </a>
         </div>
         <p class="footer-description">
@@ -10,8 +10,6 @@
         </p>
     </div>
     <div class="footer-subscribe">
-        <a href="membership/index.html" class="global-button">Become a subscriber →</a>
-        <small>Get all the latest posts delivered straight to your
-            inbox.</small>
+        <a href="<?php echo base_url() . 'Signup'; ?>" class="global-button">Crear Cuenta →</a>
     </div>
 </div>

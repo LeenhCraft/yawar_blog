@@ -41,13 +41,14 @@ class Publicar extends Controllers
             $arrResponse = array('status' => false, 'title' => '', 'icon' => 'warning', 'text' => 'No deje campos vacios');
 
             $titulo = isset($_POST['titulo']) ? strClean($_POST['titulo']) : '';
-            $resumen = isset($_POST['resumen']) ? strClean($_POST['resumen']) : '';
+            $resumen = isset($_POST['resumen']) ? substr(strClean($_POST['resumen']), 0, 100) : '';
             $tags = isset($_POST['tags']) ? $_POST['tags'] : [];
             $gallery = isset($_POST['gallery']) ? strClean($_POST['gallery']) : '';
             $contenido = isset($_POST['contenido']) ? strClean($_POST['contenido']) : '';
             $idwebusuario = $_SESSION['lnh'];
             $publicar = isset($_POST['publicar']) && strClean($_POST['publicar']) === 'on' ? 1 : 0;
             $principal = isset($_POST['principal']) && strClean($_POST['principal']) === 'on' ? 1 : 0;
+            $destacado = isset($_POST['destacado']) && strClean($_POST['destacado']) === 'on' ? 1 : 0;
             $img = isset($_FILES['portada']) ? $_FILES['portada'] : '';
             $tk = isset($_POST['_token']) ? strClean($_POST['_token']) : '';
             // dep($principal, 1);
@@ -72,14 +73,18 @@ class Publicar extends Controllers
                         if ($publicar) {
                             $requestPrincipal = $this->model->principalPost($respuesta['text']);
                         }
+                        if ($destacado) {
+                            $requestDestacado = $this->model->destacadoPost($respuesta['text'], $idwebusuario);
+                        }
                         parent::otra_clase('Clases', 'ImageClass');
                         $validacion = $this->oClass->validarImagen($img);
                         if ($validacion['status']) {
                             $nombre = $this->oClass->nombre($img);
                             $extension = $this->oClass->extension($img);
+                            $carpeta = date('Y-m-d-H-i-s') . '-';
                             // $lnh_name = strlen($nombre) > 10 ? substr($nombre, 0, 5) . '-' . generar_letras(4) : $nombre . '-' . generar_letras(4);
-                            $lnh_name = strlen($titulo) > 30 ? substr($titulo, 0, 30) : $titulo;
-                            $nomtemp = $lnh_name . '.webp';
+                            $lnh_name = strlen($titulo) > 30 ? substr($titulo, 0, 10) : $titulo;
+                            $nomtemp = $carpeta . $lnh_name . '.webp';
                             $ruta_usuario = $img['tmp_name'];
                             $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $nomtemp);
                             if ($conversion) {
@@ -123,7 +128,7 @@ class Publicar extends Controllers
             $arrResponse = array('status' => false, 'title' => '', 'icon' => 'warning', 'text' => 'No deje campos vacios');
 
             $titulo = isset($_POST['titulo']) ? strClean($_POST['titulo']) : '';
-            $resumen = isset($_POST['resumen']) ? strClean($_POST['resumen']) : '';
+            $resumen = isset($_POST['resumen']) ? substr(strClean($_POST['resumen']), 0, 100) : '';
             $tags = isset($_POST['tags']) ? $_POST['tags'] : [];
             $gallery = isset($_POST['gallery']) ? strClean($_POST['gallery']) : '';
             $contenido = isset($_POST['contenido']) ? strClean($_POST['contenido']) : '';
@@ -131,6 +136,7 @@ class Publicar extends Controllers
             $publicar = isset($_POST['publicar']) && strClean($_POST['publicar']) === 'on' ? 1 : 0;
             $pos_status = isset($_POST['status']) && strClean($_POST['status']) === 'on' ? 1 : 0;
             $principal = isset($_POST['principal']) && strClean($_POST['principal']) === 'on' ? 1 : 0;
+            $destacado = isset($_POST['destacado']) && strClean($_POST['destacado']) === 'on' ? 1 : 0;
             $img = isset($_FILES['portada']) ? $_FILES['portada'] : '';
             $tk = isset($_POST['_token']) ? strClean($_POST['_token']) : '';
             $idpost = isset($_POST['_edit']) ? intval($_POST['_edit']) : 0;
@@ -155,6 +161,9 @@ class Publicar extends Controllers
                         if ($publicar) {
                             $requestPrincipal = $this->model->principalPost($idpost);
                         }
+                        if ($destacado) {
+                            $requestDestacado = $this->model->destacadoPost($idpost, $idwebusuario);
+                        }
                         parent::otra_clase('Clases', 'ImageClass');
                         $validacion = $this->oClass->validarImagen($img);
                         $textImg = '';
@@ -162,8 +171,9 @@ class Publicar extends Controllers
                             $nombre = $this->oClass->nombre($img);
                             $extension = $this->oClass->extension($img);
                             // $lnh_name = strlen($nombre) > 10 ? substr($nombre, 0, 5) . '-' . generar_letras(4) : $nombre . '-' . generar_letras(4);
-                            $lnh_name = strlen($titulo) > 30 ? substr($titulo, 0, 30) : $titulo;
-                            $nomtemp = $lnh_name . '.webp';
+                            $carpeta = date('Y-m-d-H-i-s') . '-';
+                            $lnh_name = strlen($titulo) > 30 ? substr($titulo, 0, 10) : $titulo;
+                            $nomtemp = $carpeta . $lnh_name . '.webp';
                             $ruta_usuario = $img['tmp_name'];
                             $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $nomtemp);
                             if ($conversion) {
@@ -172,7 +182,15 @@ class Publicar extends Controllers
                                 $type = "POST::PORT";
                                 $idgalery = 0;
                                 $img_propietario = $idpost;
-                                $request = $this->model->insertImg($type, $nomtemp, $img_propietario, $idgalery);
+                                // $request = $this->model->insertImg($type, $nomtemp, $img_propietario, $idgalery);
+                                /* */
+                                $data = $this->model->verImg($type, $idpost);
+                                if (empty($data)) {
+                                    $request = $this->model->insertImg($type, $nomtemp, $img_propietario, $idgalery);
+                                } else {
+                                    $request = $this->model->updateImg($data['idimage'], $type, $nomtemp);
+                                }
+                                /* */
                                 if ($request > 0) {
                                     $textImg .= 'Imagen cargada correctamente.';
                                 } else {

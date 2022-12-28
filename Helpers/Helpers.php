@@ -42,6 +42,31 @@ function path_mini()
     return base_url() . 'Medios/Mini/';
 }
 
+function path_img_404()
+{
+    return path_recursos() . img_404();
+}
+
+function img_404()
+{
+    return '404/404.webp';
+}
+
+function img_post()
+{
+    return 'Posts/';
+}
+
+function img_user()
+{
+    return 'Users/';
+}
+
+function img_other()
+{
+    return 'Other/';
+}
+
 function media()
 {
     return BASE_URL . "Assets/";

@@ -21,12 +21,14 @@ class YawarPostModel extends Mysql
         // dep($sql, 1);
         if (!empty($request)) {
             $img = $compWebModel->getImg($request['idpost'], 'POST::PORT');
-            $imgAut = $compWebModel->getImg($request['idwebusuario'], 'USER::PORT');
+            $imgAut = $compWebModel->getUser($request['idwebusuario']);
             $request['pos_tag'] = $compWebModel->getTag($request['idpost']);
-            $request['pos_img'] = isset($img['img_url']) ? $img['img_url'] : 'https://via.placeholder.com/1600x2108';
-            $request['aut_img'] = isset($imgAut['img_url']) ? $imgAut['img_url'] : 'https://via.placeholder.com/300x49';
-            $request['aut_meta'] = $this->metaAuthor($request['idwebusuario']);
+            $request['pos_img'] = isset($img['img_url']) ? $img['img_url'] : img_404();
+            $request['aut_img'] = isset($imgAut['usu_foto']) ? $imgAut['usu_foto'] : img_404();
+            $aut_meta = $this->metaAuthor($request['idwebusuario']);
+            $request['aut_meta'] = !empty($aut_meta) ? $aut_meta : [];
             $request['pos_gallery'] = !empty($this->postGalleries($request['idpost'])) ? $this->postGalleries($request['idpost'])[0] : [];
+            $request['pos_destacado'] = $this->postDestacado($request['idpost']);
         }
         return $request;
     }
@@ -50,7 +52,7 @@ class YawarPostModel extends Mysql
         $request = $this->select($sql);
         if (!empty($request)) {
             $img = $compWebModel->getImg($request['idpost'], 'POST::PORT');
-            $request['pos_img'] = isset($img['img_url']) ? $img['img_url'] : 'https://via.placeholder.com/1600x2108';
+            $request['pos_img'] = isset($img['img_url']) ? $img['img_url'] : img_404();
             $request['pos_tag'] = $compWebModel->getTag($request['idpost']);
         }
 
@@ -69,7 +71,7 @@ class YawarPostModel extends Mysql
         $request = $this->select($sql);
         if (!empty($request)) {
             $img = $compWebModel->getImg($request['idpost'], 'POST::PORT');
-            $request['pos_img'] = isset($img['img_url']) ? $img['img_url'] : 'https://via.placeholder.com/1600x2108';
+            $request['pos_img'] = isset($img['img_url']) ? $img['img_url'] : img_404();
             $request['pos_tag'] = $compWebModel->getTag($request['idpost']);
         }
         return $request;
@@ -87,8 +89,18 @@ class YawarPostModel extends Mysql
         if (!empty($request)) {
             foreach ($request as $key => $value) {
                 $img = $compWebModel->getImg($request[$key]['idgalery'], 'GALLERY::PORT');
-                $request[$key]['ga_img'] = isset($img['img_url']) ? $img['img_url'] : 'https://via.placeholder.com/1600x2108';
+                $request[$key]['ga_img'] = isset($img['img_url']) ? $img['img_url'] : img_404();
             }
+        }
+        return $request;
+    }
+
+    public function postDestacado($id)
+    {
+        $sql = "SELECT * FROM blog_postdestacados WHERE idpost = $id";
+        $request = $this->select($sql);
+        if (empty($request)) {
+            $request = [];
         }
         return $request;
     }

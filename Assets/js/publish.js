@@ -19,7 +19,7 @@ function save(ths, e) {
   let form = $(ths);
   let dat = new FormData(form[0]);
 
-  let ajaxUrl = base_url + "Leenh/leenh";
+  let ajaxUrl = base_url + "Leenh/guardar";
   $.ajax({
     type: "POST",
     url: ajaxUrl,
@@ -29,7 +29,7 @@ function save(ths, e) {
     success: function (data) {
       let objData = JSON.parse(data);
       if (objData.status) {
-        $("#img")
+        $("#imgsave")
           .removeClass("error")
           .addClass("success")
           .find(".message")
@@ -39,7 +39,7 @@ function save(ths, e) {
         $(".alert-success").html(objData.text);
       } else {
         // Swal.fire("Error", objData.text, "warning");
-        $("#img")
+        $("#imgsave")
           .removeClass("success")
           .addClass("error")
           .find(".message")
@@ -70,24 +70,65 @@ function saveSign(ths, e) {
     success: function (data) {
       let objData = JSON.parse(data);
       if (objData.status) {
-        $("#imgg")
+        $("#imgsaveSign")
           .removeClass("error")
           .addClass("success")
           .find(".message")
           //   .removeClass("d-none")
           .addClass("kg-callout-card-blue");
-        $("#imgg").find(".alert-success").html(objData.text);
-        $("#imgg").find(".message").show("slow");
+        $("#imgsaveSign").find(".alert-success").html(objData.text);
+        $("#imgsaveSign").find(".message").show("slow");
       } else {
         // Swal.fire("Error", objData.text, "warning");
-        $("#imgg")
+        $("#imgsaveSign")
           .removeClass("success")
           .addClass("error")
           .find(".message")
           //   .removeClass("d-none")
           .addClass("kg-callout-card-yellow");
-        $("#imgg").fin(".alert-error").html(objData.text);
-        $("#imgg").find(".message").show("slow");
+        $("#imgsaveSign").fin(".alert-error").html(objData.text);
+        $("#imgsaveSign").find(".message").show("slow");
+      }
+    },
+    error: function (error) {
+      alert(error);
+    },
+  });
+}
+
+function saveRegister(ths, e) {
+  e.preventDefault();
+  let form = $(ths);
+  let dat = new FormData(form[0]);
+
+  let ajaxUrl = base_url + "Leenh/imgSecRegister";
+  $.ajax({
+    type: "POST",
+    url: ajaxUrl,
+    data: dat,
+    processData: false,
+    contentType: false,
+    success: function (data) {
+      let objData = JSON.parse(data);
+      if (objData.status) {
+        $("#imgSecRegister")
+          .removeClass("error")
+          .addClass("success")
+          .find(".message")
+          //   .removeClass("d-none")
+          .addClass("kg-callout-card-blue");
+        $("#imgSecRegister").find(".alert-success").html(objData.text);
+        $("#imgSecRegister").find(".message").show("slow");
+      } else {
+        // Swal.fire("Error", objData.text, "warning");
+        $("#imgSecRegister")
+          .removeClass("success")
+          .addClass("error")
+          .find(".message")
+          //   .removeClass("d-none")
+          .addClass("kg-callout-card-yellow");
+        $("#imgSecRegister").fin(".alert-error").html(objData.text);
+        $("#imgSecRegister").find(".message").show("slow");
       }
     },
     error: function (error) {

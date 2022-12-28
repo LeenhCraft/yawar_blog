@@ -43,7 +43,7 @@
 <script src="<?php echo media() . 'js/indexa108.js' ?>"></script> -->
 <script>
   const base_url = "<?php echo base_url(); ?>";
-  const base_recursos = "<?php echo path_recursos() . 'Webp/'; ?>";
+  const base_recursos = "<?php echo path_recursos(); ?>";
 </script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.js"></script>
 <script src="<?php echo media() . 'js/jquery.min.js'; ?>"></script>

@@ -16,6 +16,7 @@ class YawarPost extends Controllers
             $data['older'] = $this->model->postOlder($data['post']['pos_date'], 1);
             $data['next'] = $this->model->postNext($data['post']['pos_date'], 1);
             $data['gallery'] = $this->model->postGalleries($data['post']['idpost'], 2);
+            $data['css'] = ['css/lnh.grid.css'];
             // parent::otro('Leenh');
             // $data['img_port'] = $data['post']['pos_img'];
             parent::otro('Web');
@@ -24,8 +25,8 @@ class YawarPost extends Controllers
             if (isset($_SESSION['_cf'])) {
                 $data['editar'] = true;
             }
-            if (isset($url['params']) && strtolower($url['params']) === "editar") {
-                $data['editar'] = true;
+            if (isset($url['params']) && strtolower($url['params']) === "editar" && isset($_SESSION['_cf'])) {
+                // $data['editar'] = true;
                 // dep('aqui',1);
                 parent::otra_clase('Clases', 'CompWeb');
                 $this->oClass->linksfooter = false;
@@ -57,7 +58,8 @@ class YawarPost extends Controllers
                 // dep($data, 1);
                 $this->views->getView('Web/Publicar', 'Index', $data);
             } else {
-                $data['css'] = ['css/create.post.css'];
+                $data['css'] = ['css/lnh.grid.css'];
+                // dep($data,1);
                 $this->views->getView('Web/Post', 'Index', $data);
             }
         } else {

@@ -42,8 +42,9 @@ class YawarTags extends Controllers
                             if ($request['status']) {
                                 $nombre = $this->oClass->nombre($img);
                                 $extension = $this->oClass->extension($img);
+                                $carpeta = date('Y-m-d-H-i-s') . '-';
                                 $lnh_name = strlen($nombre) > 10 ? 'tag-' . substr($nombre, 0, 5) . '-' . generar_letras(4) : 'tag-' . $nombre . '-' . generar_letras(4);
-                                $nomtemp = $lnh_name . '.webp';
+                                $nomtemp = $carpeta . $lnh_name . '.webp';
                                 $ruta_usuario = $img['tmp_name'];
                                 $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $nomtemp);
                                 if ($conversion) {
@@ -102,8 +103,9 @@ class YawarTags extends Controllers
                             parent::otro("YawarTag");
                             $nombre = $this->oClass->nombre($img);
                             $extension = $this->oClass->extension($img);
+                            $carpeta = date('Y-m-d-H-i-s') . '-';
                             $lnh_name = strlen($nombre) > 10 ? 'tag-' . substr($nombre, 0, 5) . '-' . generar_letras(4) : 'tag-' . $nombre . '-' . generar_letras(4);
-                            $nomtemp = $lnh_name . '.webp';
+                            $nomtemp = $carpeta . $lnh_name . '.webp';
                             $ruta_usuario = $img['tmp_name'];
                             $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $nomtemp);
                             if ($conversion) {

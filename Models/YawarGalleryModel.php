@@ -17,7 +17,7 @@ class YawarGalleryModel extends Mysql
         $request = $this->select($sql);
         if (!empty($request)) {
             $img = $compWebModel->getImg($request['idgalery'], 'GALLERY::PORT');
-            $request['ga_img_port'] = isset($img['img_url']) ? $img['img_url'] : 'https://via.placeholder.com/1600x2108';
+            $request['ga_img_port'] = isset($img['img_url']) ? $img['img_url'] : img_404();
         }
         return $request;
     }
@@ -35,7 +35,7 @@ class YawarGalleryModel extends Mysql
         if (!empty($request)) {
             foreach ($request as $key => $value) {
                 $img = $compWebModel->getImg($request[$key]['idgalery'], 'GALLERY::PORT');
-                $request[$key]['ga_img_port'] = isset($img['img_url']) ? $img['img_url'] : 'https://via.placeholder.com/1600x2108';
+                $request[$key]['ga_img_port'] = isset($img['img_url']) ? $img['img_url'] : img_404();
             }
         }
         return $request;
@@ -68,8 +68,8 @@ class YawarGalleryModel extends Mysql
             $img = $compWebModel->getImg($request['idpost'], 'POST::PORT');
             $imgAut = $compWebModel->getImg($request['idwebusuario'], 'USER::PORT');
             $request['pos_tag'] = $compWebModel->getTag($request['idpost']);
-            $request['pos_img'] = isset($img['img_url']) ? $img['img_url'] : 'https://via.placeholder.com/1600x2108';
-            $request['aut_img'] = isset($imgAut['img_url']) ? $imgAut['img_url'] : 'https://via.placeholder.com/300x49';
+            $request['pos_img'] = isset($img['img_url']) ? $img['img_url'] : img_404();
+            $request['aut_img'] = isset($imgAut['img_url']) ? $imgAut['img_url'] : img_404();
             $request['aut_meta'] = $yawarPostModel->metaAuthor($request['idwebusuario']);
         }
         return $request;

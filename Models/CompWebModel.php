@@ -13,6 +13,13 @@ class CompWebModel extends Mysql
         return $request;
     }
 
+    public function getUser($id = 0)
+    {
+        $sql = "SELECT * FROM web_usuarios WHERE idwebusuario = $id";
+        $request = $this->select($sql);
+        return $request;
+    }
+
     public function getTag($id = 0)
     {
         $sql = "SELECT * FROM blog_post_tag a 
@@ -45,7 +52,7 @@ class CompWebModel extends Mysql
             // $sql = "SELECT * FROM blog_images WHERE img_propietario = {$value['idtag']} AND img_type = 'TAG::PORT'";
             $requestImg = $this->getImg($value['idtag'], 'TAG::PORT');
             $nData[$key] = $value;
-            $nData[$key]['tag_img'] = isset($requestImg['img_url']) ? $requestImg['img_url'] : 'https://via.placeholder.com/300x375';
+            $nData[$key]['tag_img'] = isset($requestImg['img_url']) ? $requestImg['img_url'] : img_404();
         }
         return $nData;
     }
@@ -66,7 +73,7 @@ class CompWebModel extends Mysql
                 $where = isset($_SESSION['_cf']) && $_SESSION['_cf'] === 'ok' ? "" : "WHERE a.pos_status = 1 AND a.pos_publicar = 1";
                 $order = "ORDER BY a.pos_date DESC LIMIT $offset,$limit";
                 break;
-            case $tipo == '3': //post destacado
+            case $tipo == '3': //post del usuario
                 $inner = "INNER JOIN web_usuarios b ON a.idwebusuario = b.idwebusuario";
                 $where = "WHERE a.pos_publicar = 1 AND a.pos_status = 1 AND b.idwebusuario = " . $_SESSION['lnh'];
                 $order = "ORDER BY a.pos_date DESC LIMIT $offset,$limit";
@@ -87,8 +94,8 @@ class CompWebModel extends Mysql
                 }
                 $img = $this->getImg($request['idpost'], 'POST::PORT');
                 $imgAut = $this->getImg($request['idwebusuario'], 'USER::PORT');
-                $request['pos_img'] = isset($img['img_url']) ? $img['img_url'] : 'https://via.placeholder.com/1600x2108';
-                $request['aut_img'] = isset($imgAut['img_url']) ? $imgAut['img_url'] : 'https://via.placeholder.com/300x49';
+                $request['pos_img'] = isset($img['img_url']) ? img_post() . $img['img_url'] : img_404();
+                $request['aut_img'] = isset($imgAut['img_url']) ? img_user() . $imgAut['img_url'] : img_404();
                 $request['pos_tag'] = $this->getTag($request['idpost']);
                 break;
             case 2: //lista de posts
@@ -96,8 +103,8 @@ class CompWebModel extends Mysql
                 foreach ($request as $key => $value) {
                     $img = $this->getImg($value['idpost'], 'POST::PORT');
                     $imgAut = $this->getImg($value['idwebusuario'], 'USER::PORT');
-                    $request[$key]['pos_img'] = isset($img['img_url']) ? $img['img_url'] : 'https://via.placeholder.com/1600x2108';
-                    $request[$key]['aut_img'] = isset($imgAut['img_url']) ? $imgAut['img_url'] : 'https://via.placeholder.com/300x49';
+                    $request[$key]['pos_img'] = isset($img['img_url']) ? img_post() . $img['img_url'] : img_404();
+                    $request[$key]['aut_img'] = isset($imgAut['img_url']) ? img_user() . $imgAut['img_url'] : img_404();
                     $request[$key]['pos_tag'] = $this->getTag($value['idpost']);
                 }
                 break;
@@ -106,8 +113,8 @@ class CompWebModel extends Mysql
                 foreach ($request as $key => $value) {
                     $img = $this->getImg($value['idpost'], 'POST::PORT');
                     $imgAut = $this->getImg($value['idwebusuario'], 'USER::PORT');
-                    $request[$key]['pos_img'] = isset($img['img_url']) ? $img['img_url'] : 'https://via.placeholder.com/1600x2108';
-                    $request[$key]['aut_img'] = isset($imgAut['img_url']) ? $imgAut['img_url'] : 'https://via.placeholder.com/300x49';
+                    $request[$key]['pos_img'] = isset($img['img_url']) ? img_post() . $img['img_url'] : img_404();
+                    $request[$key]['aut_img'] = isset($imgAut['img_url']) ? img_user() . $imgAut['img_url'] : img_404();
                     $request[$key]['pos_tag'] = $this->getTag($value['idpost']);
                 }
                 break;
@@ -128,8 +135,8 @@ class CompWebModel extends Mysql
         foreach ($request as $key => $value) {
             $img = $this->getImg($value['idpost'], 'POST::PORT');
             $imgAut = $this->getImg($value['idwebusuario'], 'USER::PORT');
-            $request[$key]['pos_img'] = isset($img['img_url']) ? $img['img_url'] : 'https://via.placeholder.com/1600x2108';
-            $request[$key]['aut_img'] = isset($imgAut['img_url']) ? $imgAut['img_url'] : 'https://via.placeholder.com/300x49';
+            $request[$key]['pos_img'] = isset($img['img_url']) ? $img['img_url'] : img_404();
+            $request[$key]['aut_img'] = isset($imgAut['img_url']) ? $imgAut['img_url'] : img_404();
             $request[$key]['pos_tag'] = $this->getTag($value['idpost']);
         }
         return $request;
@@ -141,7 +148,7 @@ class CompWebModel extends Mysql
         $request = $this->select_all($sql);
         foreach ($request as $key => $value) {
             $img = $this->getImg($value['idpost'], 'POST::PORT');
-            $request[$key]['pos_img'] = isset($img['img_url']) ? $img['img_url'] : 'https://via.placeholder.com/1600x2108';
+            $request[$key]['pos_img'] = isset($img['img_url']) ? $img['img_url'] : img_404();
             $request[$key]['pos_tag'] = $this->getTag($value['idpost']);
         }
         return $request;
@@ -156,7 +163,7 @@ class CompWebModel extends Mysql
             // $sql = "SELECT * FROM blog_images WHERE idgalery = {$value['idgalery']} AND img_type = 'GALLERY::PORT'";
             $requestImg = $this->getImg($value['idgalery'], 'GALLERY::PORT');
             $nData[$key] = $value;
-            $nData[$key]['ga_img'] = isset($requestImg['img_url']) ? $requestImg['img_url'] : 'https://via.placeholder.com/700x900';
+            $nData[$key]['ga_img'] = isset($requestImg['img_url']) ? $requestImg['img_url'] : img_404();
         }
         return $nData;
     }
@@ -190,7 +197,7 @@ class CompWebModel extends Mysql
         $request = $this->select_all($sql);
         foreach ($request as $key => $value) {
             $img = $this->getImg($value['num'], 'POST::PORT');
-            $request[$key]['img'] = isset($img['img_url']) ? $img['img_url'] : 'https://via.placeholder.com/1600x2108';
+            $request[$key]['img'] = isset($img['img_url']) ? $img['img_url'] : img_404();
             // $request[$key]['pos_tag'] = $this->getTag($value['idpost']);
         }
         return $request;
@@ -199,7 +206,7 @@ class CompWebModel extends Mysql
     public function register()
     {
         $img = $this->getImg(0, 'INDEX::CONT');
-        $request['img'] = isset($img['img_url']) ? $img['img_url'] : 'https://via.placeholder.com/300x200';
+        $request['img'] = isset($img['img_url']) ? img_other() . $img['img_url'] : img_404();
         return $request;
     }
 }

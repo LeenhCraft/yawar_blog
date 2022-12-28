@@ -4,5 +4,6 @@
 *.log
 /Config
 /Medios
+/Medios_old
 /Libraries/vendor
 /Libraries/node_modules

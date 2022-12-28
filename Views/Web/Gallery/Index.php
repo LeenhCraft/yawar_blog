@@ -39,7 +39,7 @@
                                     <span style="margin-left: 1.5rem;" class="kg-bookmark-author">by <?php echo $data['post']['usu_nombre'] ?></span>
                                 </div>
                             </div>
-                            <div class="kg-bookmark-thumbnail"><img src="<?php echo path_recursos() . 'Webp/' . $data['post']['pos_img'] ?>" alt="<?php echo $data['post']['pos_name'] ?>"></div>
+                            <div class="kg-bookmark-thumbnail"><img src="<?php echo path_recursos() . $data['post']['pos_img'] ?>" alt="<?php echo $data['post']['pos_name'] ?>"></div>
                         </a>
                         <?php if (isset($_SESSION['pe']) && isset($_SESSION['_cf'])) { ?>
                             <div class="account-buttons" style="margin: 2rem 0;">
@@ -109,7 +109,7 @@
                                         </div>
                                     </div>
                                     <div class="kg-file-card-icon" style="min-height: 90px; min-width: 80px; margin: 0 2.25rem;">
-                                        <img src="<?php echo isset($data['logo']['img_url']) ?  path_recursos() . 'Webp/' . $data['logo']['img_url'] : media() . 'svg/upload.svg' ?>" alt="cargando..." width="40">
+                                        <img src="<?php echo isset($data['logo']['img_url']) ?  path_recursos() . $data['logo']['img_url'] : media() . 'svg/upload.svg' ?>" alt="cargando..." width="40">
                                     </div>
                                 </div>
                             </form>
@@ -122,7 +122,7 @@
                                 foreach ($data['images'] as $img) {
                                 ?>
                                     <div class="kg-gallery-imagee">
-                                        <img src="<?php echo path_recursos() . 'Webp/' . $img['img_url'] ?>" alt="<?php echo $data['gallery']['ga_name'] ?>">
+                                        <img src="<?php echo path_recursos() . $img['img_url'] ?>" alt="<?php echo $data['gallery']['ga_name'] ?>">
                                         <?php if (isset($_SESSION['pe']) && isset($_SESSION['_cf'])) { ?>
                                             <div class="account-buttons" style="margin: 0 0 2rem 0; text-align: right;">
                                                 <a href="javascript:delImgGal(<?php echo $img['idimage'] . ',' . $data['gallery']['idgalery']; ?>)" style="width: 100%;">eliminar foto</a>

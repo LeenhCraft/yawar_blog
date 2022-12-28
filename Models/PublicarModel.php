@@ -165,4 +165,33 @@ class PublicarModel extends Mysql
         }
         return $request;
     }
+
+    public function destacadoPost($idpost, $idwebusaurio)
+    {
+        $sql = "SELECT * FROM blog_postdestacados WHERE idpost = $idpost";
+        $request = $this->select($sql);
+        if (empty($request)) {
+            $sql = "INSERT INTO blog_postdestacados(idpost,idwebusuario)VALUES(?,?)";
+            $request['status'] = $this->insert($sql, [$idpost, $idwebusaurio]);
+        } else {
+            $request['status'] = false;
+            $request['text'] = "El post ya esta destacado";
+        }
+        return $request;
+    }
+
+    public function verImg($type, $id = 0)
+    {
+        $sql = "SELECT * FROM blog_images WHERE img_type = '{$type}' AND img_propietario = '{$id}' ORDER BY idimage DESC LIMIT 1";
+        $request = $this->select($sql);
+        return $request;
+    }
+
+    public function updateImg($id, $type, $url)
+    {
+        $sql = "UPDATE blog_images SET img_url = ? WHERE idimage = ? AND img_type=?";
+        $arrData = array($url, $id, $type);
+        $request = $this->update($sql, $arrData);
+        return $request;
+    }
 }

@@ -34,7 +34,7 @@
                 <div class="custom-archive-item item">
                     <div class="item-image global-image global-image-orientation global-radius">
                         <a href="<?php echo path_gallery() . $gallery['ga_slug']; ?>" class="global-link" aria-label="<?php echo  $gallery['ga_name']; ?>"></a>
-                        <img src="<?php echo path_recursos() . 'Webp/' . $gallery['ga_img_port'] ?>" alt="<?php echo  $gallery['ga_name']; ?>">
+                        <img src="<?php echo path_recursos() . $gallery['ga_img_port'] ?>" alt="<?php echo  $gallery['ga_name']; ?>">
                     </div>
                     <div class="item-content">
                         <h2 class="item-title"><a href="<?php echo path_gallery() . $gallery['ga_slug']; ?>"><?php echo  $gallery['ga_name']; ?></a></h2>

@@ -3,9 +3,9 @@
     <div class="global-cover is-featured" style="background-image: 
     url(<?php
         if (isset($data['imgBackDes']) && !empty($data['imgBackDes'])) {
-            echo path_recursos() . 'Webp/' . $data['imgBackDes']['img_url'];
+            echo path_recursos() . $data['imgBackDes']['img_url'];
         } else {
-            echo "https://via.placeholder.com/1920x1080";
+            echo path_img_404();
         }
         ?>);">
     </div>
@@ -17,7 +17,7 @@
             <article class="item">
                 <a href="<?php echo path_post() . $value['pos_slug'] ?>" class="global-link" aria-label="<?php echo $value['pos_name'] ?>"></a>
                 <div class="item-image global-image global-image-orientation global-radius">
-                    <img src="<?php echo path_recursos() . 'Webp/' . $value['pos_img']; ?>" loading="lazy" alt="<?php echo $value['pos_name'] ?>">
+                    <img src="<?php echo path_recursos() . $value['pos_img']; ?>" loading="lazy" alt="<?php echo $value['pos_name'] ?>">
                 </div>
                 <div class="item-content">
                     <h2 class="item-title">
