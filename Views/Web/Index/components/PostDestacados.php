@@ -3,7 +3,7 @@
     <div class="global-cover is-featured" style="background-image: 
     url(<?php
         if (isset($data['imgBackDes']) && !empty($data['imgBackDes'])) {
-            echo path_recursos() . $data['imgBackDes']['img_url'];
+            echo path_recursos() . img_other() . $data['imgBackDes']['img_url'];
         } else {
             echo path_img_404();
         }

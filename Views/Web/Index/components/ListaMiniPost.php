@@ -35,7 +35,7 @@
 </div>
 </div>
 
-<div class="pagination-section">
+<div class="pagination-section d-none">
     <a href="page/2/index.html" aria-label="Mostrar más"></a>
     <button class="global-button">Mostrar más</button>
 </div>

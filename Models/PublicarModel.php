@@ -125,11 +125,14 @@ class PublicarModel extends Mysql
         }
     }
 
-    public function updateTagsPost($idpost, $slugTag)
+    public function delTags($idpost)
     {
         $sql = "DELETE FROM blog_post_tag WHERE idpost = $idpost";
         $request = $this->delete($sql);
+    }
 
+    public function updateTagsPost($idpost, $slugTag)
+    {
         $sql = "SELECT idtag FROM blog_tags WHERE tag_slug = '$slugTag'";
         $request = $this->select($sql);
         $id = 0;
@@ -141,7 +144,6 @@ class PublicarModel extends Mysql
         // dep([$sql, $request]);
         if (empty($request)) {
             // dep('entro');
-
             $sql = "INSERT INTO blog_post_tag(idpost,idtag)VALUES(?,?)";
             $arrData = [$idpost, $id];
             $request = $this->insert($sql, $arrData);

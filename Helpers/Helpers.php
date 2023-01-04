@@ -62,9 +62,29 @@ function img_user()
     return 'Users/';
 }
 
+function img_tag()
+{
+    return 'Tags/';
+}
+
+function img_gallery()
+{
+    return 'Galleries/';
+}
+
 function img_other()
 {
     return 'Other/';
+}
+
+function img_logo()
+{
+    return 'Logo/';
+}
+
+function dir_recursos()
+{
+    return __DIR__ . '/../Medios/';
 }
 
 function media()

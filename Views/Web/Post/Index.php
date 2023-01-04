@@ -154,9 +154,7 @@
         <div class="special-section global-padding">
             <small class="global-subtitle">Mira nuestra galeria de fotos</small>
             <div class="special-wrap">
-                <?php
-                foreach ($data['gallery'] as $gallery) {
-                ?>
+                <?php foreach ($data['gallery'] as $gallery) { ?>
                     <article class="item is-special">
                         <div class="item-image global-image global-image-orientation global-radius">
                             <img src="<?php echo path_recursos() . $gallery['ga_img'] ?>" alt="<?php echo $gallery['ga_name'] ?>">
@@ -166,8 +164,7 @@
                             <h2 class="item-title"><a href="<?php echo  path_gallery() . $gallery['ga_slug'] ?>"><?php echo $gallery['ga_name'] ?></a></h2>
                         </div>
                     </article>
-                <?php }
-                ?>
+                <?php } ?>
             </div>
         </div>
     <?php

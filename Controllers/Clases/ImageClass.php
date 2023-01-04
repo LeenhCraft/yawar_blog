@@ -1,4 +1,14 @@
 <?php
+/*
+tener en cuenta estos directorios
+/Medios/404
+/Medios/Galleries
+/Medios/Logo
+/Medios/Other
+/Medios/Posts
+/Medios/Tags
+/Medios/Users
+*/
 class ImageClass extends Controllers
 {
     public function __construct()

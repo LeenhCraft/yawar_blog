@@ -17,7 +17,9 @@ class YawarGallery extends Controllers
             if (isset($_SESSION['pe']) && isset($_SESSION['_cf'])) {
                 $data['js'] = ['js/gallery.js'];
                 $data['csrf'] = getTokenCsrf();
+                $data['css'] = ['css/lnh.grid.css'];
             }
+            // dep($data,1);
             $this->views->getView('Web/Gallery', 'Index', $data);
         } else {
             require_once __DIR__ . '/Error.php';

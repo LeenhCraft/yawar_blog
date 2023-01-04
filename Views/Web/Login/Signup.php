@@ -4,7 +4,7 @@
         <div class="custom-logo-wrap">
             <div class="custom-logo global-logo is-header">
                 <a href="<?php echo base_url(); ?>" class="is-logo">
-                <img src="<?php echo isset($data['logo']['img_url']) ? path_recursos() . 'Webp/' . $data['logo']['img_url'] : 'https://via.placeholder.com/85x35' ?>" alt="<?php echo NOMBRE_EMPRESA ?>">
+                    <img src="<?php echo  path_recursos()  . $data['logo'] ?>" alt="<?php echo NOMBRE_EMPRESA ?>">
                 </a>
             </div>
         </div>
@@ -35,6 +35,6 @@
 
         </div>
     </div>
-    <div class="custom-image global-bg-image" style="background-image: url(<?php echo isset($data['imgSignup']['img_url']) ?  path_recursos() . 'Webp/' . $data['imgSignup']['img_url'] : media() . 'svg/upload.svg' ?>);"></div>
+    <div class="custom-image global-bg-image" style="background-image: url(<?php echo path_recursos() . $data['imgSignup']; ?>);"></div>
 </div>
 <?php footerWeb('FooterLogin', $data); ?>

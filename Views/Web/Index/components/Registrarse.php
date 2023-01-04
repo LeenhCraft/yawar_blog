@@ -41,7 +41,7 @@
                     <div class="formMessageValdiation mb-4"></div>
                     <div>
                         <button class="global-button f-s" type="submit">
-                            registrarme
+                            Registrarme
                         </button>
                     </div>
                 </div>

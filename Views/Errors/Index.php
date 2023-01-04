@@ -18,7 +18,7 @@
                 <article class="item">
                     <div class="item-image global-image global-image-orientation global-radius">
                         <a href="<?php echo path_post() . $post['pos_slug'] ?>" class="global-link" aria-label="<?php echo $post['pos_name'] ?>"></a>
-                        <img src="<?php echo path_recursos() . 'Webp/' . $post['pos_img'] ?>" loading="lazy" alt="<?php echo $post['pos_name'] ?>">
+                        <img src="<?php echo path_recursos() . $post['pos_img'] ?>" loading="lazy" alt="<?php echo $post['pos_name'] ?>">
                     </div>
                     <div class="item-content">
                         <div class="item-tags global-tags">

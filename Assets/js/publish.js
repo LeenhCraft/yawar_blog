@@ -18,7 +18,7 @@ function save(ths, e) {
   e.preventDefault();
   let form = $(ths);
   let dat = new FormData(form[0]);
-
+  let cont = $("#imgsave");
   let ajaxUrl = base_url + "Leenh/guardar";
   $.ajax({
     type: "POST",
@@ -29,24 +29,24 @@ function save(ths, e) {
     success: function (data) {
       let objData = JSON.parse(data);
       if (objData.status) {
-        $("#imgsave")
+        cont
           .removeClass("error")
           .addClass("success")
           .find(".message")
           //   .removeClass("d-none")
           .addClass("kg-callout-card-blue");
-        $(".message").show("slow");
-        $(".alert-success").html(objData.text);
+        cont.find(".message").show("slow");
+        cont.find(".alert-success").html(objData.text);
       } else {
         // Swal.fire("Error", objData.text, "warning");
-        $("#imgsave")
+        cont
           .removeClass("success")
           .addClass("error")
           .find(".message")
           //   .removeClass("d-none")
           .addClass("kg-callout-card-yellow");
-        $(".message").show("slow");
-        $(".alert-error").html(objData.text);
+        cont.find(".message").show("slow");
+        cont.find(".alert-error").html(objData.text);
       }
     },
     error: function (error) {
@@ -59,7 +59,7 @@ function saveSign(ths, e) {
   e.preventDefault();
   let form = $(ths);
   let dat = new FormData(form[0]);
-
+  let cont = $("#imgsaveSign");
   let ajaxUrl = base_url + "Leenh/imgSign";
   $.ajax({
     type: "POST",
@@ -70,24 +70,24 @@ function saveSign(ths, e) {
     success: function (data) {
       let objData = JSON.parse(data);
       if (objData.status) {
-        $("#imgsaveSign")
+        cont
           .removeClass("error")
           .addClass("success")
           .find(".message")
           //   .removeClass("d-none")
           .addClass("kg-callout-card-blue");
-        $("#imgsaveSign").find(".alert-success").html(objData.text);
-        $("#imgsaveSign").find(".message").show("slow");
+        cont.find(".message").show("slow");
+        cont.find(".alert-success").html(objData.text);
       } else {
         // Swal.fire("Error", objData.text, "warning");
-        $("#imgsaveSign")
+        cont
           .removeClass("success")
           .addClass("error")
           .find(".message")
           //   .removeClass("d-none")
           .addClass("kg-callout-card-yellow");
-        $("#imgsaveSign").fin(".alert-error").html(objData.text);
-        $("#imgsaveSign").find(".message").show("slow");
+        cont.find(".message").show("slow");
+        cont.find(".alert-error").html(objData.text);
       }
     },
     error: function (error) {
@@ -100,7 +100,7 @@ function saveRegister(ths, e) {
   e.preventDefault();
   let form = $(ths);
   let dat = new FormData(form[0]);
-
+  let cont = $("#imgSecRegister");
   let ajaxUrl = base_url + "Leenh/imgSecRegister";
   $.ajax({
     type: "POST",
@@ -111,24 +111,24 @@ function saveRegister(ths, e) {
     success: function (data) {
       let objData = JSON.parse(data);
       if (objData.status) {
-        $("#imgSecRegister")
+        cont
           .removeClass("error")
           .addClass("success")
           .find(".message")
           //   .removeClass("d-none")
           .addClass("kg-callout-card-blue");
-        $("#imgSecRegister").find(".alert-success").html(objData.text);
-        $("#imgSecRegister").find(".message").show("slow");
+        cont.find(".message").show("slow");
+        cont.find(".alert-success").html(objData.text);
       } else {
         // Swal.fire("Error", objData.text, "warning");
-        $("#imgSecRegister")
+        cont
           .removeClass("success")
           .addClass("error")
           .find(".message")
           //   .removeClass("d-none")
           .addClass("kg-callout-card-yellow");
-        $("#imgSecRegister").fin(".alert-error").html(objData.text);
-        $("#imgSecRegister").find(".message").show("slow");
+        cont.find(".message").show("slow");
+        cont.find(".alert-error").html(objData.text);
       }
     },
     error: function (error) {

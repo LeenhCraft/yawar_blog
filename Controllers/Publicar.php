@@ -84,9 +84,10 @@ class Publicar extends Controllers
                             $carpeta = date('Y-m-d-H-i-s') . '-';
                             // $lnh_name = strlen($nombre) > 10 ? substr($nombre, 0, 5) . '-' . generar_letras(4) : $nombre . '-' . generar_letras(4);
                             $lnh_name = strlen($titulo) > 30 ? substr($titulo, 0, 10) : $titulo;
-                            $nomtemp = $carpeta . $lnh_name . '.webp';
+                            $nomtemp = urls_amigables($carpeta . $lnh_name) . '.webp';
                             $ruta_usuario = $img['tmp_name'];
-                            $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $nomtemp);
+                            // $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $nomtemp);
+                            $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, dir_recursos() . img_post() . $nomtemp);
                             if ($conversion) {
                                 // $mini = $this->oClass->minificar($lnh_name . '.webp');
                                 //guardar en la base de datos
@@ -140,7 +141,7 @@ class Publicar extends Controllers
             $img = isset($_FILES['portada']) ? $_FILES['portada'] : '';
             $tk = isset($_POST['_token']) ? strClean($_POST['_token']) : '';
             $idpost = isset($_POST['_edit']) ? intval($_POST['_edit']) : 0;
-            // dep($principal, 1);
+            // dep($tags, 1);
 
             $csrf = validarCrf($tk);
             if ($csrf['status']) {
@@ -154,6 +155,7 @@ class Publicar extends Controllers
                     if ($respuesta['status']) {
                         $requestGallery = $this->model->updateGalleryPost($idpost, $gallery);
                         if (!empty($tags)) {
+                            $this->model->delTags($idpost);
                             foreach ($tags as $slugTag) {
                                 $requestTags = $this->model->updateTagsPost($idpost, $slugTag);
                             }
@@ -173,9 +175,10 @@ class Publicar extends Controllers
                             // $lnh_name = strlen($nombre) > 10 ? substr($nombre, 0, 5) . '-' . generar_letras(4) : $nombre . '-' . generar_letras(4);
                             $carpeta = date('Y-m-d-H-i-s') . '-';
                             $lnh_name = strlen($titulo) > 30 ? substr($titulo, 0, 10) : $titulo;
-                            $nomtemp = $carpeta . $lnh_name . '.webp';
+                            $nomtemp = urls_amigables($carpeta . $lnh_name) . '.webp';
                             $ruta_usuario = $img['tmp_name'];
-                            $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $nomtemp);
+                            // $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $nomtemp);
+                            $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, dir_recursos() . img_post() . $nomtemp);
                             if ($conversion) {
                                 // $mini = $this->oClass->minificar($lnh_name . '.webp');
                                 //guardar en la base de datos

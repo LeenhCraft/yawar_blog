@@ -1,4 +1,11 @@
 <?php headerWeb('HeaderWeb', $data); ?>
+<style>
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+</style>
 <main class="global-main">
     <div class="post-header">
         <div class="post-header-wrap global-padding is-center is-archive-image">
@@ -8,7 +15,7 @@
                 ?>
                     <form id="img" class="formtag" onsubmit="updTag(this,event)">
                         <div class="message text-center border global-radius mb-4 global-padding" style="padding: 1.5rem; display: none;">
-                            <small class="alert-success global-im">Procesando su petición</small>
+                            <small class="alert-success global-im"></small>
                             <small class="alert-error global-im"></small>
                         </div>
                     <?php
@@ -32,6 +39,26 @@
                         <h1 class="post-title global-title">
                             <input class="text-center" style="max-width: 100%;" type="text" name="tagname" value="<?php echo $data['tag']['tag_name'] ?>">
                         </h1>
+                        <div class="row">
+                            <label class="content-input">
+                                <?php $checked = isset($data['tag']['tag_publicar']) && $data['tag']['tag_publicar'] == 1 ? 'checked' : ''; ?>
+                                <input type="checkbox" name="publicar" <?php echo $checked; ?>>
+                                <i></i>
+                                <span style="opacity: var(--opacity-one);">Publicar</span>
+                            </label>
+                            <label class="content-input ml-4">
+                                <?php $checked = isset($data['tag']['tag_status']) && $data['tag']['tag_status'] == 1 ? 'checked' : ''; ?>
+                                <input type="checkbox" name="status" <?php echo $checked; ?>>
+                                <i></i>
+                                <span style="opacity: var(--opacity-one);">Estado</span>
+                            </label>
+                            <div class="col-12">
+                                <button class="global-button" type="submit">Guardar</button>
+                            </div>
+                            <div class="col-12">
+                                <hr>
+                            </div>
+                        </div>
                     <?php
                     } else {
                     ?>
@@ -111,7 +138,7 @@
     <?php
     if (count($data['posts']) > 0) {
     ?>
-        <div class="pagination-section">
+        <div class="pagination-section d-none">
             <a href="page/2/index.html" aria-label="Load more"></a>
             <button class="global-button">Load more</button>
         </div>

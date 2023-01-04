@@ -12,12 +12,12 @@ class YawarGalleryModel extends Mysql
         $compWebModel = new CompWebModel();
         $table = "SELECT * FROM blog_galleries a";
         $inner = $order = $where = "";
-        $where = "WHERE a.ga_slug like '$slug' AND a.ga_publicar = 1 AND a.ga_status = 1";
+        $where = isset($_SESSION['_cf']) && $_SESSION['_cf'] === 'ok' ? "WHERE a.ga_slug like '$slug'" : "WHERE a.ga_slug like '$slug' AND a.ga_publicar = 1 AND a.ga_status = 1";
         $sql = $table . ' ' . $inner . ' ' . $where . ' ' . $order;
         $request = $this->select($sql);
         if (!empty($request)) {
             $img = $compWebModel->getImg($request['idgalery'], 'GALLERY::PORT');
-            $request['ga_img_port'] = isset($img['img_url']) ? $img['img_url'] : img_404();
+            $request['ga_img_port'] = isset($img['img_url']) ? img_gallery() . $img['img_url'] : img_404();
         }
         return $request;
     }
@@ -28,14 +28,14 @@ class YawarGalleryModel extends Mysql
         $compWebModel = new CompWebModel();
         $table = "SELECT * FROM blog_galleries a";
         $inner = $order = $where = "";
-        $where = "WHERE a.ga_publicar = 1 AND a.ga_status = 1";
+        $where = isset($_SESSION['_cf']) && $_SESSION['_cf'] === 'ok' ? "" : "WHERE a.ga_publicar = 1 AND a.ga_status = 1";
         $order = "ORDER BY a.idgalery DESC";
         $sql = $table . ' ' . $inner . ' ' . $where . ' ' . $order;
         $request = $this->select_all($sql);
         if (!empty($request)) {
             foreach ($request as $key => $value) {
                 $img = $compWebModel->getImg($request[$key]['idgalery'], 'GALLERY::PORT');
-                $request[$key]['ga_img_port'] = isset($img['img_url']) ? $img['img_url'] : img_404();
+                $request[$key]['ga_img_port'] = isset($img['img_url']) ? img_gallery() . $img['img_url'] : img_404();
             }
         }
         return $request;
@@ -68,8 +68,8 @@ class YawarGalleryModel extends Mysql
             $img = $compWebModel->getImg($request['idpost'], 'POST::PORT');
             $imgAut = $compWebModel->getImg($request['idwebusuario'], 'USER::PORT');
             $request['pos_tag'] = $compWebModel->getTag($request['idpost']);
-            $request['pos_img'] = isset($img['img_url']) ? $img['img_url'] : img_404();
-            $request['aut_img'] = isset($imgAut['img_url']) ? $imgAut['img_url'] : img_404();
+            $request['pos_img'] = isset($img['img_url']) ? img_post() . $img['img_url'] : img_404();
+            $request['aut_img'] = isset($imgAut['img_url']) ? img_user() . $imgAut['img_url'] : img_404();
             $request['aut_meta'] = $yawarPostModel->metaAuthor($request['idwebusuario']);
         }
         return $request;
@@ -92,10 +92,10 @@ class YawarGalleryModel extends Mysql
         return $return;
     }
 
-    public function updateGal($gallery, $slug, $idgallery)
+    public function updateGal($gallery, $slug, $idgallery, $publicar, $status)
     {
-        $sql = "UPDATE blog_galleries SET ga_name = ?, ga_slug = ? WHERE idgalery = ?";
-        $arrData = array($gallery, $slug, $idgallery);
+        $sql = "UPDATE blog_galleries SET ga_name = ?, ga_slug = ?, ga_publicar = ?, ga_status = ? WHERE idgalery = ?";
+        $arrData = array($gallery, $slug, $publicar, $status, $idgallery);
         $request = $this->update($sql, $arrData);
         return $request;
     }
@@ -128,6 +128,14 @@ class YawarGalleryModel extends Mysql
     {
         $sql = "UPDATE blog_galleries SET idpost = '0' WHERE idgalery = ? AND idpost = ?";
         $arrData = array($idgalery, $idpost);
+        $request = $this->update($sql, $arrData);
+        return $request;
+    }
+
+    public function updateImg($lnh_name, $img_propietario, $type)
+    {
+        $sql = "UPDATE blog_images SET img_url = ? WHERE img_propietario = ? AND img_type = ?";
+        $arrData = array($lnh_name, $img_propietario, $type);
         $request = $this->update($sql, $arrData);
         return $request;
     }

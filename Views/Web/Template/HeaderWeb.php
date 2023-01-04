@@ -45,7 +45,7 @@
             if (isset($data['img_port'])) {
                 echo isset($data['img_port']) ? path_recursos() . $data['img_port'] : path_img_404();
             } else {
-                echo isset($backImg['img_url']) ? path_recursos() . $backImg['img_url'] : path_img_404();
+                echo isset($backImg['img_url']) ? path_recursos() . img_other() . $backImg['img_url'] : path_img_404();
             }
             ?>);">
         </div>

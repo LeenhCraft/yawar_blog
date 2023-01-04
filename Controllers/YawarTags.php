@@ -18,6 +18,9 @@ class YawarTags extends Controllers
             $data['js'] = ['js/tags.js'];
             $data['csrf'] = getTokenCsrf();
         }
+        if (isset($_SESSION['pe']) && isset($_SESSION['_cf'])) {
+            $data['css'] = ['css/lnh.grid.css'];
+        }
         // dep($data,1);
         $this->views->getView('Web/Tag', 'Tags', $data);
     }
@@ -25,8 +28,8 @@ class YawarTags extends Controllers
     public function save()
     {
         if (isset($_SESSION['pe']) && isset($_SESSION['_cf'])) {
-            $arrResponse = array('status' => false, 'title' => '', 'icon' => 'warning', 'text' => 'Ingrese los datos correctamente');
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $arrResponse = array('status' => false, 'title' => '', 'icon' => 'warning', 'text' => 'Ingrese los datos correctamente');
                 // dep([$_POST, $_FILES]);
                 $tk = isset($_POST['_token']) ? strClean($_POST['_token']) : '';
                 $tag = isset($_POST['newtag']) ? strClean($_POST['newtag']) : '';
@@ -44,9 +47,10 @@ class YawarTags extends Controllers
                                 $extension = $this->oClass->extension($img);
                                 $carpeta = date('Y-m-d-H-i-s') . '-';
                                 $lnh_name = strlen($nombre) > 10 ? 'tag-' . substr($nombre, 0, 5) . '-' . generar_letras(4) : 'tag-' . $nombre . '-' . generar_letras(4);
-                                $nomtemp = $carpeta . $lnh_name . '.webp';
+                                $nomtemp = urls_amigables($carpeta . $lnh_name) . '.webp';
                                 $ruta_usuario = $img['tmp_name'];
-                                $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $nomtemp);
+                                // $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $nomtemp);
+                                $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, dir_recursos() . img_tag() . $nomtemp);
                                 if ($conversion) {
                                     // $mini = $this->oClass->minificar($lnh_name . '.webp');
                                     //guardar en la base de datos
@@ -66,13 +70,12 @@ class YawarTags extends Controllers
                                 $arrResponse = array("status" => false, 'icon' => 'error', 'title' => 'Error!!', "text" => 'No se pudo guardar el tag.' . $request['text']);
                             }
                         } else {
-                            $arrResponse = array("status" => false, 'icon' => 'info', 'title' => 'Atención!!', "text" => $validacion['message']);
+                            $arrResponse = array("status" => false, 'icon' => 'info', 'title' => 'Atención!!', "text" => $validacion['text']);
                         }
                     } else {
                         $arrResponse = array("status" => false, 'icon' => 'info', 'title' => 'Atención!!', "text" => $csrf['text']);
                     }
                 } else {
-
                     $arrResponse = array('status' => false, 'title' => 'Atención!!', 'icon' => 'warning', 'text' => 'Ingrese el nombre del tag');
                 }
             }
@@ -105,9 +108,9 @@ class YawarTags extends Controllers
                             $extension = $this->oClass->extension($img);
                             $carpeta = date('Y-m-d-H-i-s') . '-';
                             $lnh_name = strlen($nombre) > 10 ? 'tag-' . substr($nombre, 0, 5) . '-' . generar_letras(4) : 'tag-' . $nombre . '-' . generar_letras(4);
-                            $nomtemp = $carpeta . $lnh_name . '.webp';
+                            $nomtemp = urls_amigables($carpeta . $lnh_name) . '.webp';
                             $ruta_usuario = $img['tmp_name'];
-                            $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $nomtemp);
+                            $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, dir_recursos() . img_tag() . $nomtemp);
                             if ($conversion) {
                                 // $mini = $this->oClass->minificar($lnh_name . '.webp');
                                 //guardar en la base de datos
@@ -149,11 +152,13 @@ class YawarTags extends Controllers
                 $tk = isset($_POST['_token']) ? strClean($_POST['_token']) : '';
                 $idtag = isset($_POST['_tag']) ? intval($_POST['_tag']) : 0;
                 $tag = isset($_POST['tagname']) ? strClean($_POST['tagname']) : '';
+                $publicar = isset($_POST['publicar']) && strClean($_POST['publicar']) === 'on' ? 1 : 0;
+                $status = isset($_POST['status']) && strClean($_POST['status']) === 'on' ? 1 : 0;
                 $csrf = validarCrf($tk);
                 if (!empty($tag) && !empty($idtag)) {
                     if ($csrf['status']) {
                         parent::otro("YawarTag");
-                        $request = $this->other->updateTag($tag, urls_amigables($tag), $idtag);
+                        $request = $this->other->updateTag($tag, urls_amigables($tag), $idtag, $publicar, $status);
                         if ($request) {
                             $arrResponse = array("status" => true, 'icon' => 'success', 'title' => 'Excelente!!', "text" => 'Tag actualizado.');
                         } else {

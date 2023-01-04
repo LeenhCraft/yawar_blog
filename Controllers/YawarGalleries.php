@@ -17,6 +17,7 @@ class YawarGalleries extends Controllers
         if (isset($_SESSION['pe']) && isset($_SESSION['_cf'])) {
             $data['js'] = ['js/gallery.js'];
             $data['csrf'] = getTokenCsrf();
+            $data['css'] = ['css/lnh.grid.css'];
         }
         // dep($data,1);
         $this->views->getView('Web/Gallery', 'Galleries', $data);
@@ -46,9 +47,10 @@ class YawarGalleries extends Controllers
                                 $extension = $this->oClass->extension($img);
                                 $carpeta = date('Y-m-d-H-i-s') . '-';
                                 $lnh_name = strlen($nombre) > 10 ? 'gal-' . substr($nombre, 0, 5) . '-' . generar_letras(4) : 'gal-' . $nombre . '-' . generar_letras(4);
-                                $nomtemp = $carpeta . $lnh_name . '.webp';
+                                $nomtemp = urls_amigables($carpeta . $lnh_name) . '.webp';
                                 $ruta_usuario = $img['tmp_name'];
-                                $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $nomtemp);
+                                // $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $nomtemp);
+                                $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, dir_recursos() . img_gallery() . $nomtemp);
                                 if ($conversion) {
                                     // $mini = $this->oClass->minificar($lnh_name . '.webp');
                                     //guardar en la base de datos
@@ -58,7 +60,7 @@ class YawarGalleries extends Controllers
                                     parent::otro("ImageClass");
                                     $request_img = $this->other->insertImg($type, $nomtemp, $img_propietario, $idgalery);
                                     if ($request > 0) {
-                                        $arrResponse = array("status" => true, 'icon' => 'success', 'title' => 'Excelente!!', "text" => 'YawarTag creado.' . $request_img);
+                                        $arrResponse = array("status" => true, 'icon' => 'success', 'title' => 'Excelente!!', "text" => 'Galeria creado.' . $request_img);
                                     } else {
                                         $arrResponse = array("status" => false, 'icon' => 'error', 'title' => 'Error!!', "text" => 'No se pudo guardar la imagen.' . $request_img);
                                     }
@@ -66,7 +68,7 @@ class YawarGalleries extends Controllers
                                     $arrResponse = array("status" => false, 'icon' => 'error', 'title' => 'Error!!', "text" => 'No se pudo convertir la imagen.');
                                 }
                             } else {
-                                $arrResponse = array("status" => false, 'icon' => 'error', 'title' => 'Error!!', "text" => 'No se pudo guardar el tag.' . $request['text']);
+                                $arrResponse = array("status" => false, 'icon' => 'error', 'title' => 'Error!!', "text" => 'No se pudo guardar la galeria.' . $request['text']);
                             }
                         } else {
                             $arrResponse = array("status" => false, 'icon' => 'info', 'title' => 'Atención!!', "text" => $validacion['text']);
@@ -76,7 +78,7 @@ class YawarGalleries extends Controllers
                     }
                 } else {
 
-                    $arrResponse = array('status' => false, 'title' => 'Atención!!', 'icon' => 'warning', 'text' => 'Ingrese el nombre del tag');
+                    $arrResponse = array('status' => false, 'title' => 'Atención!!', 'icon' => 'warning', 'text' => 'Ingrese el nombre dela galeria.');
                 }
             }
             echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
@@ -148,15 +150,17 @@ class YawarGalleries extends Controllers
         if (isset($_SESSION['pe']) && isset($_SESSION['_cf'])) {
             $arrResponse = array('status' => false, 'title' => '', 'icon' => 'warning', 'text' => 'Ingrese los datos correctamente');
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                // dep($_POST,1);
+                // dep($_POST, 1);
                 $tk = isset($_POST['_token']) ? strClean($_POST['_token']) : '';
                 $idgalery = isset($_POST['_gal']) ? intval($_POST['_gal']) : 0;
                 $gallery = isset($_POST['galname']) ? strClean($_POST['galname']) : '';
+                $publicar = isset($_POST['publicar']) && strClean($_POST['publicar']) === 'on' ? 1 : 0;
+                $status = isset($_POST['status']) && strClean($_POST['status']) === 'on' ? 1 : 0;
                 $csrf = validarCrf($tk);
                 if (!empty($gallery) && !empty($idgalery)) {
                     if ($csrf['status']) {
                         parent::otro("YawarGallery");
-                        $request = $this->other->updateGal($gallery, urls_amigables($gallery), $idgalery);
+                        $request = $this->other->updateGal($gallery, urls_amigables($gallery), $idgalery, $publicar, $status);
                         if ($request) {
                             $arrResponse = array("status" => true, 'icon' => 'success', 'title' => 'Excelente!!', "text" => 'Galeria actualizado.');
                         } else {
@@ -167,6 +171,61 @@ class YawarGalleries extends Controllers
                     }
                 } else {
                     $arrResponse = array('status' => false, 'title' => 'Atención!!', 'icon' => 'warning', 'text' => 'Ingrese el nombre de la galeria');
+                }
+            }
+            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+        } else {
+            require_once __DIR__ . '/Error.php';
+            $classError = new Errors();
+            $classError->notFound();
+            exit();
+        }
+    }
+
+    public function image()
+    {
+        if (isset($_SESSION['pe']) && isset($_SESSION['_cf'])) {
+            $arrResponse = array('status' => false, 'title' => '', 'icon' => 'warning', 'text' => 'Ingrese los datos correctamente');
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                // dep([$_POST, $_FILES], 1);
+                $tk = isset($_POST['_token']) ? strClean($_POST['_token']) : '';
+                $tag = isset($_POST['_gal']) ? intval($_POST['_gal']) : 0;
+                $img = $_FILES['img'];
+                $csrf = validarCrf($tk);
+                if (!empty($tag)) {
+                    if ($csrf['status']) {
+                        parent::otra_clase('Clases', 'ImageClass');
+                        $validacion = $this->oClass->validarImagen($img);
+                        if ($validacion['status']) {
+                            parent::otro("YawarGallery");
+                            $nombre = $this->oClass->nombre($img);
+                            $extension = $this->oClass->extension($img);
+                            $carpeta = date('Y-m-d.H.i.s') . '-';
+                            $lnh_name = strlen($nombre) > 10 ? '-' . substr($nombre, 0, 5) . '-' . generar_letras(4) : '-' . $nombre . '-' . generar_letras(4);
+                            $nomtemp = urls_amigables($carpeta . $lnh_name) . '.webp';
+                            $ruta_usuario = $img['tmp_name'];
+                            $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, dir_recursos() . img_gallery() . $nomtemp);
+                            if ($conversion) {
+                                // $mini = $this->oClass->minificar($lnh_name . '.webp');
+                                //guardar en la base de datos
+                                $type = "GALLERY::PORT";
+                                $idgalery = 0;
+                                $img_propietario = $tag;
+                                $request_img = $this->other->updateImg($nomtemp, $img_propietario, $type);
+                                if ($request_img) {
+                                    $arrResponse = array("status" => true, 'icon' => 'success', 'title' => 'Excelente!!', "text" => 'Imagen actualizada.');
+                                } else {
+                                    $arrResponse = array("status" => false, 'icon' => 'error', 'title' => 'Error!!', "text" => 'No se pudo guardar la imagen.');
+                                }
+                            } else {
+                                $arrResponse = array("status" => false, 'icon' => 'error', 'title' => 'Error!!', "text" => 'No se pudo convertir la imagen.');
+                            }
+                        }
+                    } else {
+                        $arrResponse = array("status" => false, 'icon' => 'info', 'title' => 'Atención!!', "text" => $csrf['message']);
+                    }
+                } else {
+                    $arrResponse = array('status' => false, 'title' => 'Atención!!', 'icon' => 'warning', 'text' => 'Ingrese el nombre dela galeria.');
                 }
             }
             echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
@@ -244,7 +303,8 @@ class YawarGalleries extends Controllers
                                 $lnh_name = strlen($nombre) > 10 ? 'gal-' . $idgalery . '-' . substr($nombre, 0, 5) . '-' . generar_letras(4) : 'gal-' . $idgalery . '-' . $nombre . '-' . generar_letras(4);
                                 $nomtemp = $carpeta . $lnh_name . '.webp';
                                 $ruta_usuario = $img['tmp_name'];
-                                $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $nomtemp);
+                                // $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $nomtemp);
+                                $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, dir_recursos() . img_gallery() . $nomtemp);
                                 $request = $this->other->insImgGal("GALLERY::CONT", $nomtemp, $idgalery, $idgalery);
                                 if ($request) {
                                     $text .= "Imagen agregada correctamente ";

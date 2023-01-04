@@ -23,8 +23,8 @@ class YawarPostModel extends Mysql
             $img = $compWebModel->getImg($request['idpost'], 'POST::PORT');
             $imgAut = $compWebModel->getUser($request['idwebusuario']);
             $request['pos_tag'] = $compWebModel->getTag($request['idpost']);
-            $request['pos_img'] = isset($img['img_url']) ? $img['img_url'] : img_404();
-            $request['aut_img'] = isset($imgAut['usu_foto']) ? $imgAut['usu_foto'] : img_404();
+            $request['pos_img'] = isset($img['img_url']) ? img_post() . $img['img_url'] : img_404();
+            $request['aut_img'] = isset($imgAut['usu_foto']) ? img_user() . $imgAut['usu_foto'] : img_404();
             $aut_meta = $this->metaAuthor($request['idwebusuario']);
             $request['aut_meta'] = !empty($aut_meta) ? $aut_meta : [];
             $request['pos_gallery'] = !empty($this->postGalleries($request['idpost'])) ? $this->postGalleries($request['idpost'])[0] : [];
@@ -52,7 +52,7 @@ class YawarPostModel extends Mysql
         $request = $this->select($sql);
         if (!empty($request)) {
             $img = $compWebModel->getImg($request['idpost'], 'POST::PORT');
-            $request['pos_img'] = isset($img['img_url']) ? $img['img_url'] : img_404();
+            $request['pos_img'] = isset($img['img_url']) ? img_post() . $img['img_url'] : img_404();
             $request['pos_tag'] = $compWebModel->getTag($request['idpost']);
         }
 
@@ -71,7 +71,7 @@ class YawarPostModel extends Mysql
         $request = $this->select($sql);
         if (!empty($request)) {
             $img = $compWebModel->getImg($request['idpost'], 'POST::PORT');
-            $request['pos_img'] = isset($img['img_url']) ? $img['img_url'] : img_404();
+            $request['pos_img'] = isset($img['img_url']) ? img_post() . $img['img_url'] : img_404();
             $request['pos_tag'] = $compWebModel->getTag($request['idpost']);
         }
         return $request;
@@ -89,7 +89,7 @@ class YawarPostModel extends Mysql
         if (!empty($request)) {
             foreach ($request as $key => $value) {
                 $img = $compWebModel->getImg($request[$key]['idgalery'], 'GALLERY::PORT');
-                $request[$key]['ga_img'] = isset($img['img_url']) ? $img['img_url'] : img_404();
+                $request[$key]['ga_img'] = isset($img['img_url']) ? img_gallery() . $img['img_url'] : img_404();
             }
         }
         return $request;

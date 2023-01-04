@@ -10,8 +10,10 @@ class Signin extends Controllers
             } else {
                 $data['csrf'] = getTokenCsrf();
                 parent::otro("Leenh");
-                $data['logo'] = $this->other->verLogo('LOGO::IMG');
-                $data['imgSignin'] = $this->other->verLogo('SIGNIN::PORT');
+                $img = $this->other->verLogo('LOGO::IMG');
+                $data['logo'] = !empty($img) ? img_logo() . $img['img_url'] : img_404();
+                $img = $this->other->verLogo('SIGNIN::PORT');
+                $data['imgSignin'] = !empty($img) ? img_other() . $img['img_url'] : img_404();
                 $this->views->getView('Web/Login', 'Signin', $data);
             }
         } else {

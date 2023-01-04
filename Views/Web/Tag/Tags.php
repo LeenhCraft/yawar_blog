@@ -7,7 +7,13 @@
             </div>
         </div>
     </div>
-    <div class="custom-archive global-padding">
+    <div class="custom-archive global-padding formMessage">
+        <form class="formtag">
+            <div class="message text-center border global-radius mb-4 global-padding" style="padding: 1.5rem; display: none;">
+                <small class="alert-success global-im"></small>
+                <small class="alert-error global-im"></small>
+            </div>
+        </form>
         <small class="global-subtitle">Explora nuestras etiquetas
             <?php if (isset($_SESSION['pe']) && isset($_SESSION['_cf'])) { ?>
                 <button class="global-button global-button-sm" onclick="newTag(this,event)">nuevo</button>
@@ -35,6 +41,30 @@
                         <a href="<?php echo path_tag() . $tag['tag_slug']; ?>" class="global-link" aria-label="<?php echo  $tag['tag_name']; ?>"></a>
                         <img src="<?php echo path_recursos() . $tag['tag_img'] ?>" alt="<?php echo  $tag['tag_name']; ?>">
                     </div>
+                    <?php
+                    if (isset($_SESSION['_cf'])) {
+                    ?>
+                        <div class="global-tags mb-4">
+                            <?php
+                            if ($tag['tag_publicar'] == 0) {
+                                $text =  $tag['tag_publicar'] == 1 ? 'Publicado' : 'No publicado';
+                            ?>
+                                <span class="py-3 px-4 bg-theme global-border" style="font-size: 1.2rem;"><?php echo $text ?></span>
+                            <?php
+                            }
+                            ?>
+                            <?php
+                            if ($tag['tag_status'] == 0) {
+                                $text =  $tag['tag_status'] == 1 ? 'Activo' : 'Inactivo';
+                            ?>
+                                <span class="py-3 px-4 bg-theme global-border" style="font-size: 1.2rem;"><?php echo $text ?></span>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                    <?php
+                    }
+                    ?>
                     <div class="item-content">
                         <h2 class="item-title"><a href="<?php echo path_tag() . $tag['tag_slug']; ?>"><?php echo  $tag['tag_name']; ?></a></h2>
                         <small><?php echo  $tag['tag_cantpost']; ?> Posts</small>

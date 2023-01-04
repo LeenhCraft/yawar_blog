@@ -52,7 +52,7 @@ class CompWebModel extends Mysql
             // $sql = "SELECT * FROM blog_images WHERE img_propietario = {$value['idtag']} AND img_type = 'TAG::PORT'";
             $requestImg = $this->getImg($value['idtag'], 'TAG::PORT');
             $nData[$key] = $value;
-            $nData[$key]['tag_img'] = isset($requestImg['img_url']) ? $requestImg['img_url'] : img_404();
+            $nData[$key]['tag_img'] = isset($requestImg['img_url']) ? img_tag() . $requestImg['img_url'] : img_404();
         }
         return $nData;
     }
@@ -135,8 +135,8 @@ class CompWebModel extends Mysql
         foreach ($request as $key => $value) {
             $img = $this->getImg($value['idpost'], 'POST::PORT');
             $imgAut = $this->getImg($value['idwebusuario'], 'USER::PORT');
-            $request[$key]['pos_img'] = isset($img['img_url']) ? $img['img_url'] : img_404();
-            $request[$key]['aut_img'] = isset($imgAut['img_url']) ? $imgAut['img_url'] : img_404();
+            $request[$key]['pos_img'] = isset($img['img_url']) ? img_post() . $img['img_url'] : img_404();
+            $request[$key]['aut_img'] = isset($imgAut['img_url']) ? img_user() . $imgAut['img_url'] : img_404();
             $request[$key]['pos_tag'] = $this->getTag($value['idpost']);
         }
         return $request;
@@ -148,7 +148,7 @@ class CompWebModel extends Mysql
         $request = $this->select_all($sql);
         foreach ($request as $key => $value) {
             $img = $this->getImg($value['idpost'], 'POST::PORT');
-            $request[$key]['pos_img'] = isset($img['img_url']) ? $img['img_url'] : img_404();
+            $request[$key]['pos_img'] = isset($img['img_url']) ? img_post() . $img['img_url'] : img_404();
             $request[$key]['pos_tag'] = $this->getTag($value['idpost']);
         }
         return $request;
@@ -163,7 +163,7 @@ class CompWebModel extends Mysql
             // $sql = "SELECT * FROM blog_images WHERE idgalery = {$value['idgalery']} AND img_type = 'GALLERY::PORT'";
             $requestImg = $this->getImg($value['idgalery'], 'GALLERY::PORT');
             $nData[$key] = $value;
-            $nData[$key]['ga_img'] = isset($requestImg['img_url']) ? $requestImg['img_url'] : img_404();
+            $nData[$key]['ga_img'] = isset($requestImg['img_url']) ? img_gallery() . $requestImg['img_url'] : img_404();
         }
         return $nData;
     }
@@ -197,7 +197,7 @@ class CompWebModel extends Mysql
         $request = $this->select_all($sql);
         foreach ($request as $key => $value) {
             $img = $this->getImg($value['num'], 'POST::PORT');
-            $request[$key]['img'] = isset($img['img_url']) ? $img['img_url'] : img_404();
+            $request[$key]['img'] = isset($img['img_url']) ? img_post() . $img['img_url'] : img_404();
             // $request[$key]['pos_tag'] = $this->getTag($value['idpost']);
         }
         return $request;

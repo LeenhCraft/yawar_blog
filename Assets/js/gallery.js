@@ -22,7 +22,7 @@ function saveGal(ths, e) {
   e.preventDefault();
   let form = $(ths);
   let dat = new FormData(form[0]);
-
+  let cont = $(".formgal");
   let ajaxUrl = base_url + "YawarGalleries/save";
   $.ajax({
     type: "POST",
@@ -33,70 +33,23 @@ function saveGal(ths, e) {
     success: function (data) {
       let objData = JSON.parse(data);
       console.log(objData);
-      //   if (objData.status) {
-      //     $("#img")
-      //       .removeClass("error")
-      //       .addClass("success")
-      //       .find(".message")
-      //       //   .removeClass("d-none")
-      //       .addClass("kg-callout-card-blue");
-      //     $(".message").show("slow");
-      //     $(".alert-success").html(objData.text);
-      //   } else {
-      //     // Swal.fire("Error", objData.text, "warning");
-      //     $("#img")
-      //       .removeClass("success")
-      //       .addClass("error")
-      //       .find(".message")
-      //       //   .removeClass("d-none")
-      //       .addClass("kg-callout-card-yellow");
-      //     $(".message").show("slow");
-      //     $(".alert-error").html(objData.text);
-      //   }
-    },
-    error: function (error) {
-      alert(error);
-    },
-  });
-}
-
-function updImgTag(ths, e) {
-  e.preventDefault();
-  if (confirm("¿Estas seguro de actualizar la imagen?")) {
-    mostrarImg(ths, e);
-  }
-  let form = $(".formtag");
-  let dat = new FormData(form[0]);
-
-  let ajaxUrl = base_url + "YawarTags/updImgTag";
-  $.ajax({
-    type: "POST",
-    url: ajaxUrl,
-    data: dat,
-    processData: false,
-    contentType: false,
-    success: function (data) {
-      let objData = JSON.parse(data);
-      console.log(objData);
       if (objData.status) {
-        $("#img")
+        cont
           .removeClass("error")
           .addClass("success")
           .find(".message")
-          //   .removeClass("d-none")
           .addClass("kg-callout-card-blue");
-        $(".message").show("slow");
-        $(".alert-success").html(objData.text);
+        cont.find(".message").show("slow");
+        cont.find(".alert-success").html(objData.text);
       } else {
-        // Swal.fire("Error", objData.text, "warning");
-        $("#img")
+        console.log(objData.text);
+        cont
           .removeClass("success")
           .addClass("error")
           .find(".message")
-          //   .removeClass("d-none")
           .addClass("kg-callout-card-yellow");
-        $(".message").show("slow");
-        $(".alert-error").html(objData.text);
+        cont.find(".message").show("slow");
+        cont.find(".alert-error").html(objData.text);
       }
     },
     error: function (error) {
@@ -105,12 +58,57 @@ function updImgTag(ths, e) {
   });
 }
 
+function updImgGal(ths, e) {
+  e.preventDefault();
+  mostrarImg(ths, e);
+  if (confirm("¿Estas seguro?")) {
+    let form = $("#img");
+    let dat = new FormData(form[0]);
+    let cont = $("#frmGal");
+    let ajaxUrl = base_url + "YawarGalleries/image";
+    $.ajax({
+      type: "POST",
+      url: ajaxUrl,
+      data: dat,
+      processData: false,
+      contentType: false,
+      success: function (data) {
+        let objData = JSON.parse(data);
+        console.log(objData);
+        if (objData.status) {
+          cont
+            .removeClass("error")
+            .addClass("success")
+            .find(".message")
+            //   .removeClass("d-none")
+            .addClass("kg-callout-card-blue");
+          cont.find(".message").show("slow");
+          cont.find(".alert-success").html(objData.text);
+        } else {
+          // Swal.fire("Error", objData.text, "warning");
+          cont
+            .removeClass("success")
+            .addClass("error")
+            .find(".message")
+            //   .removeClass("d-none")
+            .addClass("kg-callout-card-yellow");
+          cont.find(".message").show("slow");
+          cont.find(".alert-error").html(objData.text);
+        }
+      },
+      error: function (error) {
+        alert(error);
+      },
+    });
+  }
+}
+
 function updGal(ths, e) {
   e.preventDefault();
   if (confirm("¿Estas seguro de actualizar la galeria?")) {
-    let form = $("#frmGal");
+    let form = $(ths);
     let dat = new FormData(form[0]);
-
+    let cont = $("#frmGal");
     let ajaxUrl = base_url + "YawarGalleries/updGal";
     $.ajax({
       type: "POST",
@@ -121,24 +119,24 @@ function updGal(ths, e) {
       success: function (data) {
         let objData = JSON.parse(data);
         if (objData.status) {
-          $("#frmGal")
+          cont
             .removeClass("error")
             .addClass("success")
             .find(".message")
             //   .removeClass("d-none")
             .addClass("kg-callout-card-blue");
-          $(".alert-success").html(objData.text);
-          $(".message").show("slow");
+          cont.find(".alert-success").html(objData.text);
+          cont.find(".message").show("slow");
         } else {
           // Swal.fire("Error", objData.text, "warning");
-          $("#frmGal")
+          cont
             .removeClass("success")
             .addClass("error")
             .find(".message")
             //   .removeClass("d-none")
             .addClass("kg-callout-card-yellow");
-          $(".alert-error").html(objData.text);
-          $(".message").show("slow");
+          cont.find(".alert-error").html(objData.text);
+          cont.find(".message").show("slow");
         }
       },
       error: function (error) {
@@ -190,7 +188,9 @@ function postAso(ths, e) {
         let fecha = new Date(item.item.date);
         let html = `
           <a href="javascript:addPostAso(this,${item.item.num})">
-          <img style="width: 70px;height:70px" src="${item.item.img}">
+          <img style="width: 70px;height:70px" src="${
+            base_recursos + item.item.img
+          }">
           <h5 style="margin:0;"><span>${item.item.title}</h5>
           <time>${fecha.toLocaleDateString("es-pe", opciones)}</time>
           </a>
@@ -271,7 +271,7 @@ function addPostAso(ths, num) {
 function viewImgGal(ths, e) {
   if (confirm("¿Quiere agregar esta imagen a la galeria?")) {
     mostrarImg(ths, e);
-    $("#img").trigger("onsubmit");
+    // $("#img").trigger("onsubmit");
   }
 }
 
@@ -351,30 +351,26 @@ function delPostAso(post, gal) {
   if (confirm("¿Estas seguro de eliminar el post asociado?")) {
     let tk = $('[name="_token"]').val();
     let ajaxUrl = base_url + "YawarGalleries/delPostAso/";
-    $.post(
-      ajaxUrl,
-      { post: post, _gal: gal, _token: tk },
-      function (data) {
-        let objData = JSON.parse(data);
-        if (objData.status) {
-          $("#frmGal")
-            .removeClass("error")
-            .addClass("success")
-            .find(".message")
-            .addClass("kg-callout-card-blue");
-          $(".alert-success").html(objData.text);
-          $(".message").show("slow");
-          window.location.reload();
-        } else {
-          $("#frmGal")
-            .removeClass("success")
-            .addClass("error")
-            .find(".message")
-            .addClass("kg-callout-card-yellow");
-          $(".alert-error").html(objData.text);
-          $(".message").show("slow");
-        }
+    $.post(ajaxUrl, { post: post, _gal: gal, _token: tk }, function (data) {
+      let objData = JSON.parse(data);
+      if (objData.status) {
+        $("#frmGal")
+          .removeClass("error")
+          .addClass("success")
+          .find(".message")
+          .addClass("kg-callout-card-blue");
+        $(".alert-success").html(objData.text);
+        $(".message").show("slow");
+        window.location.reload();
+      } else {
+        $("#frmGal")
+          .removeClass("success")
+          .addClass("error")
+          .find(".message")
+          .addClass("kg-callout-card-yellow");
+        $(".alert-error").html(objData.text);
+        $(".message").show("slow");
       }
-    );
+    });
   }
 }

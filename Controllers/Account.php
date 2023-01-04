@@ -39,9 +39,15 @@ class Account extends Controllers
             $data['imgSignup'] = $this->other->verLogo('SIGNUP::PORT');
             $data['secRegister'] = $this->other->verLogo('INDEX::CONT');
             // dep($data,1);
+            if (!empty($data['user']['usu_foto'])) {
+                $data['img_port'] = img_user() . $data['user']['usu_foto'];
+            }
             if (isset($_SESSION['pe'])) {
                 array_push($data['js'], 'js/acc.js');
                 $data['csrf'] = getTokenCsrf();
+            }
+            if (isset($_SESSION['lnh']) && $_SESSION['lnh'] === '1') {
+                array_push($data['js'], 'js/c.js');
             }
             $this->views->getView('Web/Login', 'Account', $data);
         }
@@ -50,7 +56,7 @@ class Account extends Controllers
     {
         // dep($_POST);
         // dep($_FILES, 1);
-        if (isset($_SESSION['pe']) && isset($_SESSION['_cf'])) {
+        if (isset($_SESSION['pe'])) {
             $arrResponse = array('status' => false, 'title' => '', 'icon' => 'warning', 'text' => 'Ingrese los datos correctamente');
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // dep([$_POST, $_FILES], 1);
@@ -67,9 +73,11 @@ class Account extends Controllers
                         $nombre = $this->oClass->nombre($img);
                         $extension = $this->oClass->extension($img);
                         $lnh_name = strlen($nombre) > 10 ? 'usu-' . substr($nombre, 0, 5) . '-' . generar_letras(4) : 'usu-' . $nombre . '-' . generar_letras(4);
-                        $nomtemp = $lnh_name . '.webp';
+                        $nomtemp = urls_amigables($lnh_name) . '.webp';
                         $ruta_usuario = $img['tmp_name'];
-                        $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $nomtemp);
+                        // $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $nomtemp);
+                        // $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/' . img_user() . $nomtemp);
+                        $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, dir_recursos() . img_user() . $nomtemp);
                         if ($conversion) {
                             // $mini = $this->oClass->minificar($lnh_name . '.webp');
                             //guardar en la base de datos

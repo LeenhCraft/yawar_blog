@@ -4,7 +4,7 @@
         <div class="account-section global-padding">
             <div class="post-header">
                 <?php
-                if (isset($_SESSION['pe']) && isset($_SESSION['_cf'])) {
+                if (isset($_SESSION['pe'])) {
                 ?>
                     <form id="img" class="formtag">
                         <div class="message text-center border global-radius mb-4 global-padding" style="padding: 1.5rem; display: none;">
@@ -26,7 +26,7 @@
                                 <?php
                                 }
                                 ?>
-                                <img src="<?php echo empty($data['user']['usu_foto']) ? path_img_404() : path_recursos() . 'Users/' . $data['user']['usu_foto']; ?>" alt="<?php echo $data['user']['usu_nombre'] ?>" style="z-index: 0;">
+                                <img src="<?php echo empty($data['user']['usu_foto']) ? path_img_404() : path_recursos() . img_user() . $data['user']['usu_foto']; ?>" alt="<?php echo $data['user']['usu_nombre'] ?>" style="z-index: 0;">
                             </div>
                             <?php
                             if (isset($_SESSION['pe']) && false) {
@@ -83,7 +83,49 @@
                 </div>
             </div>
         </div>
-        <?php if (isset($_SESSION['pe']) && isset($_SESSION['_cf'])) { ?>
+        <?php
+        if (isset($_SESSION['pe']) && $_SESSION['lnh'] === '1') { ?>
+            <div class="account-details">
+                <small class="global-subtitle">root</small>
+                <div class="account-details-wrap global-radius">
+                    <div class="account-details-content">
+                        <?php
+                        if (isset($_SESSION['_cf']) && $_SESSION['_cf'] === 'ok') {
+                        ?>
+                            <form onsubmit="c(this,event)" class="cf">
+                                <div class="message text-center border global-radius mb-4 global-padding" style="padding: 1.5rem; display: none;">
+                                    <small class="alert-success global-im"></small>
+                                    <small class="alert-error global-im"></small>
+                                </div>
+                                <input type="hidden" name="_token" value="<?php echo $data['csrf'] ?>">
+                                <input type="hidden" name="_usr" value="<?php echo $data['user']['idwebusuario'] ?>">
+                                <button class="global-button" type="submit">Desactivar</button>
+                            </form>
+                        <?php
+                        } else {
+                        ?>
+                            <form onsubmit="c(this,event)" class="cf">
+                                <style>
+                                    .global-button.no-color,
+                                    .global-button.no-color::before {
+                                        background-color: #fff;
+                                        color: #000;
+                                    }
+                                </style>
+                                <div class="message text-center border global-radius mb-4 global-padding" style="padding: 1.5rem; display: none;">
+                                    <small class="alert-success global-im"></small>
+                                    <small class="alert-error global-im"></small>
+                                </div>
+                                <input type="hidden" name="_token" value="<?php echo $data['csrf'] ?>">
+                                <input type="hidden" name="_usr" value="<?php echo $data['user']['idwebusuario'] ?>">
+                                <button class="global-button no-color" type="submit">Activar</button>
+                            </form>
+                        <?php
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
             <div class="account-section global-padding">
                 <div class="account-details">
                     <div class="card mb-4">
@@ -110,8 +152,9 @@
                                                         <div class="kg-file-card-filesize">
                                                             <?php
                                                             if (isset($data['logo']['img_url'])) {
-                                                                if (file_exists(__DIR__ . '/../../Medios/Webp/' . $data['logo']['img_url'])) {
-                                                                    $size = filesize(__DIR__ . '/../../Medios/Webp/' . $data['logo']['img_url']);
+                                                                // if (file_exists(__DIR__ . '/../../Medios/Webp/' . $data['logo']['img_url'])) {
+                                                                if (file_exists(dir_recursos() . img_other() . $data['logo']['img_url'])) {
+                                                                    $size = filesize(dir_recursos() . img_other() . $data['logo']['img_url']);
                                                                     echo number_format($size / 1024, 2) . " KB";
                                                                 }
                                                             }
@@ -121,7 +164,7 @@
                                                 </div>
                                             </div>
                                             <div class="kg-file-card-icon" style="min-height: 90px; min-width: 80px; margin: 0 2.25rem;">
-                                                <img src="<?php echo isset($data['logo']['img_url']) ?  path_recursos() . 'Webp/' . $data['logo']['img_url'] : media() . 'svg/upload.svg' ?>" alt="cargando..." width="40">
+                                                <img src="<?php echo isset($data['logo']['img_url']) ?  path_recursos() . img_logo() . $data['logo']['img_url'] : media() . 'svg/upload.svg' ?>" alt="cargando..." width="40">
                                             </div>
                                         </div>
                                         <div class="upload-button kg-file-card-container global-radius mb-4">
@@ -137,8 +180,8 @@
                                                         <div class="kg-file-card-filesize">
                                                             <?php
                                                             if (isset($data['backImg']['img_url'])) {
-                                                                if (file_exists(__DIR__ . '/../../Medios/Webp/' . $data['backImg']['img_url'])) {
-                                                                    $size = filesize(__DIR__ . '/../../Medios/Webp/' . $data['backImg']['img_url']);
+                                                                if (file_exists(dir_recursos() . img_other() . $data['backImg']['img_url'])) {
+                                                                    $size = filesize(dir_recursos() . img_other() . $data['backImg']['img_url']);
                                                                     echo number_format($size / 1024, 2) . " KB";
                                                                 }
                                                             }
@@ -148,7 +191,7 @@
                                                 </div>
                                             </div>
                                             <div class="kg-file-card-icon" style="min-height: 90px; min-width: 80px; margin: 0 2.25rem;">
-                                                <img src="<?php echo isset($data['backImg']['img_url']) ?  path_recursos() . 'Webp/' . $data['backImg']['img_url'] : media() . 'svg/upload.svg' ?>" alt="cargando..." width="40">
+                                                <img src="<?php echo isset($data['backImg']['img_url']) ?  path_recursos() . img_other() . $data['backImg']['img_url'] : media() . 'svg/upload.svg' ?>" alt="cargando..." width="40">
                                             </div>
                                         </div>
                                         <div class="upload-button kg-file-card-container global-radius mb-4">
@@ -164,8 +207,8 @@
                                                         <div class="kg-file-card-filesize">
                                                             <?php
                                                             if (isset($data['backDes']['img_url'])) {
-                                                                if (file_exists(__DIR__ . '/../../Medios/Webp/' . $data['backDes']['img_url'])) {
-                                                                    $size = filesize(__DIR__ . '/../../Medios/Webp/' . $data['backDes']['img_url']);
+                                                                if (file_exists(dir_recursos() . img_other() . $data['backDes']['img_url'])) {
+                                                                    $size = filesize(dir_recursos() . img_other() . $data['backDes']['img_url']);
                                                                     echo number_format($size / 1024, 2) . " KB";
                                                                 }
                                                             }
@@ -175,7 +218,7 @@
                                                 </div>
                                             </div>
                                             <div class="kg-file-card-icon" style="min-height: 90px; min-width: 80px; margin: 0 2.25rem;">
-                                                <img src="<?php echo isset($data['backDes']['img_url']) ?  path_recursos() . 'Webp/' . $data['backDes']['img_url'] : media() . 'svg/upload.svg' ?>" alt="cargando..." width="40">
+                                                <img src="<?php echo isset($data['backDes']['img_url']) ?  path_recursos() . img_other() . $data['backDes']['img_url'] : media() . 'svg/upload.svg' ?>" alt="cargando..." width="40">
                                             </div>
                                         </div>
                                         <button type="submit" class="global-button">guardar</button>
@@ -208,8 +251,8 @@
                                                         <div class="kg-file-card-filesize">
                                                             <?php
                                                             if (isset($data['imgSignin']['img_url'])) {
-                                                                if (file_exists(__DIR__ . '/../../Medios/Webp/' . $data['imgSignin']['img_url'])) {
-                                                                    $size = filesize(__DIR__ . '/../../Medios/Webp/' . $data['imgSignin']['img_url']);
+                                                                if (file_exists(dir_recursos() . img_other() . $data['imgSignin']['img_url'])) {
+                                                                    $size = filesize(dir_recursos() . img_other() . $data['imgSignin']['img_url']);
                                                                     echo number_format($size / 1024, 2) . " KB";
                                                                 }
                                                             }
@@ -219,7 +262,7 @@
                                                 </div>
                                             </div>
                                             <div class="kg-file-card-icon" style="min-height: 90px; min-width: 80px; margin: 0 2.25rem;">
-                                                <img src="<?php echo isset($data['imgSignin']['img_url']) ?  path_recursos() . 'Webp/' . $data['imgSignin']['img_url'] : media() . 'svg/upload.svg' ?>" alt="cargando..." width="40">
+                                                <img src="<?php echo isset($data['imgSignin']['img_url']) ?  path_recursos() . img_other() . $data['imgSignin']['img_url'] : media() . 'svg/upload.svg' ?>" alt="cargando..." width="40">
                                             </div>
                                         </div>
                                         <div class="upload-button kg-file-card-container global-radius mb-4">
@@ -235,8 +278,8 @@
                                                         <div class="kg-file-card-filesize">
                                                             <?php
                                                             if (isset($data['imgSignup']['img_url'])) {
-                                                                if (file_exists(__DIR__ . '/../../Medios/Webp/' . $data['imgSignup']['img_url'])) {
-                                                                    $size = filesize(__DIR__ . '/../../Medios/Webp/' . $data['imgSignup']['img_url']);
+                                                                if (file_exists(dir_recursos() . img_other() . $data['imgSignup']['img_url'])) {
+                                                                    $size = filesize(dir_recursos() . img_other() . $data['imgSignup']['img_url']);
                                                                     echo number_format($size / 1024, 2) . " KB";
                                                                 }
                                                             }
@@ -246,7 +289,7 @@
                                                 </div>
                                             </div>
                                             <div class="kg-file-card-icon" style="min-height: 90px; min-width: 80px; margin: 0 2.25rem;">
-                                                <img src="<?php echo isset($data['imgSignup']['img_url']) ?  path_recursos() . 'Webp/' . $data['imgSignup']['img_url'] : media() . 'svg/upload.svg' ?>" alt="cargando..." width="40">
+                                                <img src="<?php echo isset($data['imgSignup']['img_url']) ?  path_recursos() . img_other() . $data['imgSignup']['img_url'] : media() . 'svg/upload.svg' ?>" alt="cargando..." width="40">
                                             </div>
                                         </div>
                                         <button type="submit" class="global-button">guardar</button>
@@ -290,7 +333,7 @@
                                                 </div>
                                             </div>
                                             <div class="kg-file-card-icon" style="min-height: 90px; min-width: 80px; margin: 0 2.25rem;">
-                                                <img src="<?php echo isset($data['secRegister']['img_url']) ?  path_recursos() . 'Webp/' . $data['secRegister']['img_url'] : media() . 'svg/upload.svg' ?>" alt="cargando..." width="40">
+                                                <img src="<?php echo isset($data['secRegister']['img_url']) ?  path_recursos() . img_other() . $data['secRegister']['img_url'] : media() . 'svg/upload.svg' ?>" alt="cargando..." width="40">
                                             </div>
                                         </div>
                                         <button type="submit" class="global-button">guardar</button>

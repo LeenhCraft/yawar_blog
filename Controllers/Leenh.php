@@ -4,7 +4,7 @@ class Leenh extends Controllers
     public function __construct()
     {
         parent::__construct();
-        if (!isset($_SESSION['pe']) || !isset($_SESSION['_cf'])) {
+        if (!isset($_SESSION['pe'])) {
             // header('Location: ' . base_url() . 'login');
             require_once __DIR__ . '/Error.php';
             $classError = new Errors();
@@ -39,9 +39,10 @@ class Leenh extends Controllers
                         $nombre = $this->oClass->nombre($logo);
                         $extension = $this->oClass->extension($logo);
                         $lnh_name = strlen($nombre) > 10 ? substr($nombre, 0, 5) . '-' . generar_letras(4) : $nombre . '-' . generar_letras(4);
-                        $nomtemp = $lnh_name . '.webp';
+                        $nomtemp = urls_amigables($lnh_name) . '.webp';
                         $ruta_usuario = $logo['tmp_name'];
-                        $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $nomtemp);
+                        // $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $nomtemp);
+                        $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, dir_recursos() . img_logo() . $nomtemp);
                         if ($conversion) {
                             // $mini = $this->oClass->minificar($lnh_name . '.webp');
                             //guardar en la base de datos
@@ -73,9 +74,10 @@ class Leenh extends Controllers
                         $nombre = $this->oClass->nombre($imgBackWeb);
                         $extension = $this->oClass->extension($imgBackWeb);
                         $lnh_name = strlen($nombre) > 10 ? substr($nombre, 0, 5) . '-' . generar_letras(4) : $nombre . '-' . generar_letras(4);
-                        $nomtemp = $lnh_name . '.webp';
+                        $nomtemp = urls_amigables($lnh_name) . '.webp';
                         $ruta_usuario = $imgBackWeb['tmp_name'];
-                        $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $lnh_name . '.webp');
+                        // $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $lnh_name . '.webp');
+                        $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, dir_recursos() . img_other() . $nomtemp);
                         if ($conversion) {
                             $type = "BACK::WEB";
                             $idgalery = 0;
@@ -104,9 +106,10 @@ class Leenh extends Controllers
                         $nombre = $this->oClass->nombre($imgBackDes);
                         $extension = $this->oClass->extension($imgBackDes);
                         $lnh_name = strlen($nombre) > 10 ? substr($nombre, 0, 5) . '-' . generar_letras(4) : $nombre . '-' . generar_letras(4);
-                        $nomtemp = $lnh_name . '.webp';
+                        $nomtemp = urls_amigables($lnh_name) . '.webp';
                         $ruta_usuario = $imgBackDes['tmp_name'];
-                        $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $lnh_name . '.webp');
+                        // $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $lnh_name . '.webp');
+                        $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, dir_recursos() . img_other() . $nomtemp);
                         if ($conversion) {
                             $type = "BACK::DES";
                             $idgalery = 0;
@@ -172,7 +175,8 @@ class Leenh extends Controllers
                     $lnh_name = strlen($nombre) > 10 ? 'signin' . substr($nombre, 0, 5) . '-' . generar_letras(4) : 'signin-' . $nombre . '-' . generar_letras(4);
                     $nomtemp = $lnh_name . '.webp';
                     $ruta_usuario = $imgSignin['tmp_name'];
-                    $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $nomtemp);
+                    // $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $nomtemp);
+                    $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, dir_recursos() . img_other() . $nomtemp);
                     if ($conversion) {
                         // $mini = $this->oClass->minificar($lnh_name . '.webp');
                         //guardar en la base de datos
@@ -202,7 +206,8 @@ class Leenh extends Controllers
                     $lnh_name = strlen($nombre) > 10 ? 'signup' . substr($nombre, 0, 5) . '-' . generar_letras(4) : 'signup-' . $nombre . '-' . generar_letras(4);
                     $nomtemp = $lnh_name . '.webp';
                     $ruta_usuario = $imgSignup['tmp_name'];
-                    $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $nomtemp);
+                    // $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $nomtemp);
+                    $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, dir_recursos() . img_other() . $nomtemp);
                     if ($conversion) {
                         // $mini = $this->oClass->minificar($lnh_name . '.webp');
                         //guardar en la base de datos
@@ -255,7 +260,8 @@ class Leenh extends Controllers
                     $lnh_name = strlen($nombre) > 10 ? substr($nombre, 0, 5) . '-' . generar_letras(4) : $nombre . '-' . generar_letras(4);
                     $nomtemp = $lnh_name . '.webp';
                     $ruta_usuario = $imgSecRegister['tmp_name'];
-                    $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $nomtemp);
+                    // $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, __DIR__ . '/../Medios/Webp/' . $nomtemp);
+                    $conversion = $this->oClass->convertirWebp($extension, $ruta_usuario, dir_recursos() . img_other() . $nomtemp);
                     if ($conversion) {
                         // $mini = $this->oClass->minificar($lnh_name . '.webp');
                         //guardar en la base de datos
@@ -282,6 +288,38 @@ class Leenh extends Controllers
             }
             echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
             exit();
+        } else {
+            require_once __DIR__ . '/Error.php';
+            $classError = new Errors();
+            $classError->notFound();
+        }
+    }
+
+    public function c()
+    {
+        // dep($_SESSION);
+        // dep($_POST, 1);
+        if (strtoupper($_SERVER['REQUEST_METHOD']) === "POST" && isset($_SESSION['pe'])) {
+            $arrResponse = array("status" => false, 'icon' => 'info', 'title' => 'Atención!!', "text" => 'No cuenta con los permisos necesarios.');
+            $tk = isset($_POST['_token']) ? strClean($_POST['_token']) : '';
+            $usr = isset($_POST['_usr']) ? strClean($_POST['_usr']) : '';
+            $csrf = validarCrf($tk);
+            if ($csrf['status']) {
+                if (!empty($usr) && $usr === '1') {
+                    if (isset($_SESSION['_cf']) && $_SESSION['_cf'] === 'ok') {
+                        unset($_SESSION['_cf']);
+                        $arrResponse = array("status" => true, 'icon' => 'success', 'title' => 'Excelente!!', "text" => 'Desactivado vista admin.');
+                    } else {
+                        $_SESSION['_cf'] = 'ok';
+                        $arrResponse = array("status" => true, 'icon' => 'success', 'title' => 'Excelente!!', "text" => 'Activado vista admin.');
+                    }
+                } else {
+                    $arrResponse = array("status" => false, 'icon' => 'error', 'title' => 'Error!!', "text" => 'Usuario no autorizado.');
+                }
+            } else {
+                $arrResponse = array('status' => false, 'title' => '', 'icon' => 'warning', 'text' => 'Token invalido');
+            }
+            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
         } else {
             require_once __DIR__ . '/Error.php';
             $classError = new Errors();

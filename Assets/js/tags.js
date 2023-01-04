@@ -18,7 +18,7 @@ function saveTag(ths, e) {
   e.preventDefault();
   let form = $(ths);
   let dat = new FormData(form[0]);
-
+  let cont = $(".formtag");
   let ajaxUrl = base_url + "YawarTags/save";
   $.ajax({
     type: "POST",
@@ -29,26 +29,27 @@ function saveTag(ths, e) {
     success: function (data) {
       let objData = JSON.parse(data);
       console.log(objData);
-      //   if (objData.status) {
-      //     $("#img")
-      //       .removeClass("error")
-      //       .addClass("success")
-      //       .find(".message")
-      //       //   .removeClass("d-none")
-      //       .addClass("kg-callout-card-blue");
-      //     $(".message").show("slow");
-      //     $(".alert-success").html(objData.text);
-      //   } else {
-      //     // Swal.fire("Error", objData.text, "warning");
-      //     $("#img")
-      //       .removeClass("success")
-      //       .addClass("error")
-      //       .find(".message")
-      //       //   .removeClass("d-none")
-      //       .addClass("kg-callout-card-yellow");
-      //     $(".message").show("slow");
-      //     $(".alert-error").html(objData.text);
-      //   }
+      if (objData.status) {
+        cont
+          .removeClass("error")
+          .addClass("success")
+          .find(".message")
+          //   .removeClass("d-none")
+          .addClass("kg-callout-card-blue");
+        cont.find(".message").show("slow");
+        cont.find(".alert-success").html(objData.text);
+      } else {
+        // Swal.fire("Error", objData.text, "warning");
+        console.log(objData.text);
+        cont
+          .removeClass("success")
+          .addClass("error")
+          .find(".message")
+          //   .removeClass("d-none")
+          .addClass("kg-callout-card-yellow");
+        cont.find(".message").show("slow");
+        cont.find(".alert-error").html(objData.text);
+      }
     },
     error: function (error) {
       alert(error);

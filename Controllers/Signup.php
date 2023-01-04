@@ -10,8 +10,10 @@ class Signup extends Controllers
             } else {
                 $data['csrf'] = getTokenCsrf();
                 parent::otro("Leenh");
-                $data['logo'] = $this->other->verLogo('LOGO::IMG');
-                $data['imgSignup'] = $this->other->verLogo('SIGNUP::PORT');
+                $img = $this->other->verLogo('LOGO::IMG');
+                $data['logo'] = !empty($img) ? img_logo() . $img['img_url'] : img_404();
+                $img = $this->other->verLogo('SIGNUP::PORT');
+                $data['imgSignup'] = !empty($img) ? img_other() . $img['img_url'] : img_404();
                 $this->views->getView('Web/Login', 'Signup', $data);
             }
         } else {

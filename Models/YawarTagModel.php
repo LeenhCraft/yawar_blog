@@ -12,7 +12,8 @@ class YawarTagModel extends Mysql
         $compWebModel = new CompWebModel();
         $table = "SELECT * FROM blog_tags a";
         $inner = $order = $where = "";
-        $where = "WHERE a.tag_publicar = 1 AND a.tag_status = 1";
+        $where = isset($_SESSION['_cf']) && $_SESSION['_cf'] === 'ok' ? "" : "WHERE a.tag_publicar = 1 AND a.tag_status = 1";
+        // $where = "WHERE a.tag_publicar = 1 AND a.tag_status = 1";
         $order = "ORDER BY a.idtag DESC";
         $sql = $table . ' ' . $inner . ' ' . $where . ' ' . $order;
         $request = $this->select_all($sql);
@@ -20,7 +21,7 @@ class YawarTagModel extends Mysql
             foreach ($request as $key => $value) {
                 $img = $compWebModel->getImg($request[$key]['idtag'], 'TAG::PORT');
                 $cant = $this->cantPost($request[$key]['idtag']);
-                $request[$key]['tag_img'] = isset($img['img_url']) ? $img['img_url'] : img_404();
+                $request[$key]['tag_img'] = isset($img['img_url']) ? img_tag() . $img['img_url'] : img_404();
                 $request[$key]['tag_cantpost'] = isset($cant['tag_cantpost']) ? $cant['tag_cantpost'] : '0';
             }
         }
@@ -33,7 +34,7 @@ class YawarTagModel extends Mysql
         $compWebModel = new CompWebModel();
         $table = "SELECT * FROM blog_tags a";
         $inner = $order = $where = "";
-        $where = "WHERE a.tag_slug like '$slug' AND a.tag_publicar = 1 AND a.tag_status = 1";
+        $where = isset($_SESSION['_cf']) && $_SESSION['_cf'] === 'ok' ? "WHERE a.tag_slug like '$slug'" : "WHERE a.tag_slug like '$slug' AND a.tag_publicar = 1 AND a.tag_status = 1";
         // $inner = "INNER JOIN web_usuarios b ON a.idwebusuario = b.idwebusuario";
         $sql = $table . ' ' . $inner . ' ' . $where . ' ' . $order;
         // $sql = "SELECT * FROM blog_posts WHERE pos_slug like '$slug'";
@@ -41,7 +42,7 @@ class YawarTagModel extends Mysql
         if (!empty($request)) {
             $img = $compWebModel->getImg($request['idtag'], 'TAG::PORT');
             $cant = $this->cantPost($request['idtag']);
-            $request['tag_img'] = isset($img['img_url']) ? $img['img_url'] : img_404();
+            $request['tag_img'] = isset($img['img_url']) ? img_tag() . $img['img_url'] : img_404();
             $request['tag_cantpost'] = isset($cant['tag_cantpost']) ? $cant['tag_cantpost'] : '0';
         }
         return $request;
@@ -97,7 +98,7 @@ class YawarTagModel extends Mysql
             foreach ($request as $key => $value) {
                 $img = $compWebModel->getImg($request[$key]['idpost'], 'POST::PORT');
                 $request[$key]['pos_tag'] = $compWebModel->getTag($request[$key]['idpost']);
-                $request[$key]['pos_img'] = isset($img['img_url']) ? $img['img_url'] : img_404();
+                $request[$key]['pos_img'] = isset($img['img_url']) ? img_post() . $img['img_url'] : img_404();
                 $request[$key]['aut_meta'] = $this->metaAuthor($request[$key]['idwebusuario']);
             }
         }
@@ -137,10 +138,10 @@ class YawarTagModel extends Mysql
         return $request;
     }
 
-    public function updateTag($tag, $slug, $idtag)
+    public function updateTag($tag, $slug, $idtag, $publicar, $status)
     {
-        $sql = "UPDATE blog_tags SET tag_name = ?, tag_slug = ? WHERE idtag = ?";
-        $arrData = array($tag, $slug, $idtag);
+        $sql = "UPDATE blog_tags SET tag_name = ?, tag_slug = ?, tag_publicar = ?, tag_status = ? WHERE idtag = ?";
+        $arrData = array($tag, $slug, $publicar, $status, $idtag);
         $request = $this->update($sql, $arrData);
         return $request;
     }
