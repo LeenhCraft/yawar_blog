@@ -135,11 +135,11 @@
                                         <div class="kg-file-card-filesize">
                                             <?php
                                             if (isset($data['post']['pos_img'])) {
-                                                if (file_exists(__DIR__ . '/../../../Medios/Webp/' . $data['post']['pos_img'])) {
-                                                    $size = filesize(__DIR__ . '/../../../Medios/Webp/' . $data['post']['pos_img']);
+                                                if (file_exists(dir_recursos() . $data['post']['pos_img'])) {
+                                                    $size = filesize(dir_recursos() . $data['post']['pos_img']);
                                                     echo number_format($size / 1024, 2) . " KB";
                                                 } else {
-                                                    echo 'no existe 0 KB ';
+                                                    echo 'no existe 0 KB';
                                                 }
                                             } else {
                                                 echo '0 KB';

@@ -291,7 +291,7 @@ function enviarEmail($data, $template)
             $mail->Subject = $asunto;
             $mail->Body    = $mensaje;
             $mail->AltBody = 'leenhcraft.com';
-            $mail->charSet = "UTF-8";
+            // $mail->charSet = "UTF-8";
 
             $mail->send();
             $msg['status'] = true;
@@ -560,9 +560,10 @@ function addceros($string, $ceros = 4)
 //     return $html;
 // }
 
-function paginador($data, $limite = 12, $pagina = 1)
+function paginador($data, $limite = 12, $pagina = 1, $url)
 {
     // dep([$data['count'], $limite]);
+    $url = !empty($url) ? $url : base_url();
     if ($data['count'] > 0 && $data['count'] > $limite) {
         $totalPaginas = ceil($data['count'] / $limite);
         // dep(['total de pg' => $totalPaginas]);
@@ -573,11 +574,11 @@ function paginador($data, $limite = 12, $pagina = 1)
 
         if ($totalPaginas > ($view + 2)) {
             $active = $pagina == $inicio ? 'class="active"' : '';
-            $a .= '<a ' . $active . ' href="' . base_url() . 'tienda/pagina/' . $inicio . '">' . $inicio . '</a>';
+            $a .= '<a ' . $active . ' href="' . $url . $inicio . '">' . $inicio . '</a>';
             $active = '';
             if ($pagina == 1) { // si esta en la primera pagina
                 for ($i = 2; $i <= $view + 1; $i++) {
-                    $b .= '<a ' . $active . ' href="' . base_url() . 'tienda/pagina/' . $i . '">' . $i . '</a>';
+                    $b .= '<a ' . $active . ' href="' . $url . $i . '">' . $i . '</a>';
                 }
                 $b .= '<a href="#" style="pointer-events: none">...</a>';
             } else {
@@ -585,7 +586,7 @@ function paginador($data, $limite = 12, $pagina = 1)
                     if ($totalPaginas > $view) {
                         $b .= '<a href="#" style="pointer-events: none">...</a>';
                         for ($i = $totalPaginas - $view; $i < $totalPaginas; $i++) {
-                            $b .= '<a ' . $active . ' href="' . base_url() . 'tienda/pagina/' . $i . '">' . $i . '</a>';
+                            $b .= '<a ' . $active . ' href="' . $url . $i . '">' . $i . '</a>';
                         }
                     }
                 } else { // si esta en una pagina intermedia
@@ -595,44 +596,40 @@ function paginador($data, $limite = 12, $pagina = 1)
                         $b .= '<a href="#" style="pointer-events: none">...</a>';
                         for ($i = $atras; $i <= $pagina; $i++) {
                             $active = $pagina == $i ? 'class="active"' : '';
-                            $b .= '<a ' . $active . ' href="' . base_url() . 'tienda/pagina/' . $i . '">' . $i . '</a>';
+                            $b .= '<a ' . $active . ' href="' . $url . $i . '">' . $i . '</a>';
                         }
                         $active = '';
                     } else if ($pagina <= $totalPaginas) {
                         for ($i = $inicio + 1; $i <= $pagina; $i++) {
                             $active = $pagina == $i ? 'class="active"' : '';
-                            $b .= '<a ' . $active . ' href="' . base_url() . 'tienda/pagina/' . $i . '">' . $i . '</a>';
+                            $b .= '<a ' . $active . ' href="' . $url . $i . '">' . $i . '</a>';
                         }
                         $active = '';
                     }
 
                     if ($adelante < ($totalPaginas - $view)) {
                         for ($i = $pagina + 1; $i <= $adelante; $i++) {
-                            $b .= '<a ' . $active . ' href="' . base_url() . 'tienda/pagina/' . $i . '">' . $i . '</a>';
+                            $b .= '<a ' . $active . ' href="' . $url . $i . '">' . $i . '</a>';
                         }
                         $b .= '<a href="#" style="pointer-events: none">...</a>';
                     } else {
                         for ($i = $pagina + 1; $i <= $totalPaginas - 1; $i++) {
-                            $b .= '<a ' . $active . ' href="' . base_url() . 'tienda/pagina/' . $i . '">' . $i . '</a>';
+                            $b .= '<a ' . $active . ' href="' . $url . $i . '">' . $i . '</a>';
                         }
                     }
                     // dep([$atras, $pagina, $adelante]);
                 }
             }
             $active = $pagina == $totalPaginas ? 'class="active"' : '';
-            $c .= '<a ' . $active . ' href="' . base_url() . 'tienda/pagina/' . $totalPaginas . '">' . $totalPaginas . '</a>';
+            $c .= '<a ' . $active . ' href="' . $url . $totalPaginas . '">' . $totalPaginas . '</a>';
             $active = '';
         } else {
             for ($i = $inicio; $i <= $totalPaginas; $i++) {
                 $active = $pagina == $i ? 'class="active"' : '';
-                $b .= '<a ' . $active . ' href="' . base_url() . 'tienda/pagina/' . $i . '">' . $i . '</a>';
+                $b .= '<a ' . $active . ' href="' . $url . $i . '">' . $i . '</a>';
             }
         }
-        $html = '
-    <div class="product__pagination text-center mb-5">
-        ' . $a . $b . $c . '
-    </div>
-    ';
+        $html = '<div class="product__pagination text-center mb-5">' . $a . $b . $c . '</div>';
     } else {
         $html = '';
     }

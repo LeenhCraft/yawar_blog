@@ -58,6 +58,9 @@ class YawarPost extends Controllers
                 // dep($data, 1);
                 $this->views->getView('Web/Publicar', 'Index', $data);
             } else {
+                if (!empty($data['post']['pos_img'])) {
+                    $data['img_port'] = $data['post']['pos_img'];
+                }
                 $data['css'] = ['css/lnh.grid.css'];
                 // dep($data,1);
                 $this->views->getView('Web/Post', 'Index', $data);

@@ -1,5 +1,8 @@
 <?php headerWeb('HeaderWeb', $data); ?>
 <main class="global-main">
+    <div id="preloder" style="display: none;">
+        <div class="loader"></div>
+    </div>
     <article class="post-section">
         <div class="post-wrap global-padding">
             <div class="post-content custom-content-leenh">
@@ -173,7 +176,7 @@
                         <?php }
                         if (!empty($data['images'])) {
                         ?>
-                            <div class="kg-gallery-row grid-1">
+                            <div class="kg-gallery-row grid-1 mb-4">
                                 <?php
                                 $num = count($data['images']);
                                 foreach ($data['images'] as $img) {
@@ -189,6 +192,12 @@
                                 <?php
                                 }
                                 ?>
+                            </div>
+                            <?php
+                            echo paginador($data['count'], $data['limite'], $data['pagina'], $data['url']);
+                            ?>
+                            <div class="pagination-section d-none">
+                                <a class="global-button" href="<?php echo path_post() . 'pagina/' ?>">Siguiente pagina</a>
                             </div>
                         <?php
                         } else {

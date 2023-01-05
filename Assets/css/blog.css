@@ -15,6 +15,26 @@
     --letter-spacing: -0.01em;
 }
 
+html {
+    scrollbar-color: #fff var(--color-body);
+    scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    background: var(--color-body);
+    padding: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #fff;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(194, 194, 194)
+}
+
 @media (min-width: 1481px) {
     .hero-title {
         max-width: 1070px;
@@ -623,4 +643,40 @@ option {
 
 .global-border {
     border-radius: var(--border-radius);
+}
+
+
+.product__pagination, .blog__pagination {
+    padding-top: 10px;
+}
+
+.product__pagination a, .blog__pagination a {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #b2b2b2;
+    font-size: 14px;
+    color: #b2b2b2;
+    font-weight: 700;
+    line-height: 28px;
+    text-align: center;
+    margin-right: 16px;
+    transition: all, 0.3s;
+}
+
+.product__pagination a:hover, .blog__pagination a:hover {
+    background: var(--ghost-accent-color);
+    border-color: var(--ghost-accent-color);
+    color: #ffffff;
+}
+
+.product__pagination a:last-child, .blog__pagination a:last-child {
+    margin-right: 0;
+}
+
+.product__pagination .active, .blog__pagination .active {
+    background: var(--ghost-accent-color);
+    border-color: var(--ghost-accent-color);
+    color: #ffffff;
+    pointer-events: none;
 }

@@ -1,3 +1,9 @@
+document.addEventListener("DOMContentLoaded", function () {
+  // $("#preloder").css("position", "fixed");
+  document.getElementById("preloder").style.position = "fixed";
+});
+var spinner = $("#preloder");
+
 function newGal(ths, e) {
   let elemetn = $(".new-tag");
   if (elemetn.hasClass("active")) {
@@ -271,13 +277,14 @@ function addPostAso(ths, num) {
 function viewImgGal(ths, e) {
   if (confirm("¿Quiere agregar esta imagen a la galeria?")) {
     mostrarImg(ths, e);
-    // $("#img").trigger("onsubmit");
+    $("#img").trigger("onsubmit");
   }
 }
 
 function addImgGal(ths, e) {
   let form = $(ths);
   let dat = new FormData(form[0]);
+  spinner.css("display", "flex");
   let ajaxUrl = base_url + "YawarGalleries/addImgGal/";
   $.ajax({
     type: "POST",
@@ -286,6 +293,7 @@ function addImgGal(ths, e) {
     processData: false,
     contentType: false,
     success: function (data) {
+      spinner.css("display", "none");
       let objData = JSON.parse(data);
       if (objData.status) {
         $("#frmGal")
@@ -311,6 +319,7 @@ function addImgGal(ths, e) {
       }
     },
     error: function (error) {
+      spinner.css("display", "none");
       alert(error);
     },
   });
@@ -318,9 +327,11 @@ function addImgGal(ths, e) {
 
 function delImgGal(a, b) {
   if (confirm("¿Estas seguro de eliminar esta imagen?")) {
+    spinner.css("display", "flex");
     let tk = $('[name="_token"]').val();
     let ajaxUrl = base_url + "YawarGalleries/delImgGal/";
     $.post(ajaxUrl, { a: a, b: b, _token: tk }, function (data) {
+      spinner.css("display", "none");
       let objData = JSON.parse(data);
 
       if (objData.status) {

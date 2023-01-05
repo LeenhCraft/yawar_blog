@@ -41,14 +41,25 @@ class YawarGalleryModel extends Mysql
         return $request;
     }
 
-    public function images($idgallery)
+    public function images($idgallery, $offset = 0, $limite = 9)
     {
         $table = "SELECT * FROM blog_images a";
-        $inner = $order = $where = "";
+        $inner = $order = $where = $limit = "";
         $where = "WHERE a.idgalery = '$idgallery' AND a.img_type = 'GALLERY::CONT'";
-        $sql = $table . ' ' . $inner . ' ' . $where . ' ' . $order;
+        $limit = "LIMIT $offset, $limite";
+        $sql = $table . ' ' . $inner . ' ' . $where . ' ' . $order . ' ' . $limit;
         $request = $this->select_all($sql);
         return $request;
+    }
+
+    public function countImages($idgallery)
+    {
+        $table = "SELECT * FROM blog_images a";
+        $inner = $order = $where = $limit = "";
+        $where = "WHERE a.idgalery = '$idgallery' AND a.img_type = 'GALLERY::CONT'";
+        $sql = $table . ' ' . $inner . ' ' . $where . ' ' . $order . ' ' . $limit;
+        $request = $this->select_all($sql);
+        return ["count" => count($request)];
     }
 
     public function postAsociados($idgallery)
