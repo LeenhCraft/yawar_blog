@@ -143,11 +143,4 @@ class Web extends Controllers
         }
         die();
     }
-
-    public function demo()
-    {
-        dep(date('Y-m-d-H-i-s'));
-        dep(path_img_404());
-        dep(dir_recursos());
-    }
 }
