@@ -1,7 +1,7 @@
 <header class="header-section">
     <div class="header-wrap">
         <div class="header-logo global-logo is-header">
-            <a href="/" class="is-logo">
+            <a href="<?php echo base_url(); ?>" class="is-logo">
                 <img src="<?php echo isset($logo['img_url']) ? path_recursos() . img_logo() . $logo['img_url'] : path_img_404() ?>" alt="<?php echo NOMBRE_EMPRESA ?>">
             </a>
         </div>

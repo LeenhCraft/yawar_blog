@@ -14,22 +14,22 @@ function base_url()
 
 function path_post()
 {
-    return base_url() . 'yawarpost/';
+    return base_url() . 'YawarPost/';
 }
 
 function path_tag()
 {
-    return base_url() . 'yawartag/';
+    return base_url() . 'YawarTag/';
 }
 
 function path_gallery()
 {
-    return base_url() . 'yawargallery/';
+    return base_url() . 'YawarGallery/';
 }
 
 function path_author()
 {
-    return base_url() . 'yawarautor/';
+    return base_url() . 'YawarAutor/';
 }
 
 function path_recursos()

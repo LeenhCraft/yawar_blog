@@ -50,4 +50,4 @@
             ?>);">
         </div>
         <div class="global-content">
-            <?php require_once __DIR__ . '/Navbarweb.php'; ?>
+            <?php require_once __DIR__ . '/NavbarWeb.php'; ?>
