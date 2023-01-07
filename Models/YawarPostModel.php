@@ -27,7 +27,7 @@ class YawarPostModel extends Mysql
             $request['aut_img'] = isset($imgAut['usu_foto']) ? img_user() . $imgAut['usu_foto'] : img_404();
             $aut_meta = $this->metaAuthor($request['idwebusuario']);
             $request['aut_meta'] = !empty($aut_meta) ? $aut_meta : [];
-            $request['pos_gallery'] = !empty($this->postGalleries($request['idpost'])) ? $this->postGalleries($request['idpost'])[0] : [];
+            $request['pos_gallery'] = !empty($this->postGalleries($request['idpost'])) ? $this->postGalleries($request['idpost'])[0] : ['ga_slug' => ''];
             $request['pos_destacado'] = $this->postDestacado($request['idpost']);
         }
         return $request;

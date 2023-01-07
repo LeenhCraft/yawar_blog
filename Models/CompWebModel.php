@@ -75,7 +75,8 @@ class CompWebModel extends Mysql
                 break;
             case $tipo == '3': //post del usuario
                 $inner = "INNER JOIN web_usuarios b ON a.idwebusuario = b.idwebusuario";
-                $where = "WHERE a.pos_publicar = 1 AND a.pos_status = 1 AND b.idwebusuario = " . $_SESSION['lnh'];
+                $where = isset($_SESSION['_cf']) && $_SESSION['_cf'] === 'ok' ? "WHERE " : "WHERE a.pos_status = 1 AND a.pos_publicar = 1 AND";
+                $where .= " b.idwebusuario = " . $_SESSION['lnh'];
                 $order = "ORDER BY a.pos_date DESC LIMIT $offset,$limit";
                 break;
             default:

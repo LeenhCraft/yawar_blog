@@ -55,7 +55,7 @@ class Publicar extends Controllers
 
             $csrf = validarCrf($tk);
             if ($csrf['status']) {
-                if (empty($titulo) || empty($contenido) || empty($img) || empty($tags)) {
+                if (empty($titulo) || empty($contenido) || empty($tags)) {
                     $arrResponse = array('status' => false, 'title' => '', 'icon' => 'warning', 'text' => 'No deje campos vacios.');
                 } else {
                     $slug = strlen($titulo) > 30 ? substr($titulo, 0, 30) : $titulo;
