@@ -5,7 +5,7 @@
             <div class="custom-error-content custom-content">
                 <h1>403</h1>
                 <p class="global-excerpt">Debe iniciar sesión para acceder a esta pagina</p>
-                <a href="/" class="global-button">Volver al inicio</a>
+                <a href="<?php echo base_url(); ?>" class="global-button">Volver al inicio</a>
             </div>
         </div>
     </div>
@@ -18,8 +18,7 @@
                 <article class="item">
                     <div class="item-image global-image global-image-orientation global-radius">
                         <a href="<?php echo path_post() . $post['pos_slug'] ?>" class="global-link" aria-label="<?php echo $post['pos_name'] ?>"></a>
-                        <img srcset="<?php echo $post['pos_img'] ?> 300w, 
-			 <?php echo $post['pos_img'] ?> 600w" sizes="(max-width:480px) 300px, 600px" src="<?php echo $post['pos_img'] ?>" loading="lazy" alt="<?php echo $post['pos_name'] ?>">
+                        <img src="<?php echo path_recursos() . $post['pos_img'] ?>" loading="lazy" alt="<?php echo $post['pos_name'] ?>">
                     </div>
                     <div class="item-content">
                         <div class="item-tags global-tags">

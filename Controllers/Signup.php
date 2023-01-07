@@ -61,6 +61,11 @@ class Signup extends Controllers
             $strEmail = strClean($arrParams[0]);
             $strToken = strClean($arrParams[1]);
             // dep([$strEmail, $strToken], 1);
+            parent::otro("Leenh");
+            $img = $this->other->verLogo('LOGO::IMG');
+            $data['logo'] = !empty($img) ? img_logo() . $img['img_url'] : img_404();
+            $img = $this->other->verLogo('SIGNUP::PORT');
+            $data['imgSignup'] = !empty($img) ? img_other() . $img['img_url'] : img_404();
             parent::otro('web');
             $response = $this->other->validar($strEmail, $strToken);
             if ($response['status']) {

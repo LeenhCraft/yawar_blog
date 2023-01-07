@@ -42,6 +42,8 @@ class Signin extends Controllers
                     } else {
                         if (password_verify($pass, $data['usu_pass'])) {
                             if ($data['usu_activo'] == 1 && $data['usu_estado'] == 1) {
+                                $this->other->upd_visita($data['idwebusuario']);
+                                $this->other->upd_centinela($data['idwebusuario']);
                                 $_SESSION['lnh'] = $data['idwebusuario'];
                                 if ($data['idwebusuario'] == 1) {
                                     $_SESSION['_cf'] = "ok";

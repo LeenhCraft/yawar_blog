@@ -331,7 +331,7 @@
                                                     <td class="es-m-p20b" align="left" style="padding:0;Margin:0;width:270px">
                                                         <table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                             <tr style="border-collapse:collapse">
-                                                                <td class="es-m-p0l es-m-txt-c" align="left" style="padding:0;Margin:0;font-size:0"><a href="<?php echo base_url(); ?>" target="_blank" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:none;color:#1376C8;font-size:14px"><img src="<?php echo base_url() . $data['empresa']['emp_logo'] ?>" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="183"></a></td>
+                                                                <td class="es-m-p0l es-m-txt-c" align="left" style="padding:0;Margin:0;font-size:0"><a href="<?php echo base_url(); ?>" target="_blank" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:none;color:#1376C8;font-size:14px"><img src="<?php echo base_url() . $data['empresa']['emp_logo'] ?>" alt ="<?php echo $data['empresa']['emp_nombre'] ?>" style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="183"></a></td>
                                                             </tr>
                                                         </table>
                                                     </td>
@@ -376,7 +376,7 @@
                                                             </tr>
                                                             <tr style="border-collapse:collapse">
                                                                 <td align="center" style="padding:0;Margin:0;padding-top:25px;padding-left:40px;padding-right:40px">
-                                                                    <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:24px;color:#666666;font-size:16px">Activa tu cuenta de cliente. La próxima vez que compres con nosotros, inicie sesión para hacerlo más rápido</p>
+                                                                    <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:helvetica, 'helvetica neue', arial, verdana, sans-serif;line-height:24px;color:#666666;font-size:16px">Activa tu cuenta de blogger. La próxima vez que visites nuestro blog, inicie sesión para disfrutar de una mejor experiencia.</p>
                                                                 </td>
                                                             </tr>
                                                             <tr style="border-collapse:collapse">

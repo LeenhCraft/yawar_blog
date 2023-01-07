@@ -5,7 +5,7 @@
             <div class="custom-error-content custom-content">
                 <h1>404</h1>
                 <p class="global-excerpt">Pagina no encontrada</p>
-                <a href="/" class="global-button">Volver al inicio</a>
+                <a href="<?php echo base_url(); ?>" class="global-button">Volver al inicio</a>
             </div>
         </div>
     </div>

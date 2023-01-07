@@ -269,6 +269,15 @@ class WebModel extends Mysql
         return $request;
     }
 
+    public function upd_centinela($idwebusuario)
+    {
+        $vis_cod = $_SESSION['vi'];
+        $sql = "UPDATE sis_centinela SET idwebusuario = ? WHERE vis_cod = ?";
+        $arrData = array($idwebusuario, $vis_cod);
+        $request = $this->update($sql, $arrData);
+        return $request;
+    }
+
     public function listCombo()
     {
         $sql = "SELECT idfilial as nmr, fi_nombre as nombre FROM ym_filiales WHERE fi_status = 1";
