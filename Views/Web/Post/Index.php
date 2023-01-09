@@ -1,4 +1,11 @@
 <?php headerWeb('HeaderWeb', $data); ?>
+<style>
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+</style>
 <main class="global-main">
     <progress class="post-progress"></progress>
     <article class="post-section is-sidebar">
